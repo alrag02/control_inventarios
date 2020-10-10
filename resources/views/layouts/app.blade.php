@@ -18,13 +18,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/1.0.0/mdb.min.css" rel="stylesheet"/>
 
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -46,29 +45,91 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
+
+                            <? /*
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
+                            */ ?>
                         @else
+                        <!--Consulta de inmobiliario -->
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdownConsulta" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{__('Consulta de inmobiliario')}}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="#">
+                                        {{__('Lista de inmobiliarios')}}
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        {{__('Búsqueda Avanzada')}}
+                                    </a>
+                                </div>
+                            </li>
+                            <!--Agregar Datos -->
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdownModificacion" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{__('Agregar/Modificar Datos')}}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="#">
+                                        {{__('Inmobiliario')}}
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        {{__('Conceptos')}}
+                                    </a>
+                                </div>
+                            </li>
+
+                            <!--Revisión de Inventarios -->
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdownRevision" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{__('Revisión de Inventarios')}}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="#">
+                                        {{__('Historial de revisiones')}}
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        {{__('Nueva revisión')}}
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        {{__('Comprobar existencia de inmobiliario')}}
+                                    </a>
+                                </div>
+                            </li>
+
+                            <!--Sesión -->
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <!--Configuración de usuarios-->
+                                    <a class="dropdown-item" href="#">
+                                        {{ __('Configuración de usuarios') }}
+                                    </a>
+                                    <!--Ayuda-->
+                                    <a class="dropdown-item" href="#">
+                                        {{ __('Ayuda') }}
+                                    </a>
+                                    <!--Cerrar Sesión-->
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+
                                 </div>
                             </li>
+
                         @endguest
                     </ul>
                 </div>
