@@ -109,7 +109,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <!--Configuración de usuarios-->
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{ route('usuarios.registrados.index') }}">
                                         {{ __('Configuración de usuarios') }}
                                     </a>
                                     <!--Ayuda-->
