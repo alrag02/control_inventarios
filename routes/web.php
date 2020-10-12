@@ -20,3 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    Route::namespace('usuarios')->prefix('usuarios')->name('usuarios.')->group(function (){
+
+    Route::resource('/registrados','UsersController', ['except' =>['show','create', 'store']]);
+
+});
+
+
