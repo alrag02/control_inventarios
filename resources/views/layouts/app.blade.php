@@ -55,6 +55,7 @@
                             */ ?>
                         @else
                         <!--Consulta de inmobiliario -->
+                            @can('consultar inmobiliarios<')
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdownConsulta" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{__('Consulta de inmobiliario')}}
@@ -68,7 +69,9 @@
                                     </a>
                                 </div>
                             </li>
+                            @endcan
                             <!--Agregar Datos -->
+                            @can('editar inmobiliarios')
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdownModificacion" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{__('Agregar/Modificar Datos')}}
@@ -77,13 +80,16 @@
                                     <a class="dropdown-item" href="#">
                                         {{__('Inmobiliario')}}
                                     </a>
+                                    @can('consultar conceptos')
                                     <a class="dropdown-item" href="#">
                                         {{__('Conceptos')}}
                                     </a>
+                                    @endcan
                                 </div>
                             </li>
-
+                            @endcan
                             <!--Revisión de Inventarios -->
+                            @can('consultar cortes')
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdownRevision" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{__('Revisión de Inventarios')}}
@@ -92,16 +98,21 @@
                                     <a class="dropdown-item" href="#">
                                         {{__('Historial de revisiones')}}
                                     </a>
+                                    @can('crear cortes')
                                     <a class="dropdown-item" href="#">
                                         {{__('Nueva revisión')}}
                                     </a>
+                                    @endcan
+                                    @can('revisar inventarios')
                                     <a class="dropdown-item" href="#">
                                         {{__('Comprobar existencia de inmobiliario')}}
                                     </a>
+                                    @endcan
                                 </div>
                             </li>
-
+                            @endcan
                             <!--Sesión -->
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -109,9 +120,11 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <!--Configuración de usuarios-->
+                                    @can('consultar usuarios')
                                     <a class="dropdown-item" href="{{ route('usuarios.registrados.index') }}">
                                         {{ __('Configuración de usuarios') }}
                                     </a>
+                                    @endcan
                                     <!--Ayuda-->
                                     <a class="dropdown-item" href="#">
                                         {{ __('Ayuda') }}
