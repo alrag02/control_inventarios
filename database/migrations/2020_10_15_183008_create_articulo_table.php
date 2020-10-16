@@ -15,8 +15,8 @@ class CreateArticuloTable extends Migration
     {
         Schema::create('articulo', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->string('etiqueta_local', 128)->nullable();
-            $table->string('etiqueta_externa', 128)->nullable();
+            $table->string('etiqueta_local', 128)->nullable()->unique();
+            $table->string('etiqueta_externa', 128)->nullable()->unique();
             $table->string('concepto', 128)->nullable();
             $table->string('marca', 128)->nullable();
             $table->string('modelo', 128)->nullable();

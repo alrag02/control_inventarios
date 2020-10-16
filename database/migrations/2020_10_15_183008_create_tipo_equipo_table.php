@@ -16,6 +16,7 @@ class CreateTipoEquipoTable extends Migration
         Schema::create('tipo_equipo', function (Blueprint $table) {
             $table->integer('id', true);
             $table->string('nombre', 128)->nullable();
+            $table->string('sigla', 64)->nullable();
             $table->boolean('vigencia')->nullable();
             $table->timestamps();
         });
