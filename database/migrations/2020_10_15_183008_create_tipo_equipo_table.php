@@ -17,6 +17,7 @@ class CreateTipoEquipoTable extends Migration
             $table->integer('id', true);
             $table->string('nombre', 128)->nullable();
             $table->boolean('vigencia')->nullable();
+            $table->timestamps();
         });
     }
 

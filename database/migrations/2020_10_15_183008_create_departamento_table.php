@@ -18,6 +18,7 @@ class CreateDepartamentoTable extends Migration
             $table->string('nombre', 128)->nullable();
             $table->boolean('vigencia')->nullable();
             $table->integer('fk_area')->nullable()->index('fk_area');
+            $table->timestamps();
         });
     }
 

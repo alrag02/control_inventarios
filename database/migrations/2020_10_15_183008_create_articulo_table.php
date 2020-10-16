@@ -30,6 +30,7 @@ class CreateArticuloTable extends Migration
             $table->double('costo')->nullable();
             $table->string('num_factura', 128)->nullable();
             $table->enum('activo_resguardo', ['activo', 'resguardo'])->nullable();
+            $table->timestamps();
         });
     }
 

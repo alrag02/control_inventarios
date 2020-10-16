@@ -19,6 +19,7 @@ class CreateOficinaTable extends Migration
             $table->integer('fk_edificio')->nullable();
             $table->enum('planta', ['baja', 'alta'])->nullable();
             $table->boolean('vigencia')->nullable();
+            $table->timestamps();
         });
     }
 

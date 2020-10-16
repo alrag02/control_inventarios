@@ -18,6 +18,7 @@ class CreateTipoCompraTable extends Migration
             $table->string('nombre', 128)->nullable();
             $table->string('sigla', 64)->nullable();
             $table->boolean('vigencia')->nullable();
+            $table->timestamps();
         });
     }
 
