@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Inmobiliario;
 
 use App\Http\Controllers\Controller;
-use App\Models\Inmobiliario\area;
+use App\Models\Inmobiliario\oficina;
 use Illuminate\Http\Request;
 
-class areaController extends Controller
+class oficinaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class areaController extends Controller
      */
     public function index()
     {
-        return area::all();
+        //
     }
 
     /**
@@ -36,56 +36,51 @@ class areaController extends Controller
      */
     public function store(Request $request)
     {
-        return area::create($request->all());
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Inmobiliario\area  $area
+     * @param  \App\Models\Inmobiliario\oficina  $oficina
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(oficina $oficina)
     {
-        return area::find($id);
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Inmobiliario\area  $area
+     * @param  \App\Models\Inmobiliario\oficina  $oficina
      * @return \Illuminate\Http\Response
      */
-    public function edit(area $area)
+    public function edit(oficina $oficina)
     {
-
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Inmobiliario\area  $area
+     * @param  \App\Models\Inmobiliario\oficina  $oficina
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, oficina $oficina)
     {
-        $area = area::find($id);
-        $area->nombre = $request->nombre;
-        $area->vigencia = $request->vigencia;
-        $area->save();
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Inmobiliario\area  $area
+     * @param  \App\Models\Inmobiliario\oficina  $oficina
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(oficina $oficina)
     {
-        return Product::destroy($id);
+        //
     }
 }
-
