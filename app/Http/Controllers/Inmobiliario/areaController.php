@@ -5,27 +5,31 @@ namespace App\Http\Controllers\Inmobiliario;
 use App\Http\Controllers\Controller;
 use App\Models\Inmobiliario\area;
 use Illuminate\Http\Request;
+use App\DataTables\areaDataTable;
 
 class areaController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
+     * @param areaDataTable $dataTable
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index(areaDataTable $dataTable)
     {
-        return area::all();
+        return view('inmobiliario.area.index', ['area' => area::all()]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
-        //
+        return view('inmobiliario.area.create');
     }
 
     /**
@@ -36,7 +40,10 @@ class areaController extends Controller
      */
     public function store(Request $request)
     {
-        return area::create($request->all());
+        $area = new area();
+        $area->nombre = $request->nombre;
+        $area->vigencia = $request->vigencia;
+        return $area->save() ? redirect("inmobiliario/area") : view("inmobiliario.area.create");
     }
 
     /**
@@ -57,9 +64,9 @@ class areaController extends Controller
      * @param  \App\Models\Inmobiliario\area  $area
      * @return \Illuminate\Http\Response
      */
-    public function edit(area $area)
+    public function edit($id)
     {
-
+        return view('inmobiliario.area.edit',["area" => area::find($id)]);
     }
 
     /**
@@ -74,7 +81,7 @@ class areaController extends Controller
         $area = area::find($id);
         $area->nombre = $request->nombre;
         $area->vigencia = $request->vigencia;
-        $area->save();
+        return $area->save() ? redirect("inmobiliario/area") : view("inmobiliario.area.edit");
     }
 
     /**
@@ -85,7 +92,10 @@ class areaController extends Controller
      */
     public function destroy($id)
     {
-        return Product::destroy($id);
+        $area = area::find($id);
+        $area->vigencia = 0;
+        $area->save();
+        return area::destroy($id) ? redirect("inmobiliario/area"): view("inmobiliario.area.edit", print 'Hubo un error al eliminar');
     }
 }
 
