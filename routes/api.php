@@ -18,8 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('area','Inmobiliario\areaController');
+//Route::apiResource('area','Inmobiliario\areaController');
 
-Route::apiResource('articulo','Inmobiliario\articuloController');
+//Route::apiResource('articulo','Inmobiliario\articuloController');
 
-Route::apiResource('departamento','Inmobiliario\departamentoController');
+//Route::apiResource('departamento','Inmobiliario\departamentoController');

@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Inmobiliario;
 use App\Http\Controllers\Controller;
 use App\Models\Inmobiliario\area;
 use Illuminate\Http\Request;
-use App\DataTables\areaDataTable;
+use Illuminate\Support\Facades\Validator;
+
 
 class areaController extends Controller
 {
@@ -17,7 +18,7 @@ class areaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index(areaDataTable $dataTable)
+    public function index()
     {
         return view('inmobiliario.area.index', ['area' => area::all()]);
     }
@@ -40,10 +41,10 @@ class areaController extends Controller
      */
     public function store(Request $request)
     {
-        $area = new area();
-        $area->nombre = $request->nombre;
-        $area->vigencia = $request->vigencia;
-        return $area->save() ? redirect("inmobiliario/area") : view("inmobiliario.area.create");
+        $data = new area();
+        $data->nombre = $request->nombre;
+        $data->vigencia = $request->vigencia;
+        return $data->save() ? redirect("inmobiliario/area") : view("inmobiliario.area.create");
     }
 
     /**
@@ -78,10 +79,10 @@ class areaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $area = area::find($id);
-        $area->nombre = $request->nombre;
-        $area->vigencia = $request->vigencia;
-        return $area->save() ? redirect("inmobiliario/area") : view("inmobiliario.area.edit");
+        $data = area::find($id);
+        $data->nombre = $request->nombre;
+        $data->vigencia = $request->vigencia;
+        return $data->save() ? redirect("inmobiliario/area") : view("inmobiliario.area.edit");
     }
 
     /**
@@ -90,11 +91,11 @@ class areaController extends Controller
      * @param  \App\Models\Inmobiliario\area  $area
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        $area = area::find($id);
-        $area->vigencia = 0;
-        $area->save();
+        $data = area::find($id);
+        $data->vigencia = 0;
+        $data->save();
         return area::destroy($id) ? redirect("inmobiliario/area"): view("inmobiliario.area.edit", print 'Hubo un error al eliminar');
     }
 }

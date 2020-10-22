@@ -1,7 +1,30 @@
 @php($nombre_concepto = 'area')
+<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">
+    Eliminar
+</button>
 
-<form action="{{route('inmobiliario.'.$nombre_concepto.'.destroy',$area->id)}}" method="post" class="d-inline-block">
-    {{method_field('DELETE')}}
-    @csrf
-    <input type="submit" class="btn btn-danger" value="Eliminar">
-</form>
+<!-- Modal -->
+
+    <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Está seguro?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Esta operación no se puede deshacer</p>
+                </div>
+                <div class="modal-footer">
+                    <form action="{{route('inmobiliario.'.$nombre_concepto.'.destroy',$area->id)}}" method="post" class="d-inline-block" id="eliminar">
+                        {{method_field('DELETE')}}
+                        @csrf
+                    <input type="submit" class="btn btn-danger" value="Estoy Seguro" onclick=' this.hidden = true; save();'>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+

@@ -1,31 +1,56 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <div class="text-center"><h1>Areas</h1></div>
+    @php($nombre_concepto = 'area')
     <div class="container">
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Vigencia</th>
-                <th>Accion</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($area as $area)
-                <tr>
-                    <td>{{$area->id}}</td>
-                    <td>{{$area->nombre}}</td>
-                    <td>{{$area->vigencia}}</td>
-                    <td><a href="{{url('/inmobiliario/area/'.$area->id.'/edit')}}" class="btn btn-info">Editar</a>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-        <a href="{{url('/inmobiliario/area/create')}}" class="btn btn-primary">Crear</a>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="form-row">
+                            <div class="col-lg-2">
+                                <img class="card-img-left mx-auto d-block" src=" https://www.flaticon.com/svg/static/icons/svg/1642/1642054.svg " style="width: 48px; " alt="">
+                            </div>
+                            <div class="col-lg-7">
+                                <h1>{{ __('Lista de '.$nombre_concepto.'s') }}</h1>
+                            </div>
+                            <div class="col-lg-3 d-inline-flex p-2">
+                                <a href="{{url('/inmobiliario/'.$nombre_concepto.'/create')}}"><button class="btn btn-primary">Crear {{ $nombre_concepto }}</button></a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                            <table class="table table-bordered">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Vigencia</th>
+                                    <th>Modificado el.</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($area as $data)
+                                    <tr>
+                                        <td>{{$data->id}}</td>
+                                        <td>{{$data->nombre}}</td>
+                                        <td>{{($data->vigencia == 1) ? 'Activo' : 'En Baja'}}</td>
+                                        <td>{{$data->updated_at}}</td>
+                                        <td><a href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-light">Editar</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 
 @endsection

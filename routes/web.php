@@ -27,8 +27,11 @@ Route::namespace('usuarios')->prefix('usuarios')->name('usuarios.')->group(funct
 });
 
 Route::namespace('Inmobiliario')->prefix('inmobiliario')->name('inmobiliario.')->group(function (){
+    Route::view('/', 'inmobiliario.index');
 
     Route::resource('/area', 'areaController');
+    Route::resource('/articulo', 'articuloController');
+    Route::resource('/departamento', 'departamentoController');
 });
 
 

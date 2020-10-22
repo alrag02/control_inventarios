@@ -7,6 +7,8 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
+                    <img class="card-img-top mx-auto d-block" src=" https://www.flaticon.com/svg/static/icons/svg/1642/1642054.svg " style="width: 96px;  margin: 1em" alt="Card image cap">
+
                     <div class="card-header"> <h1>{{ __('Cree una nueva '.$nombre_concepto) }}</h1> </div>
 
                     <div class="card-body">
@@ -28,12 +30,13 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary" id="submitButton" onclick=' this.hidden = true; save();'>Guardar</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
 @endsection
