@@ -18,6 +18,7 @@ class CreateEdificioTable extends Migration
             $table->string('nombre', 128)->nullable();
             $table->boolean('vigencia')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

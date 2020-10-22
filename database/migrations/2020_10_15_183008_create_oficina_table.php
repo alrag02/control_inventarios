@@ -20,6 +20,7 @@ class CreateOficinaTable extends Migration
             $table->enum('planta', ['baja', 'alta'])->nullable();
             $table->boolean('vigencia')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

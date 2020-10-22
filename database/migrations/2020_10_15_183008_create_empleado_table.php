@@ -23,6 +23,7 @@ class CreateEmpleadoTable extends Migration
             $table->string('nivel', 128)->nullable();
             $table->boolean('vigencia')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
