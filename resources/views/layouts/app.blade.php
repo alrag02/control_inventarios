@@ -17,8 +17,14 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ url('css/app.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/1.0.0/mdb.min.css" rel="stylesheet"/>
+    <link href="{{ url('css/style.css') }}" rel="stylesheet">
+
+    <!-- Simple Datatables -->
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
+    <script src="{{url('js/table_datatables.js')}}" ></script>
 
 </head>
 <body>
@@ -55,10 +61,10 @@
                                     {{__('Consulta de inmobiliario')}}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{route('inmobiliario.articulo.index')}}">
                                         {{__('Lista de inmobiliarios')}}
                                     </a>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{route('inmobiliario.articulo.index')}}">
                                         {{__('Búsqueda Avanzada')}}
                                     </a>
                                 </div>
@@ -71,11 +77,11 @@
                                     {{__('Agregar/Modificar Datos')}}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">
-                                        {{__('Inmobiliario')}}
+                                    <a class="dropdown-item" href="{{route('inmobiliario.articulo.create')}}">
+                                        {{__('Articulos')}}
                                     </a>
                                     @can('consultar conceptos')
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{route('inmobiliario.')}}">
                                         {{__('Conceptos')}}
                                     </a>
                                     @endcan

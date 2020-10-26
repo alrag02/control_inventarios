@@ -8,24 +8,27 @@ use Illuminate\Http\Request;
 
 class tipo_equipoController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
+     * @param tipo_equipoDataTable $dataTable
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        //
+        return view('inmobiliario.tipo_equipo.index', ['tipo_equipo' => tipo_equipo::all()]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
-        //
+        return view('inmobiliario.tipo_equipo.create');
     }
 
     /**
@@ -36,7 +39,20 @@ class tipo_equipoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Obtener el dato
+
+        $data = new tipo_equipo();
+
+        //Obtener los datos con los que se obtengan en el request
+
+        $data->nombre = $request->nombre;
+        $data->sigla = $request->sigla;
+        $data->vigencia = $request->vigencia;
+
+        //Almacenar el dato y dirigir al index con mensaje,
+        // si no puede almacenar, regresar a create con mensaje de error
+
+        return $data->save() ? redirect("inmobiliario/tipo_equipo")->with('message', 'Creado Correctamente') : view("inmobiliario.tipo_equipo.create");
     }
 
     /**
@@ -45,9 +61,9 @@ class tipo_equipoController extends Controller
      * @param  \App\Models\Inmobiliario\tipo_equipo  $tipo_equipo
      * @return \Illuminate\Http\Response
      */
-    public function show(tipo_equipo $tipo_equipo)
+    public function show($id)
     {
-        //
+        return tipo_equipo::find($id);
     }
 
     /**
@@ -56,9 +72,9 @@ class tipo_equipoController extends Controller
      * @param  \App\Models\Inmobiliario\tipo_equipo  $tipo_equipo
      * @return \Illuminate\Http\Response
      */
-    public function edit(tipo_equipo $tipo_equipo)
+    public function edit($id)
     {
-        //
+        return view('inmobiliario.tipo_equipo.edit',["tipo_equipo" => tipo_equipo::find($id)]);
     }
 
     /**
@@ -68,9 +84,22 @@ class tipo_equipoController extends Controller
      * @param  \App\Models\Inmobiliario\tipo_equipo  $tipo_equipo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, tipo_equipo $tipo_equipo)
+    public function update(Request $request, $id)
     {
-        //
+        //Obtener el dato
+
+        $data = tipo_equipo::find($id);
+
+        //Cambiar los datos con los que se obtengan del request en edit
+
+        $data->nombre = $request->nombre;
+        $data->sigla = $request->sigla;
+        $data->vigencia = $request->vigencia;
+
+        //Actualizar el dato y dirigir al index con mensaje,
+        // si no puede actualizar, regresar a edit con mensaje de error
+
+        return $data->save() ? redirect("inmobiliario/tipo_equipo")->with('message', 'Modificado Correctamente') : view("inmobiliario.tipo_equipo.edit");
     }
 
     /**
@@ -79,8 +108,33 @@ class tipo_equipoController extends Controller
      * @param  \App\Models\Inmobiliario\tipo_equipo  $tipo_equipo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(tipo_equipo $tipo_equipo)
+    public function destroy($id)
     {
-        //
+        //Obtener el dato
+
+        $data = tipo_equipo::find($id);
+
+        //Determinar si el dato contiene otros datos dependientes
+
+        /*
+        if( count($data->tipo_equipo_has_articulo) > 0 ){
+
+            //En caso de ser ser así regresar al index con mensaje de error
+
+            return redirect("inmobiliario/tipo_equipo")->with('message', 'Tiene '.count($data->tipo_equipo_has_articulo).' tipo_equipo_has_articulos dependientes, editelos para que no dependan de esta tipo_equipo.');
+        }else{
+
+            //Dar de baja el dato antes de eliminarlo.
+        */
+        $data->vigencia = 0;
+        $data->save();
+
+        //Eliminar el dato y dirigir al index con mensaje,
+        // si no puede eliminarlo, regresar a edit con mensaje de error
+
+        return tipo_equipo::destroy($id) ? redirect("inmobiliario/tipo_equipo")->with('message', 'Elemento eliminado'): view("inmobiliario.tipo_equipo.edit", print 'Hubo un error al eliminar');
+        /*
+        }
+        */
     }
 }

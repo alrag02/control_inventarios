@@ -16,4 +16,9 @@ class edificio extends Model
         'nombre',
         'vigencia'
     ];
+
+    public function oficina()
+    {
+        return $this->hasMany('App\Models\Inmobiliario\oficina', 'fk_edificio','id');
+    }
 }

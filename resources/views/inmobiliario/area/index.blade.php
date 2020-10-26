@@ -1,10 +1,12 @@
-@extends('layouts.app')
 
+@extends('layouts.app')
+@can('consultar conceptos')
 @section('content')
-    @php($nombre_concepto = 'area')
+@include('layouts.alert')
+@php($nombre_concepto = 'area')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="form-row">
@@ -22,8 +24,8 @@
                     </div>
                     <div class="card-body">
                         <div class="container">
-                            <table class="table table-bordered">
-                                <thead class="thead-dark">
+                            <table class="table table-bordered table-striped">
+                                <thead class="thead-light">
                                 <tr>
                                     <th>Id</th>
                                     <th>Nombre</th>
@@ -36,7 +38,7 @@
                                 @foreach($area as $data)
                                     <tr>
                                         <td>{{$data->id}}</td>
-                                        <td>{{$data->nombre}}</td>
+                                        <td>{{$data->nombre }}</td>
                                         <td>{{($data->vigencia == 1) ? 'Activo' : 'En Baja'}}</td>
                                         <td>{{$data->updated_at}}</td>
                                         <td><a href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-light">Editar</a>
@@ -52,5 +54,7 @@
         </div>
     </div>
 
+@include('layouts.table_datatable')
 
 @endsection
+@endcan

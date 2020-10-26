@@ -14,7 +14,7 @@ class tipo_compra extends Model
 
     protected $fillable = [
         'nombre',
-        'siglas',
+        'sigla',
         'vigencia'
     ];
 }

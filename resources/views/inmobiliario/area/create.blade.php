@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@can('crear conceptos')
 @section('content')
 
     @php($nombre_concepto = 'area')
@@ -12,13 +13,15 @@
                     <div class="card-header"> <h1>{{ __('Cree una nueva '.$nombre_concepto) }}</h1> </div>
 
                     <div class="card-body">
-                        <form action="{{route('inmobiliario.'.$nombre_concepto.'.store')}}" method="POST">
+                        <form action="{{route('inmobiliario.'.$nombre_concepto.'.store')}}" method="POST" onsubmit="document.getElementById('btn_store').hidden = true; save();">
                             @csrf
+                            <!-- nombre -->
                             <div class="form-group">
                                 <label for="inv_camp_nombre">Nombre del {{$nombre_concepto}}</label>
-                                <input type="text" class="form-control" name="nombre" id="inv_camp_nombre" placeholder="Nombre">
+                                <input type="text" class="form-control" name="nombre" id="inv_camp_nombre" placeholder="Inserte el nombre aquí" required>
                             </div>
-
+                            @can('baja conceptos')
+                            <!-- vigencia -->
                             <div class="form-group">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="vigencia" id="inv_camp_vigencia" value="1" checked>
@@ -29,8 +32,9 @@
                                     <label class="form-check-label" for="inv_camp_vigencia_baja">En Baja</label>
                                 </div>
                             </div>
-
-                            <button type="submit" class="btn btn-primary" id="submitButton" onclick=' this.hidden = true; save();'>Guardar</button>
+                            @endcan
+                            <!-- btn_store -->
+                            <button type="submit" class="btn btn-primary" id="btn_store" >Guardar</button>
                         </form>
                     </div>
                 </div>
@@ -40,3 +44,4 @@
 
 
 @endsection
+@endcan

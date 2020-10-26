@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Inmobiliario;
 
 use App\Http\Controllers\Controller;
+use App\Models\Inmobiliario\edificio;
 use App\Models\Inmobiliario\oficina;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class oficinaController extends Controller
      */
     public function index()
     {
-        //
+        return view('inmobiliario.oficina.index', ['oficina' => oficina::all()]);
+
     }
 
     /**
@@ -25,7 +27,8 @@ class oficinaController extends Controller
      */
     public function create()
     {
-        //
+        return view('inmobiliario.oficina.create', ['edificio' => edificio::get(['id', 'nombre', 'vigencia'])->where('vigencia',1)]);
+
     }
 
     /**
@@ -36,7 +39,13 @@ class oficinaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new oficina();
+        $data->nombre = $request->nombre;
+        $data->planta = $request->planta;
+        $data->vigencia = $request->vigencia;
+        $data->fk_edificio = $request->fk_edificio;
+        return $data->save() ? redirect("inmobiliario/oficina") : view("inmobiliario.oficina.create");
+
     }
 
     /**
@@ -45,9 +54,9 @@ class oficinaController extends Controller
      * @param  \App\Models\Inmobiliario\oficina  $oficina
      * @return \Illuminate\Http\Response
      */
-    public function show(oficina $oficina)
+    public function show($id)
     {
-        //
+        return oficina::find($id);
     }
 
     /**
@@ -56,9 +65,9 @@ class oficinaController extends Controller
      * @param  \App\Models\Inmobiliario\oficina  $oficina
      * @return \Illuminate\Http\Response
      */
-    public function edit(oficina $oficina)
+    public function edit($id)
     {
-        //
+        return view('inmobiliario.oficina.edit',["oficina" => oficina::find($id), 'edificio' => edificio::get(['id', 'nombre', 'vigencia'])->where('vigencia',1)]);
     }
 
     /**
@@ -68,9 +77,15 @@ class oficinaController extends Controller
      * @param  \App\Models\Inmobiliario\oficina  $oficina
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, oficina $oficina)
+    public function update(Request $request, $id)
     {
-        //
+        $data = oficina::find($id);
+        $data->nombre = $request->nombre;
+        $data->planta = $request->planta;
+        $data->fk_edificio = $request->fk_edificio;
+        $data->vigencia = $request->vigencia;
+        return $data->save() ? redirect("inmobiliario/oficina") : view("inmobiliario.oficina.edit");
+
     }
 
     /**
@@ -79,8 +94,12 @@ class oficinaController extends Controller
      * @param  \App\Models\Inmobiliario\oficina  $oficina
      * @return \Illuminate\Http\Response
      */
-    public function destroy(oficina $oficina)
+    public function destroy($id)
     {
-        //
+        $data = oficina::find($id);
+        $data->vigencia = 0;
+        $data->save();
+        return oficina::destroy($id) ? redirect("inmobiliario/oficina"): view("inmobiliario.oficina.edit", print 'Hubo un error al eliminar');
+
     }
 }

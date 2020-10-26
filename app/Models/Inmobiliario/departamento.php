@@ -21,4 +21,9 @@ class departamento extends Model
         'nivel',
 
     ];
+
+    public function area()
+    {
+        return $this->belongsTo('App\Models\Inmobiliario\area','fk_area');
+    }
 }

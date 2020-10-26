@@ -18,4 +18,9 @@ class oficina extends Model
         'planta',
         'vigencia'
     ];
+
+    public function edificio()
+    {
+        return $this->belongsTo('App\Models\Inmobiliario\edificio','fk_edificio');
+    }
 }

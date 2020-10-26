@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Inmobiliario;
 
 use App\Http\Controllers\Controller;
+use App\Models\Inmobiliario\area;
 use App\Models\Inmobiliario\departamento;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class departamentoController extends Controller
      */
     public function index()
     {
-        //
+        return view('inmobiliario.departamento.index', ['departamento' => departamento::all()]);
     }
 
     /**
@@ -25,7 +26,8 @@ class departamentoController extends Controller
      */
     public function create()
     {
-        //
+        return view('inmobiliario.departamento.create', ['area' => area::get(['id', 'nombre', 'vigencia'])->where('vigencia',1)]);
+
     }
 
     /**
@@ -36,7 +38,12 @@ class departamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new departamento();
+        $data->nombre = $request->nombre;
+        $data->vigencia = $request->vigencia;
+        $data->fk_area = $request->fk_area;
+        return $data->save() ? redirect("inmobiliario/departamento") : view("inmobiliario.departamento.create");
+
     }
 
     /**
@@ -45,9 +52,9 @@ class departamentoController extends Controller
      * @param  \App\Models\Inmobiliario\departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function show(departamento $departamento)
+    public function show($id)
     {
-        //
+        return departamento::find($id);
     }
 
     /**
@@ -56,9 +63,10 @@ class departamentoController extends Controller
      * @param  \App\Models\Inmobiliario\departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function edit(departamento $departamento)
+    public function edit($id)
     {
-        //
+        return view('inmobiliario.departamento.edit',["departamento" => departamento::find($id), 'area' => area::get(['id', 'nombre', 'vigencia'])->where('vigencia',1)]);
+
     }
 
     /**
@@ -68,9 +76,14 @@ class departamentoController extends Controller
      * @param  \App\Models\Inmobiliario\departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, departamento $departamento)
+    public function update(Request $request, $id)
     {
-        //
+        $data = departamento::find($id);
+        $data->nombre = $request->nombre;
+        $data->fk_area = $request->fk_area;
+        $data->vigencia = $request->vigencia;
+        return $data->save() ? redirect("inmobiliario/departamento") : view("inmobiliario.departamento.edit");
+
     }
 
     /**
@@ -79,8 +92,11 @@ class departamentoController extends Controller
      * @param  \App\Models\Inmobiliario\departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(departamento $departamento)
+    public function destroy($id)
     {
-        //
+        $data = departamento::find($id);
+        $data->vigencia = 0;
+        $data->save();
+        return departamento::destroy($id) ? redirect("inmobiliario/departamento"): view("inmobiliario.departamento.edit", print 'Hubo un error al eliminar');
     }
 }

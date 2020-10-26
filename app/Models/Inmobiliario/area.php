@@ -16,4 +16,9 @@ class area extends Model
       'nombre',
       'vigencia'
     ];
+
+    public function departamento()
+    {
+        return $this->hasMany('App\Models\Inmobiliario\departamento', 'fk_area','id');
+    }
 }
