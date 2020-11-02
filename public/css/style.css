@@ -1,4 +1,12 @@
+
+
+.card{
+    background: linear-gradient(#ffffff, #f5f6fa); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
 .card-selection{
-    background-color: #fff070;
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-image: linear-gradient(#fff070, #ffd670);
     height: 24rem;
 }
+

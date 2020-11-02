@@ -17,6 +17,7 @@ class CreateArticuloHasEmpleadoTable extends Migration
             $table->integer('id', true);
             $table->integer('fk_empleado')->nullable()->index('fk_empleado');
             $table->integer('fk_articulo')->nullable()->index('fk_articulo');
+            $table->integer('fk_encargo')->nullable()->index('fk_encargo');
         });
     }
 

@@ -20,7 +20,7 @@ class UsersWithPermissions extends Seeder
             'last_name_m' => 'Gonzañes',
             'work_id' => 'wid00002',
             'email' => 'NineBaboon@maildrop.cc',
-            'password' => bcrypt('AlejandroG25')
+            'password' => bcrypt('AlejandroG21')
         ]);
         $predefUser->assignRole('consultor');
 
@@ -30,7 +30,7 @@ class UsersWithPermissions extends Seeder
             'last_name_m' => 'Montelongo',
             'work_id' => 'wid00003',
             'email' => 'osacar.montelongo@lagos.tecmm.edu.mx',
-            'password' => bcrypt('AlejandroG25')
+            'password' => bcrypt('AlejandroG22')
         ]);
         $predefUser_2->assignRole('editor');
 

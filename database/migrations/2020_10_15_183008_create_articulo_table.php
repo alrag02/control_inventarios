@@ -29,9 +29,18 @@ class CreateArticuloTable extends Migration
             $table->date('fecha_adquisiscion')->nullable();
             $table->double('costo')->nullable();
             $table->string('num_factura', 128)->nullable();
-            $table->enum('activo_resguardo', ['activo', 'resguardo'])->nullable();
+
+            $table->integer('fk_departamento')->nullable()->index('fk_departamento');
+            $table->integer('fk_estado')->nullable()->index('fk_estado');
+            $table->integer('fk_foto')->nullable()->index('fk_foto');
+            $table->integer('fk_oficina')->nullable()->index('fk_oficina');
+            $table->integer('fk_tipo_compra')->nullable()->index('fk_tipo_compra');
+            $table->integer('fk_tipo_equipo')->nullable()->index('fk_tipo_equipo');
+
             $table->timestamps();
             $table->softDeletes();
+
+
         });
     }
 

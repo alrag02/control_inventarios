@@ -22,6 +22,7 @@ class CreateEmpleadoTable extends Migration
             $table->string('email', 128)->nullable();
             $table->string('nivel', 128)->nullable();
             $table->boolean('vigencia')->nullable();
+            $table->integer('fk_departamento')->nullable()->index('fk_departamento');
             $table->timestamps();
             $table->softDeletes();
         });

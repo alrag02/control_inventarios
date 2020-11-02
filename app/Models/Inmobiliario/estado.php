@@ -16,4 +16,9 @@ class estado extends Model
         'nombre',
         'vigencia'
     ];
+
+    public function articulo()
+    {
+        return $this->hasMany('App\Models\Inmobiliario\articulo', 'fk_estado','id');
+    }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeysToOficinaTable extends Migration
+class AddForeignKeysToEmpleadoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddForeignKeysToOficinaTable extends Migration
      */
     public function up()
     {
-        Schema::table('oficina', function (Blueprint $table) {
-            $table->foreign('fk_edificio', 'oficina_ibfk_1')->references('id')->on('edificio')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+        Schema::table('empleado', function (Blueprint $table) {
+            $table->foreign('fk_departamento', 'empleado_ibfk_1')->references('id')->on('departamento')->onUpdate('RESTRICT')->onDelete('RESTRICT');
         });
     }
 
@@ -25,8 +25,8 @@ class AddForeignKeysToOficinaTable extends Migration
      */
     public function down()
     {
-        Schema::table('oficina', function (Blueprint $table) {
-            $table->dropForeign('oficina_ibfk_1');
+        Schema::table('empleado', function (Blueprint $table) {
+            $table->dropForeign('empleado_ibfk_1');
         });
     }
 }

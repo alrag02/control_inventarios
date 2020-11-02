@@ -21,4 +21,25 @@ class empleado extends Model
         'nivel',
         'vigencia'
     ];
+
+    public function departamento()
+    {
+        return $this->belongsTo('App\Models\Inmobiliario\departamento','fk_departamento');
+    }
+
+
+
+    public function articulo()
+    {
+        return $this->belongsToMany('App\Models\Inmobiliario\articulo', 'articulo_has_empleado', 'fk_empleado', 'fk_articulo');
+
+    }
+
+    public function encargo()
+    {
+        return $this->belongsToMany('App\Models\Inmobiliario\encargo', 'articulo_has_empleado', 'fk_empleado', 'fk_encargo');
+
+    }
+
+
 }

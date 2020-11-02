@@ -16,4 +16,16 @@ class encargo extends Model
         'nombre',
         'vigencia'
     ];
+
+    public function articulo()
+    {
+        return $this->belongsToMany('App\Models\Inmobiliario\articulo', 'articulo_has_empleado', 'fk_encargo', 'fk_articulo');
+
+    }
+
+    public function empleado()
+    {
+        return $this->belongsToMany('App\Models\Inmobiliario\empleado', 'articulo_has_empleado', 'fk_encargo', 'fk_empleado');
+
+    }
 }

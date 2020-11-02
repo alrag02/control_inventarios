@@ -23,4 +23,9 @@ class oficina extends Model
     {
         return $this->belongsTo('App\Models\Inmobiliario\edificio','fk_edificio');
     }
+
+    public function articulo()
+    {
+        return $this->hasMany('App\Models\Inmobiliario\articulo', 'fk_oficina','id');
+    }
 }

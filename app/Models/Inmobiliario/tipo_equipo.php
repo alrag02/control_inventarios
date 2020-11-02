@@ -18,4 +18,9 @@ tipo_equipo extends Model
         'sigla',
         'vigencia'
     ];
+
+    public function articulo()
+    {
+        return $this->hasMany('App\Models\Inmobiliario\articulo', 'fk_tipo_equipo','id');
+    }
 }

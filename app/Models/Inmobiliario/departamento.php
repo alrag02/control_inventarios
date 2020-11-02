@@ -26,4 +26,14 @@ class departamento extends Model
     {
         return $this->belongsTo('App\Models\Inmobiliario\area','fk_area');
     }
+
+    public function empleado()
+    {
+        return $this->hasMany('App\Models\Inmobiliario\empleado', 'fk_departamento','id');
+    }
+
+    public function articulo()
+    {
+        return $this->hasMany('App\Models\Inmobiliario\articulo', 'fk_departamento','id');
+    }
 }
