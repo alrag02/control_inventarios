@@ -3,22 +3,22 @@
 namespace App\Http\Controllers\Inmobiliario;
 
 use App\Http\Controllers\Controller;
-use App\Models\Inmobiliario\tipo_compra;
+use App\Models\Inmobiliario\familia;
 use Illuminate\Http\Request;
 
-class tipo_compraController extends Controller
+class familiaController extends Controller
 {
 
     /**
      * Display a listing of the resource.
      *
-     * @param tipo_compraDataTable $dataTable
+     * @param familiaDataTable $dataTable
      * @return \Illuminate\Http\Response
      */
 
     public function index()
     {
-        return view('inmobiliario.tipo_compra.index', ['tipo_compra' => tipo_compra::all()]);
+        return view('inmobiliario.familia.index', ['familia' => familia::all()]);
     }
 
     /**
@@ -28,7 +28,7 @@ class tipo_compraController extends Controller
      */
     public function create()
     {
-        return view('inmobiliario.tipo_compra.create');
+        return view('inmobiliario.familia.create');
     }
 
     /**
@@ -41,7 +41,7 @@ class tipo_compraController extends Controller
     {
         //Obtener el dato
 
-        $data = new tipo_compra();
+        $data = new familia();
 
         //Obtener los datos con los que se obtengan en el request
 
@@ -52,43 +52,43 @@ class tipo_compraController extends Controller
         //Almacenar el dato y dirigir al index con mensaje,
         // si no puede almacenar, regresar a create con mensaje de error
 
-        return $data->save() ? redirect("inmobiliario/tipo_compra")->with('message', 'Creado Correctamente') : view("inmobiliario.tipo_compra.create");
+        return $data->save() ? redirect("inmobiliario/familia")->with('message', 'Creado Correctamente') : view("inmobiliario.familia.create");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Inmobiliario\tipo_compra  $tipo_compra
+     * @param  \App\Models\Inmobiliario\familia  $familia
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return tipo_compra::find($id);
+        return familia::find($id);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Inmobiliario\tipo_compra  $tipo_compra
+     * @param  \App\Models\Inmobiliario\familia  $familia
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        return view('inmobiliario.tipo_compra.edit',["tipo_compra" => tipo_compra::find($id)]);
+        return view('inmobiliario.familia.edit',["familia" => familia::find($id)]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Inmobiliario\tipo_compra  $tipo_compra
+     * @param  \App\Models\Inmobiliario\familia  $familia
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         //Obtener el dato
 
-        $data = tipo_compra::find($id);
+        $data = familia::find($id);
 
         //Cambiar los datos con los que se obtengan del request en edit
 
@@ -99,23 +99,23 @@ class tipo_compraController extends Controller
         //Actualizar el dato y dirigir al index con mensaje,
         // si no puede actualizar, regresar a edit con mensaje de error
 
-        return $data->save() ? redirect("inmobiliario/tipo_compra")->with('message', 'Modificado Correctamente') : view("inmobiliario.tipo_compra.edit");
+        return $data->save() ? redirect("inmobiliario/familia")->with('message', 'Modificado Correctamente') : view("inmobiliario.familia.edit");
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Inmobiliario\tipo_compra  $tipo_compra
+     * @param  \App\Models\Inmobiliario\familia  $familia
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //Obtener el dato
 
-        $data = tipo_compra::find($id);
+        $data = familia::find($id);
 
         //Determinar si el dato contiene otros datos dependientes
-            //Dar de baja el dato antes de eliminarlo.
+        //Dar de baja el dato antes de eliminarlo.
 
         $data->vigencia = 0;
         $data->save();
@@ -123,7 +123,7 @@ class tipo_compraController extends Controller
         //Eliminar el dato y dirigir al index con mensaje,
         // si no puede eliminarlo, regresar a edit con mensaje de error
 
-        return tipo_compra::destroy($id) ? redirect("inmobiliario/tipo_compra")->with('message', 'Elemento eliminado'): view("inmobiliario.tipo_compra.edit", print 'Hubo un error al eliminar');
+        return familia::destroy($id) ? redirect("inmobiliario/familia")->with('message', 'Elemento eliminado'): view("inmobiliario.familia.edit", print 'Hubo un error al eliminar');
         /*
         }
         */

@@ -4,13 +4,25 @@
 <div class="container">
     <div class="row mx-auto">
         <!--Articulo -->
-        <div class="col-lg-4 md-4 sm-6">
+        <div class="col-lg-2 md-4 sm-6">
             <a href="{{route('inmobiliario.articulo.index')}}">
                 <div class="card card-selection text-dark">
                     <img class="card-img-top mx-auto d-block" src="https://image.flaticon.com/icons/png/512/65/65843.png" style="width: 96px;  margin: 1em" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">Artículo</h5>
                         <p class="card-text">Agregar aquí el inmobiliario de la institucion</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!--Familia -->
+        <div class="col-lg-2 md-4 sm-6">
+            <a href="{{route('inmobiliario.familia.index')}}">
+                <div class="card card-selection text-dark">
+                    <img class="card-img-top mx-auto d-block" src="https://image.flaticon.com/icons/png/512/65/65843.png" style="width: 96px;  margin: 1em" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Familia</h5>
+                        <p class="card-text">Tipos de inmobiliario pertenecientes a una familia</p>
                     </div>
                 </div>
             </a>

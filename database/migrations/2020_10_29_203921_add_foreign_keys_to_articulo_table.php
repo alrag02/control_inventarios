@@ -20,6 +20,8 @@ class AddForeignKeysToArticuloTable extends Migration
             $table->foreign('fk_oficina', 'articulo_ibfk_4')->references('id')->on('oficina')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->foreign('fk_tipo_compra', 'articulo_ibfk_5')->references('id')->on('tipo_compra')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->foreign('fk_tipo_equipo', 'articulo_ibfk_6')->references('id')->on('tipo_equipo')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('fk_familia', 'articulo_ibfk_7')->references('id')->on('familia')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+
         });
     }
 
@@ -37,6 +39,7 @@ class AddForeignKeysToArticuloTable extends Migration
             $table->dropForeign('articulo_ibfk_4');
             $table->dropForeign('articulo_ibfk_5');
             $table->dropForeign('articulo_ibfk_6');
+            $table->dropForeign('articulo_ibfk_7');
         });
     }
 }

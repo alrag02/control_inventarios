@@ -1,7 +1,9 @@
-
+body{
+    background-image: radial-gradient(#212121, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 
 .card{
-    background: linear-gradient(#ffffff, #f5f6fa); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(whitesmoke, #f5f6fa); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .card-selection{
@@ -10,3 +12,12 @@
     height: 24rem;
 }
 
+.card-wrapper_articulo{
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-image: linear-gradient(ghostwhite ,#d2ecec);
+}
+
+.card-selection-articulo{
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-image: linear-gradient(ghostwhite , #d2ecec);
+}

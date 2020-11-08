@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@can('editar conceptos')
+@can('editar inmobiliarios')
 
 @section('content')
 @php($nombre_concepto = 'departamento')
@@ -23,11 +23,11 @@
                                     <label for="inv_camp_nombre">Area a la que pertenece</label>
                                     <select type="text" class="form-select" name="fk_area" id="inv_camp_nombre">
                                         @foreach($area as $data)
-                                            <option value="{{$data->id}}" {{($departamento->area->id == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
+                                            <option value="{{$data->id}}" {{((!empty($departamento->area->id)) == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                @can('baja conceptos')
+                                @can('baja inmobiliarios')
                                 <!-- vigencia -->
                                 <div class="form-group">
                                     <div class="form-check form-check-inline">

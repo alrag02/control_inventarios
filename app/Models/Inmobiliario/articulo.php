@@ -28,11 +28,13 @@ class articulo extends Model
         'costo',
         'num_factura',
         'activo_resguardo',
+        'fk_familia',
         'fk_departamento',
         'fk_estado',
         'fk_tipo_compra',
         'fk_tipo_equipo',
-        'fk_oficina'
+        'fk_oficina',
+        'vigencia'
     ];
 
     public function departamento()
@@ -60,7 +62,10 @@ class articulo extends Model
         return $this->belongsTo('App\Models\Inmobiliario\oficina','fk_oficina');
     }
 
-
+    public function familia()
+    {
+        return $this->belongsTo('App\Models\Inmobiliario\familia','fk_familia');
+    }
 
     public function empleado()
     {
@@ -74,4 +79,12 @@ class articulo extends Model
 
     }
 
+    //Obstner los datos de las fechas de inserccion (para generar la cadena de las eltiquetas locales)
+    public function getDates()
+    {
+        //define the datetime table column names as below in an array, and you will get the
+        //carbon objects for these fields in model objects.
+
+        return array('created_at', 'updated_at','fecha_adquisiscion');
+    }
 }
