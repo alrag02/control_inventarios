@@ -7,7 +7,11 @@ use App\Models\Inmobiliario\departamento;
 use App\Models\Inmobiliario\edificio;
 use App\Models\Inmobiliario\empleado;
 use App\Models\Inmobiliario\encargo;
+use App\Models\Inmobiliario\estado;
+use App\Models\Inmobiliario\familia;
 use App\Models\Inmobiliario\oficina;
+use App\Models\Inmobiliario\tipo_compra;
+use App\Models\Inmobiliario\tipo_equipo;
 use Illuminate\Database\Seeder;
 
 class datosConceptos extends Seeder
@@ -174,6 +178,87 @@ class datosConceptos extends Seeder
 
         encargo::create([
             'nombre' => 'Resguardante 2',
+            'vigencia' => '1'
+        ]);
+
+        tipo_compra::create([
+            'nombre' => 'Compra Licitacion',
+            'sigla' => 'CI',
+            'vigencia' => '1'
+        ]);
+
+        tipo_compra::create([
+            'nombre' => 'Donacion',
+            'sigla' => 'DO',
+            'vigencia' => '0'
+        ]);
+
+        tipo_equipo::create([
+            'nombre' => 'Mobiliario',
+            'sigla' => 'MOB',
+            'vigencia' => '1'
+        ]);
+
+        tipo_equipo::create([
+            'nombre' => 'Equipo de Oficinas',
+            'sigla' => 'EO',
+            'vigencia' => '1'
+        ]);
+
+        tipo_equipo::create([
+            'nombre' => 'Equipo de Computo',
+            'sigla' => 'EC',
+            'vigencia' => '1'
+        ]);
+
+        estado::create([
+            'nombre' => 'Bueno',
+            'vigencia' => '1'
+        ]);
+
+        estado::create([
+            'nombre' => 'Extraviado',
+            'vigencia' => '1'
+        ]);
+
+        estado::create([
+            'nombre' => 'Dañado',
+            'vigencia' => '1'
+        ]);
+
+        familia::create([
+            'nombre' => 'Mobiliario y equipo de Administración',
+            'sigla' => '5100',
+            'vigencia' => '1'
+        ]);
+
+        familia::create([
+            'nombre' => 'Mobiliario y equipo Educacional',
+            'sigla' => '5200',
+            'vigencia' => '1'
+        ]);
+
+        familia::create([
+            'nombre' => 'Mobiliario y equipo de Laboratorio',
+            'sigla' => '5300',
+            'vigencia' => '1'
+        ]);
+
+        familia::create([
+            'nombre' => 'Equipo de Transporte y Vehiculos',
+            'sigla' => '5400',
+            'vigencia' => '1'
+        ]);
+
+        familia::create([
+            'nombre' => 'Maquinaria industrial y Herramientas',
+            'sigla' => '5600',
+            'vigencia' => '1'
+        ]);
+
+        familia::create([
+            'nombre' => 'Equipo de cómputo y Telecomunicaciones',
+            'sigla' => '5150',
             'vigencia' => '1'
         ]);
     }

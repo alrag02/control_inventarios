@@ -1,4 +1,4 @@
-const dataTable = new simpleDatatables.DataTable(".table", {
+let dataTable = new simpleDatatables.DataTable(".table", {
         searchable: true,
         fixedHeight: true,
         labels: {

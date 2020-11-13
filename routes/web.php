@@ -48,9 +48,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('/tipo_equipo', 'tipo_equipoController');
     });
 
-    Route::namespace('revision')->prefix('revision')->name('revision.')->group(function (){
+    Route::namespace('Revision')->prefix('revision')->name('revision.')->group(function (){
        // Route::resource('/registrados','UsersController', ['except' =>['show','create', 'store']]);
         Route::view('/','revision.index');
+        Route::resource('/corte','corteController');
     });
 });
 

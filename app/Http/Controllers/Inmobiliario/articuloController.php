@@ -15,6 +15,7 @@ use App\Models\Inmobiliario\tipo_compra;
 use App\Models\Inmobiliario\tipo_equipo;
 use App\Models\Inmobiliario\edificio;
 use Illuminate\Http\Request;
+use Milon\Barcode\DNS1D;
 
 class articuloController extends Controller
 {
@@ -25,6 +26,7 @@ class articuloController extends Controller
      */
     public function index()
     {
+
         return view('inmobiliario.articulo.index', [
             'articulo' => articulo::all(),
             'area' => area::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
@@ -36,6 +38,7 @@ class articuloController extends Controller
             'oficina' => oficina::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'edificio' => edificio::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
         ]);
+
     }
 
     /**
@@ -51,8 +54,8 @@ class articuloController extends Controller
             'departamento' => departamento::all(),
             'familia' => familia::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'estado' => estado::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
-            'tipo_compra' => tipo_compra::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
-            'tipo_equipo' => tipo_equipo::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            'tipo_compra' => tipo_compra::get(['id', 'nombre', 'sigla' ,'vigencia'])->where('vigencia',1),
+            'tipo_equipo' => tipo_equipo::get(['id', 'nombre', 'sigla' , 'vigencia'])->where('vigencia',1),
             'oficina' => oficina::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'edificio' => edificio::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'empleado' => empleado::get(['id', 'nombre', 'apellido_paterno','apellido_materno', 'vigencia'])->where('vigencia',1),
@@ -93,24 +96,30 @@ class articuloController extends Controller
 
         //Generar codigo interno ITSLM-01-CI-MOB-0207
 
+
         $data->etiqueta_local =
             'ITSLM-'.
-            $request->fecha_adquisiscion->year.
+            substr( $data->fecha_adquisiscion->year, -2).
             '-'.
-            tipo_compra::get('siglas')->where('id',$request->fk_tipo_compra).
-            tipo_equipo::get('siglas')->where('id',$request->fk_tipo_equipo).
+            $data->tipo_compra->sigla.
+            '-'.
+            $data->tipo_equipo->sigla.
+            '-'.
             //Numeros random, provisional
-            random_bytes(4)
-        ;
-
+            mt_rand(0000,9999);
         $data->save();
 
+        //echo (new DNS1D)->getBarcodeHTML('ITSLM-16-CI-MOB-0029', 'C128');
+
+
         $art = articulo::find($data->id);
-        $art->encargo()->attach(1, ['fk_empleado' => $request->articulo_has_empleado_1]);
-        $art->encargo()->attach(2, ['fk_empleado' => $request->articulo_has_empleado_2]);
-        $art->encargo()->attach(3, ['fk_empleado' => $request->articulo_has_empleado_3]);
-        $art->encargo()->attach(4, ['fk_empleado' => $request->articulo_has_empleado_4]);
-        $art->encargo()->attach(5, ['fk_empleado' => $request->articulo_has_empleado_5]);
+        $art->encargo()->attach(1, ['fk_empleado' => ($request->articulo_has_empleado_1) ?? null]);
+        $art->encargo()->attach(2, ['fk_empleado' => ($request->articulo_has_empleado_2) ?? null]);
+        $art->encargo()->attach(3, ['fk_empleado' => ($request->articulo_has_empleado_3) ?? null]);
+        $art->encargo()->attach(4, ['fk_empleado' => ($request->articulo_has_empleado_4) ?? null]);
+        $art->encargo()->attach(5, ['fk_empleado' => ($request->articulo_has_empleado_5) ?? null]);
+
+        redirect("inmobiliario/articulo");
 
     }
 
@@ -134,14 +143,17 @@ class articuloController extends Controller
     public function edit($id)
     {
         return view('inmobiliario.articulo.edit',[
-            'articulo' => articulo::all(),
+            'articulo' => articulo::find($id),
             'area' => area::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'departamento' => departamento::all(),
+            'familia' => familia::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'estado' => estado::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
-            'tipo_compra' => tipo_compra::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
-            'tipo_equipo' => tipo_equipo::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            'tipo_compra' => tipo_compra::get(['id', 'nombre', 'sigla' ,'vigencia'])->where('vigencia',1),
+            'tipo_equipo' => tipo_equipo::get(['id', 'nombre', 'sigla' , 'vigencia'])->where('vigencia',1),
             'oficina' => oficina::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'edificio' => edificio::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            'empleado' => empleado::get(['id', 'nombre', 'apellido_paterno','apellido_materno', 'vigencia'])->where('vigencia',1),
+            'encargo' => encargo::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
         ]);
 
     }
@@ -192,5 +204,10 @@ class articuloController extends Controller
         $data->vigencia = 0;
         $data->save();
         return articulo::destroy($id) ? redirect("inmobiliario/articulo"): view("inmobiliario.articulo.edit", print 'Hubo un error al eliminar');
+    }
+
+    public function generateBarCode($id){
+        echo (new DNS1D)->getBarcodeHTML('ITSLM-16-CI-MOB-0029', 'C128');
+
     }
 }

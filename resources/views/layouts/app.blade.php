@@ -22,8 +22,6 @@
     <link href="{{ url('css/style.css') }}" rel="stylesheet">
 
     <!-- Simple Datatables -->
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
     <script src="{{url('js/table_datatables.js')}}" ></script>
 
 </head>
@@ -96,16 +94,16 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="#">
-                                        {{__('Historial de revisiones')}}
+                                        {{__('Historial de Cortes de inventario')}}
                                     </a>
                                     @can('crear cortes')
                                     <a class="dropdown-item" href="#">
-                                        {{__('Nueva revisión')}}
+                                        {{__('Nuevo corte de inventario')}}
                                     </a>
                                     @endcan
                                     @can('revisar inventarios')
                                     <a class="dropdown-item" href="#">
-                                        {{__('Comprobar existencia de inmobiliario')}}
+                                        {{__('Realizar revisión de inventarios')}}
                                     </a>
                                     @endcan
                                 </div>
