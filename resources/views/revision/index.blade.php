@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@can('consultar cortes')
+@can('consultar corte')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -22,7 +22,7 @@
 @endsection
 @endcan
 
-@cannot('consultar cortes')
+@cannot('consultar corte')
     <?php
         redirect('index');
     ?>

@@ -79,12 +79,17 @@ class articulo extends Model
 
     }
 
-    //Obstner los datos de las fechas de inserccion (para generar la cadena de las eltiquetas locales)
+    //Obtener los datos separadas de las fechas, esto para poder general las etiquetas con el año de
+    //adquisisción,
     public function getDates()
     {
         //define the datetime table column names as below in an array, and you will get the
         //carbon objects for these fields in model objects.
 
         return array('created_at', 'updated_at','fecha_adquisiscion');
+    }
+
+    public function disponibilidad_articulo(){
+        return $this->hasMany('App\Models\Revision\disponibilidad_articulo', 'fk_articulo','id');
     }
 }

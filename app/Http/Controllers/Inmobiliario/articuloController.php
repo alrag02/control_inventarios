@@ -14,6 +14,7 @@ use App\Models\Inmobiliario\oficina;
 use App\Models\Inmobiliario\tipo_compra;
 use App\Models\Inmobiliario\tipo_equipo;
 use App\Models\Inmobiliario\edificio;
+use App\Models\Revision\disponibilidad_articulo;
 use Illuminate\Http\Request;
 use Milon\Barcode\DNS1D;
 
@@ -94,9 +95,7 @@ class articuloController extends Controller
         $data->fk_tipo_equipo = $request->fk_tipo_equipo;
         $data->fk_oficina = $request->fk_oficina;
 
-        //Generar codigo interno ITSLM-01-CI-MOB-0207
-
-
+        //Generar codigo interno
         $data->etiqueta_local =
             'ITSLM-'.
             substr( $data->fecha_adquisiscion->year, -2).
@@ -112,6 +111,8 @@ class articuloController extends Controller
         //echo (new DNS1D)->getBarcodeHTML('ITSLM-16-CI-MOB-0029', 'C128');
 
 
+        //Agregar los datos de articulo_Has_empleado
+
         $art = articulo::find($data->id);
         $art->encargo()->attach(1, ['fk_empleado' => ($request->articulo_has_empleado_1) ?? null]);
         $art->encargo()->attach(2, ['fk_empleado' => ($request->articulo_has_empleado_2) ?? null]);
@@ -119,8 +120,14 @@ class articuloController extends Controller
         $art->encargo()->attach(4, ['fk_empleado' => ($request->articulo_has_empleado_4) ?? null]);
         $art->encargo()->attach(5, ['fk_empleado' => ($request->articulo_has_empleado_5) ?? null]);
 
-        redirect("inmobiliario/articulo");
+        //Agregar los datos de disponibilidad_articulo
+        $disp_art = new disponibilidad_articulo();
+        $disp_art->fk_articulo = $data->id;
+        $disp_art->estado = 'sin_revisar';
+        $disp_art->fk_revision = null;
+        $disp_art->save();
 
+        redirect("inmobiliario/articulo")->with('message', 'Modificado Correctamente');
     }
 
     /**
@@ -207,7 +214,6 @@ class articuloController extends Controller
     }
 
     public function generateBarCode($id){
-        echo (new DNS1D)->getBarcodeHTML('ITSLM-16-CI-MOB-0029', 'C128');
-
+        echo (new DNS1D)->getBarcodeHTML($id, 'C128');
     }
 }

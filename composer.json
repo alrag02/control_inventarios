@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
         "milon/barcode": "^8.0",
+        "spatie/laravel-backup": "^6.11",
         "spatie/laravel-permission": "^3.17"
     },
     "require-dev": {

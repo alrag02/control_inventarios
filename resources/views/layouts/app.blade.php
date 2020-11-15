@@ -93,11 +93,11 @@
                                     {{__('Revisión de Inventarios')}}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{route('revision.corte.index')}}">
                                         {{__('Historial de Cortes de inventario')}}
                                     </a>
                                     @can('crear cortes')
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{route('revision.corte.create')}}">
                                         {{__('Nuevo corte de inventario')}}
                                     </a>
                                     @endcan

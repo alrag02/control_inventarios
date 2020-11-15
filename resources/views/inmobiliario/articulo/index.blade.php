@@ -74,7 +74,7 @@
                                                     <ul>
                                                         <li>Area: {{($data->departamento->area->nombre) ?? '-'}}</li>
                                                         <li>Departamento: {{($data->departamento->nombre) ?? '-'}}</li>
-                                                        <li>Ubicacion: {{($data->edificio->nombre) ?? '-'}}</li>
+                                                        <li>Ubicación: {{($data->edificio->nombre) ?? '-'}}</li>
                                                     </ul>
                                                     <h4>Empleados</h4>
                                                     <ul>
@@ -114,7 +114,6 @@
         </div>
     </div>
     <script>
-
         function toggle_by_class(cls, on) {
             const lst = document.getElementById(cls);
             lst.style.display = on ? '' : 'none';

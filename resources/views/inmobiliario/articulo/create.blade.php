@@ -2,7 +2,6 @@
 
 @can('crear inmobiliarios')
 @section('content')
-
     @php($nombre_concepto = 'articulo')
 
     <div class="container">
@@ -10,13 +9,6 @@
             <div class="row mx-auto">
                 <div class="col-lg-12">
                     <div class="card card-wrapper_articulo">
-                        @extends('layouts.app')
-
-                        @can('crear inmobiliarios')
-                        @section('content')
-
-                            @php($nombre_concepto = 'articulo')
-
                             <div class="container">
                                 <div class="row justify-content-center">
                                     <div class="row mx-auto">
@@ -297,8 +289,6 @@
                                     </div>
                                 </div>
                             </div>
-                        @endsection
-                        @endcan
                     </div>
                 </div>
             </div>
