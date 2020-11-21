@@ -21,7 +21,7 @@
                                         </button>
                                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opciones</button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">Generar Etiqueta</a>
+                                            <a class="dropdown-item" href="{{route('inmobiliario.'.$nombre_concepto.'.generateBarCode',$articulo->id)}}">Generar Etiqueta</a>
                                             <a class="dropdown-item" href="#">Dar de Baja</a>
                                             <div role="separator" class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Eliminar</a>
@@ -44,7 +44,7 @@
                                                     <!--etiqueta_externa-->
                                                     <div class="form-group col-md-12">
                                                         <label for="inv_camp_etiqueta_externa">Etiqueta TECMM</label>
-                                                        <input type="text" name="etiqueta_externa" class="form-control" id="inv_camp_etiqueta_externa" placeholder="TECMM-XXXX-XX-XXXX">
+                                                        <input type="text" name="etiqueta_externa" value="{{$articulo->etiqueta_externa}}" class="form-control" id="inv_camp_etiqueta_externa" placeholder="TECMM-XXXX-XX-XXXX">
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <!-- familia -->
@@ -52,7 +52,7 @@
                                                         <select name="fk_familia" class="form-select" id="inv_camp_familia">
                                                             <option selected disabled class="font-italic">Seleccione...</option>
                                                             @foreach($familia as $data)
-                                                                <option value="{{$data->id}}">{{$data->nombre}}</option>
+                                                                <option value="{{$data->id}}" {{($articulo->familia->id == $data->id) ? 'selected':''}} >{{$data->nombre}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -61,50 +61,50 @@
                                                     <!-- concepto -->
                                                     <div class="form-group col-md-12">
                                                         <label for="inv_camp_concepto">Concepto</label>
-                                                        <input type="text" name="concepto" class="form-control" id="inv_camp_concepto" placeholder="Concepto">
+                                                        <input type="text" name="concepto" value="{{$articulo->concepto}}" class="form-control" id="inv_camp_concepto" placeholder="Concepto">
                                                     </div>
                                                     <!-- marca -->
                                                     <div class="form-group col-md-6">
                                                         <label for="inv_camp_marca">Marca</label>
-                                                        <input type="text" name="marca" class="form-control" id="inv_camp_marca" placeholder="Marca">
+                                                        <input type="text" name="marca" value="{{$articulo->marca}}" class="form-control" id="inv_camp_marca" placeholder="Marca">
                                                     </div>
                                                     <!-- modelo -->
                                                     <div class="form-group col-md-6">
                                                         <label for="inv_camp_modelo">Modelo</label>
-                                                        <input type="text" name="modelo" class="form-control" id="inv_camp_modelo" placeholder="Modelo">
+                                                        <input type="text" name="modelo" value="{{$articulo->modelo}}" class="form-control" id="inv_camp_modelo" placeholder="Modelo">
                                                     </div>
                                                     <!-- descripcion -->
                                                     <div class="form-group col-md-12">
                                                         <label for="inv_camp_descripcion">Descripción</label>
-                                                        <input type="textarea" name="descripcion" class="form-control" id="inv_camp_descripcion" placeholder="Descripción breve">
+                                                        <input type="textarea" name="descripcion" value="{{$articulo->descripcion}}" class="form-control" id="inv_camp_descripcion" placeholder="Descripción breve">
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
                                                     <!-- numero_serie -->
                                                     <div class="form-group col-md-4">
                                                         <label for="inv_camp_numero_serie">No. de Serie</label>
-                                                        <input type="text" name="numero_serie" class="form-control" id="inv_camp_numero_serie" placeholder="#####">
+                                                        <input type="text" name="numero_serie" value="{{$articulo->numero_serie}}" class="form-control" id="inv_camp_numero_serie" placeholder="#####">
                                                     </div>
                                                     <!-- color -->
                                                     <div class="form-group col-md-5">
                                                         <label for="inv_camp_color">Color</label>
                                                         <select type="text" name="color" class="form-select" id="inv_camp_color">
                                                             <option selected disabled hidden class="font-italic">Seleccione</option>
-                                                            <option value="blanco">Blanco</option>
-                                                            <option value="negro">Negro</option>
-                                                            <option value="gris">Gris</option>
-                                                            <option value="rojo">Rojo</option>
-                                                            <option value="azul">Azul</option>
-                                                            <option value="verde">Verde</option>
-                                                            <option value="amarillo">Amarillo</option>
-                                                            <option value="naranja">Naranja</option>
-                                                            <option value="cafe">Café</option>
+                                                            <option value="blanco"  {{("blanco" == $articulo->color) ? 'selected':''}}>Blanco</option>
+                                                            <option value="negro"   {{("negro" == $articulo->color) ? 'selected':''}}>Negro</option>
+                                                            <option value="gris"    {{("gris" == $articulo->color) ? 'selected':''}}>Gris</option>
+                                                            <option value="rojo"    {{("rojo" == $articulo->color) ? 'selected':''}}>Rojo</option>
+                                                            <option value="azul"    {{("azul" == $articulo->color) ? 'selected':''}}>Azul</option>
+                                                            <option value="verde"   {{("verde" == $articulo->color) ? 'selected':''}}>Verde</option>
+                                                            <option value="amarillo"{{("amarillo" == $articulo->color) ? 'selected':''}}>Amarillo</option>
+                                                            <option value="naranja" {{("naranja" == $articulo->color) ? 'selected':''}}>Naranja</option>
+                                                            <option value="cafe"    {{("cafe" == $articulo->color) ? 'selected':''}}>Café</option>
                                                         </select>
                                                     </div>
                                                     <!-- cantidad -->
                                                     <div class="form-group col-md-3">
                                                         <label for="inv_camp_cantidad">Cant.</label>
-                                                        <input type="number" name="cantidad" class="form-control" id="inv_camp_cantidad" placeholder="#">
+                                                        <input type="number" name="cantidad" value="{{$articulo->cantidad}}" class="form-control" id="inv_camp_cantidad" placeholder="#">
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
@@ -114,14 +114,14 @@
                                                         <select class="form-select" name="fk_estado" id="inv_camp_estado">
                                                             <option selected disabled class="font-italic">Seleccione...</option>
                                                             @foreach($estado as $data)
-                                                                <option value="{{$data->id}}">{{$data->nombre}}</option>
+                                                                <option value="{{$data->id}}" {{($articulo->estado->id == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                     <!-- placas -->
                                                     <div class="form-group col-md-6">
                                                         <label for="inv_camp_placas">Placas</label>
-                                                        <input type="text" name="placas" class="form-control" id="inv_camp_placas" placeholder="Solo si es vehiculo">
+                                                        <input type="text" name="placas" value="{{$articulo->placas}}" class="form-control" id="inv_camp_placas" placeholder="Solo si es vehiculo">
                                                     </div>
                                                     <!-- vigencia -->
                                                     <div class="form-group">
@@ -148,7 +148,7 @@
                                                         <select name="edificio" class="form-select" id="inv_camp_edificio">
                                                             <option selected disabled class="font-italic">Seleccione...</option>
                                                             @foreach($edificio as $data)
-                                                                <option value="{{$data->id}}">{{$data->nombre}}</option>
+                                                                <option value="{{$data->id}}" {{($articulo->oficina->edificio->id == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -158,7 +158,7 @@
                                                         <select name="fk_oficina" class="form-select" id="inv_camp_fk_oficina">
                                                             <option selected disabled class="font-italic">Seleccione...</option>
                                                             @foreach($oficina as $data)
-                                                                <option value="{{$data->id}}">{{$data->nombre}}</option>
+                                                                <option value="{{$data->id}}" {{($articulo->oficina->id == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -175,7 +175,7 @@
                                                                 " type="text">
                                                             <option selected disabled class="font-italic" onclick="">Seleccione...</option>
                                                             @foreach($area as $data)
-                                                                <option value="{{$data->id}}" >{{$data->nombre}}</option>
+                                                                <option value="{{$data->id}}" {{($articulo->departamento->area->id == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -186,7 +186,7 @@
                                                                 disabled>
                                                             <option selected disabled class="font-italic">Seleccione...</option>
                                                             @foreach($departamento as $data)
-                                                                <option value="{{$data->id}}">{{$data->nombre}}</option>
+                                                                <option value="{{$data->id}}" {{($articulo->departamento->id == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -201,7 +201,7 @@
                                                     <!-- observaciones -->
                                                     <div class="form-group col-md-12">
                                                         <label for="inv_camp_observaciones">Observaciones</label>
-                                                        <input type="text" name="observaciones" class="form-control" id="inv_camp_observaciones" placeholder="#">
+                                                        <input type="text" name="observaciones" value="{{$articulo->observaciones}}" class="form-control" id="inv_camp_observaciones" placeholder="#">
                                                     </div>
                                                 </div>
                                             </div>
@@ -210,28 +210,31 @@
                                         <div class="col-md-4">
                                             <div class="card card-body">
                                                 <h4 class="card-title">Datos de Adquisición</h4>
+                                                <label for="inv_camp_fecha_adquisiscion">Etiqueta</label>
                                                 <div class="form-row">
-                                                    <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj75Ynx7_vrAhWwmq0KHZ4nAwQQFjAAegQIBhAB&url=https%3A%2F%2Fwiki.lib.sun.ac.za%2Fimages%2F0%2F07%2FBootstrap-tutorial.pdf&usg=AOvVaw2UWmwvM6mnEZ5S6T_Fpsie">
-                                                        <img src="https://www.latiendadelasbarras.com/wp-content/uploads/2019/07/codigo-39-barras.jpg" alt="" width="200px " class="card-image-top mx-auto d-block P-2">
-                                                    </a>
+                                                    <div class="container text-center bg-light p-2">
+                                                        <img src="data:image/png;base64,{{
+                                                            DNS1D::getBarcodePNG($articulo->etiqueta_local, 'C128','1','100',array(1,1,1), true)
+                                                        }}" alt="barcode" />
+                                                    </div>
                                                 </div>
                                                 <div class="form-row">
                                                     <!-- fecha_adquisiscion -->
                                                     <div class="form-group col-md-12">
                                                         <label for="inv_camp_fecha_adquisiscion">Fecha de adquisición</label>
-                                                        <input type="date" name="fecha_adquisiscion" class="form-control" id="inv_camp_fecha_adquisiscion" placeholder="">
+                                                        <input type="date" name="fecha_adquisiscion" value="{{$articulo->fecha_adquisiscion->format('Y-m-d')}}" class="form-control" id="inv_camp_fecha_adquisiscion" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
                                                     <!-- costo -->
                                                     <div class="form-group col-md-4">
                                                         <label for="inv_camp_costo">Costo</label>
-                                                        <input type="number" name="costo" class="form-control" id="inv_camp_costo" placeholder="$">
+                                                        <input type="number" name="costo" value="{{$articulo->costo}}" class="form-control" id="inv_camp_costo" placeholder="$">
                                                     </div>
                                                     <!-- num_factura -->
                                                     <div class="form-group col-md-8">
                                                         <label for="inv_camp_num_factura">Numero de Factura</label>
-                                                        <input type="text" name="num_factura" class="form-control" id="inv_camp_num_factura" placeholder="#xxxxxxx">
+                                                        <input type="text" name="num_factura" value="{{$articulo->num_factura}}" class="form-control" id="inv_camp_num_factura" placeholder="#xxxxxxx">
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
@@ -241,7 +244,7 @@
                                                         <select type="text" name="fk_tipo_compra" class="form-select" id="inv_camp_fk_tipo_compra" >
                                                             <option selected disabled class="font-italic">Seleccione...</option>
                                                             @foreach($tipo_compra as $data)
-                                                                <option value="{{$data->id}}">{{$data->nombre}}</option>
+                                                                <option value="{{$data->id}}" {{($articulo->tipo_compra->id == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -251,7 +254,7 @@
                                                         <select type="text" name="fk_tipo_equipo" class="form-select" id="inv_camp_fk_tipo_equipo" >
                                                             <option selected disabled class="font-italic">Seleccione...</option>
                                                             @foreach($tipo_equipo as $data)
-                                                                <option value="{{$data->id}}">{{$data->nombre}}</option>
+                                                                <option value="{{$data->id}}" {{($articulo->tipo_equipo->id == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>

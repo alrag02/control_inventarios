@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Revision;
 
 use App\Http\Controllers\Controller;
+use App\Models\Inmobiliario\articulo;
 use App\Models\Revision\corte;
+use App\Models\Revision\disponibilidad_articulo;
 use Illuminate\Http\Request;
 
 class corteController extends Controller
@@ -48,7 +50,17 @@ class corteController extends Controller
         //Almacenar el dato y dirigir al index con mensaje,
         // si no puede almacenar, regresar a create con mensaje de error
 
-        return $data->save() ? redirect("revision/corte")->with('message', 'Creado Correctamente') : view("revision.corte.create");
+        $data->save();
+
+        //Actualizar tods los articulos para que aparecan sin revisar,
+        foreach (articulo::get() as $disp_art){
+            $disp_art->disponibilidad = 'sin_revisar';
+            $disp_art->fk_revision = null;
+            $disp_art->timestamps = false;
+            $disp_art->disponibilidad_updated_at = date("Y-m-d h:i:s");
+            $disp_art->save();
+        }
+        return redirect("revision/corte")->with('message', 'Creado Correctamente');
     }
 
     /**

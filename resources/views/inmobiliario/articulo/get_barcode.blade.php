@@ -1,25 +1,21 @@
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered">
-    Launch centered demo modal
-</button>
+@extends('layouts.app')
 
-<!-- Modal -->
-<div class="modal" id="exampleModalCentered" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenteredLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+
+@section('content')
+    <div class="container">
+        <div class="card">
+            <div class="card-title">
+                <h5>Etiqueta de codigo de barras</h5>
             </div>
-            <div class="modal-body">
-                //echo (new DNS1D)->getBarcodeHTML('ITSLM-16-CI-MOB-0029', 'C128');
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="card-body">
+                <div class="container text-center">
+                    <img src="data:image/png;base64,{{
+                    DNS1D::getBarcodePNG($articulo->etiqueta_local, 'C128','1','100',array(1,1,1), true)
+                }}" alt="barcode" />
+                </div>
             </div>
         </div>
+
     </div>
-</div>
+
+@endsection

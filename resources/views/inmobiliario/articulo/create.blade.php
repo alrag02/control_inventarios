@@ -24,13 +24,6 @@
                                                                 <button type="submit" id="btn-store" class="btn btn-primary">
                                                                     Guardar
                                                                 </button>
-                                                                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opciones</button>
-                                                                <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" href="#">Generar Etiqueta</a>
-                                                                    <a class="dropdown-item" href="#">Dar de Baja</a>
-                                                                    <div role="separator" class="dropdown-divider"></div>
-                                                                    <a class="dropdown-item" href="#">Eliminar</a>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -41,9 +34,6 @@
                                                                     <div class="card card-body">
                                                                         <h4 class="card-title">Información General</h4>
                                                                         <div class="form-row">
-                                                                            <a href="#">
-                                                                                <img src="https://www.coppel.com/images/catalog/pm/3836613-1.jpg" alt="" width="200px " class="card-image-top mx-auto d-block P-2">
-                                                                            </a>
                                                                         </div>
                                                                         <div class="form-row">
                                                                             <!--etiqueta_externa-->
@@ -109,7 +99,7 @@
                                                                             <!-- cantidad -->
                                                                             <div class="form-group col-md-3">
                                                                                 <label for="inv_camp_cantidad">Cant.</label>
-                                                                                <input type="number" name="cantidad" class="form-control" id="inv_camp_cantidad" placeholder="#">
+                                                                                <input type="number" name="cantidad" class="form-control" id="inv_camp_cantidad" min="1" placeholder="#">
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-row">
@@ -216,15 +206,12 @@
                                                                     <div class="card card-body">
                                                                         <h4 class="card-title">Datos de Adquisición</h4>
                                                                         <div class="form-row">
-                                                                            <a href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj75Ynx7_vrAhWwmq0KHZ4nAwQQFjAAegQIBhAB&url=https%3A%2F%2Fwiki.lib.sun.ac.za%2Fimages%2F0%2F07%2FBootstrap-tutorial.pdf&usg=AOvVaw2UWmwvM6mnEZ5S6T_Fpsie">
-                                                                                <img src="https://www.latiendadelasbarras.com/wp-content/uploads/2019/07/codigo-39-barras.jpg" alt="" width="200px " class="card-image-top mx-auto d-block P-2">
-                                                                            </a>
                                                                         </div>
                                                                         <div class="form-row">
                                                                             <!-- fecha_adquisiscion -->
                                                                             <div class="form-group col-md-12">
                                                                                 <label for="inv_camp_fecha_adquisiscion">Fecha de adquisición</label>
-                                                                                <input type="date" name="fecha_adquisiscion" class="form-control" id="inv_camp_fecha_adquisiscion" placeholder="">
+                                                                                <input type="date" name="fecha_adquisiscion" class="form-control" id="inv_camp_fecha_adquisiscion" placeholder="" required>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-row">
@@ -241,9 +228,9 @@
                                                                         </div>
                                                                         <div class="form-row">
                                                                             <!-- fk_tipo_compra -->
-                                                                            <div class="form-group col-md-6">
+                                                                            <div class="form-group col-md-12">
                                                                                 <label for="inv_camp_fk_tipo_compra">Tipo de Compra</label>
-                                                                                <select type="text" name="fk_tipo_compra" class="form-select" id="inv_camp_fk_tipo_compra" >
+                                                                                <select type="text" name="fk_tipo_compra" class="form-select" id="inv_camp_fk_tipo_compra" required>
                                                                                     <option selected disabled class="font-italic">Seleccione...</option>
                                                                                     @foreach($tipo_compra as $data)
                                                                                         <option value="{{$data->id}}">{{$data->nombre}}</option>
@@ -251,9 +238,9 @@
                                                                                 </select>
                                                                             </div>
                                                                             <!-- fk_tipo_equipo -->
-                                                                            <div class="form-group col-md-6">
+                                                                            <div class="form-group col-md-12">
                                                                                 <label for="inv_camp_fk_tipo_equipo">Tipo de equipo</label>
-                                                                                <select type="text" name="fk_tipo_equipo" class="form-select" id="inv_camp_fk_tipo_equipo" >
+                                                                                <select type="text" name="fk_tipo_equipo" class="form-select" id="inv_camp_fk_tipo_equipo" required>
                                                                                     <option selected disabled class="font-italic">Seleccione...</option>
                                                                                     @foreach($tipo_equipo as $data)
                                                                                         <option value="{{$data->id}}">{{$data->nombre}}</option>

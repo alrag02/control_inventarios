@@ -4,11 +4,10 @@ namespace App\Models\Revision;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class revision extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $table = 'revision';
 
@@ -25,5 +24,10 @@ class revision extends Model
     public function corte()
     {
         return $this->belongsTo('App\Models\Revision\corte','fk_corte');
+    }
+
+    public function articulo()
+    {
+        return $this->hasMany('App\Models\Inmobiliario\articulo', 'fk_revision','id');
     }
 }

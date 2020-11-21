@@ -22,11 +22,12 @@
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-striped" onload="document.getElementsByClassName('table-toggle').style.display = 'none';">
-                            <thead class="thead-dark">
+                            <thead class="thead-light">
                             <tr>
                                 <th>Id</th>
                                 <th>Etiq. Local</th>
                                 <th>Etiq. Externa</th>
+                                <th>Concepto </th>
                                 <th>Actualizado a</th>
                                 <th></th>
                                 <th></th>
@@ -38,18 +39,18 @@
                                     <td>{{$data->id}}</td>
                                     <td>{{($data->etiqueta_local) ?? '-'}}</td>
                                     <td>{{($data->etiqueta_externa) ?? '-'}}</td>
+                                    <td>{{($data->concepto) ?? '-'}}</td>
                                     <td>{{$data->updated_at->format('d/M/Y h:i a')}}</td>
                                     <td>
                                         <a href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-outline-dark">Editar</a>
                                     </td>
                                     <td>
-                                        <button class="btn btn-outline-dark" onClick="toggle_by_class('hidden_{{$data->id}}', true);">Detalles ▲</button>
+                                        <button class="btn btn-outline-dark" onClick="toggle_by_class('hidden_{{$data->id}}', true);">▼ </button>
                                     </td>
                                     <td>
-                                        <button class="btn btn-outline-dark" onClick="toggle_by_class('hidden_{{$data->id}}', false);">Reducir ▼</button>
+                                        <button class="btn btn-outline-dark" onClick="toggle_by_class('hidden_{{$data->id}}', false);">▲ </button>
                                     </td>
                                 </tr>
-                                <br>
                                 <tr id="hidden_{{$data->id}}" class="tb-toggle dropdown-toggle" style="display: none">
                                     <td colspan="100%">
                                         <div class="row">
@@ -74,15 +75,15 @@
                                                     <ul>
                                                         <li>Area: {{($data->departamento->area->nombre) ?? '-'}}</li>
                                                         <li>Departamento: {{($data->departamento->nombre) ?? '-'}}</li>
-                                                        <li>Ubicación: {{($data->edificio->nombre) ?? '-'}}</li>
+                                                        <li>Edificio: {{($data->oficina->edificio->nombre) ?? '-'}}</li>
+                                                        <li>Oficina: {{($data->oficina->nombre) ?? '-'}}</li>
                                                     </ul>
                                                     <h4>Empleados</h4>
                                                     <ul>
-                                                        <li>Encargdo de area:</li>
-                                                        <li>Titular #1</li>
-                                                        <li>Titular #2</li>
-                                                        <li>Respaldo #1</li>
-                                                        <li>Respaldo #2</li>
+                                                        @foreach($encargo as $second_data)
+                                                            <li>{{$second_data->nombre}}:
+                                                                {{$data->find($data->id)->empleado()->where('fk_encargo',$second_data->id)->pluck('nombre', 'apellido_paterno') ?? '-'}}</li>
+                                                        @endforeach
                                                     </ul>
                                                 </div>
                                             </div>
@@ -90,7 +91,7 @@
                                                 <div class="card card-body">
                                                     <h4>Datos de adquisición</h4>
                                                     <ul>
-                                                        <li>Fecha de Adquisición: {{($data->fecha_adquisiscion) ?? '-'}}</li>
+                                                        <li>Fecha de Adquisición: {{($data->fecha_adquisiscion->format('d/M/Y')) ?? '-'}}</li>
                                                         <li>Costo: ${{($data->costo) ?? '-'}}</li>
                                                         <li>No. Factura: {{($data->num_factura) ?? '-'}}</li>
                                                         <li>Tipo de Compra: {{($data->tipo_compra->nombre) ?? '-'}}</li>
@@ -100,6 +101,9 @@
                                                 <br>
                                                 <div class="card card-body">
                                                     <h4>Observaciones</h4>
+                                                    <ul>
+                                                        <li>{{$data->observaciones ?? 'Ninguno'}}</li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>

@@ -34,7 +34,11 @@ class articulo extends Model
         'fk_tipo_compra',
         'fk_tipo_equipo',
         'fk_oficina',
-        'vigencia'
+        'fk_revision',
+        'vigencia',
+        'disponibilidad',
+        'disponibilidad_updated_at'
+
     ];
 
     public function departamento()
@@ -86,10 +90,10 @@ class articulo extends Model
         //define the datetime table column names as below in an array, and you will get the
         //carbon objects for these fields in model objects.
 
-        return array('created_at', 'updated_at','fecha_adquisiscion');
+        return array('created_at', 'updated_at','fecha_adquisiscion','disponibilidad_updated_at');
     }
 
-    public function disponibilidad_articulo(){
-        return $this->hasMany('App\Models\Revision\disponibilidad_articulo', 'fk_articulo','id');
+    public function revision(){
+        return $this->belongsTo('App\Models\Inmobiliario\revision','fk_revision');
     }
 }

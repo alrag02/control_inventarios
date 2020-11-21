@@ -14,12 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
 
-//Route::apiResource('area','Inmobiliario\areaController');
+//Route::apiResource('revision/{id_user}','Revision\revisionApi');
 
+Route::post('login', 'movil\ApiRest@login');
 //Route::apiResource('articulo','Inmobiliario\articuloController');
 
 //Route::apiResource('departamento','Inmobiliario\departamentoController');

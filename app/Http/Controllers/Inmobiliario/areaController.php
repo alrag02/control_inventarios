@@ -133,5 +133,7 @@ class areaController extends Controller
             return area::destroy($id) ? redirect("inmobiliario/area")->with('message', 'Elemento eliminado'): view("inmobiliario.area.edit", print 'Hubo un error al eliminar');
         }
     }
+
+
 }
 

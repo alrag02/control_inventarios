@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\inmobiliario\barcodeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,12 +47,17 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('/oficina', 'oficinaController');
         Route::resource('/tipo_compra', 'tipo_compraController');
         Route::resource('/tipo_equipo', 'tipo_equipoController');
+        Route::resource('/foto','fotoController');
+
+
+        Route::get('articulo/generateBarCode/{id}', [barcodeController::class, 'barcode'])->name('articulo.generateBarCode');
     });
 
     Route::namespace('Revision')->prefix('revision')->name('revision.')->group(function (){
        // Route::resource('/registrados','UsersController', ['except' =>['show','create', 'store']]);
         Route::view('/','revision.index');
         Route::resource('/corte','corteController');
+        Route::resource('/revision','revisionController');
     });
 });
 

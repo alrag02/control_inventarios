@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="TerminalProjectOptionsProvider">
-    <envs>
-      <env key="Path" value="C:\Laragon\bin\mysql\mysql-5.7.24-winx64\;C:\Laragon\bin\php\php-7.4.11-nts-Win32-vc15-x64\;C:\Python39\Scripts\;C:\Python39\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\Microsoft MPI\Bin\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\PuTTY\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Bin\;C:\Program Files\IVI Foundation\VISA\Win64\Bin\;C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Bin;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Git\cmd;C:\Program Files (x86)\dotnet\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\aaaaaa\AppData\Local\Programs\Python\Python37-32\Scripts\;C:\Users\aaaaaa\AppData\Local\Programs\Python\Python37-32\;C:\Users\aaaaaa\AppData\Local\Microsoft\WindowsApps;C:\Users\aaaaaa\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\aaaaaa\Videos\arduino-cli_0.6.0_Windows_64bit;C:\Users\aaaaaa\AppData\Roaming\Composer\vendor\bin;C:\Users\aaaaaa\AppData\Roaming\npm" />
-    </envs>
-  </component>
-</project>

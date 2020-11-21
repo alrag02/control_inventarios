@@ -43,8 +43,8 @@ class RolesAndPermissions extends Seeder
         Permission::create(['name' => 'eliminar conceptos']);
 
         //Permisos de generación de corte y revisión de inventarios
-        Permission::create(['name' => 'crear corte']);
-        Permission::create(['name' => 'consultar corte']);
+        Permission::create(['name' => 'crear cortes']);
+        Permission::create(['name' => 'consultar cortes']);
         Permission::create(['name' => 'revisar inventarios']);
 
 
@@ -56,7 +56,7 @@ class RolesAndPermissions extends Seeder
         $role_consultor->givePermissionTo([
                 //  Inmobiliarios
                 'consultar inmobiliarios',
-                'consultar corte'
+                'consultar cortes'
             ]);
 
         // Rol del editor de aplicaciones
@@ -67,12 +67,15 @@ class RolesAndPermissions extends Seeder
                 'editar inmobiliarios',
                 'consultar inmobiliarios',
                 //  Cortes y revision
-                'crear corte',
-                'consultar corte',
+                'crear cortes',
+                'consultar cortes',
                 'revisar inventarios'
             ]);
 
         $role_admin = Role::create(['name' => 'admin']);
         $role_admin->givePermissionTo(Permission::all());
+
+        $role_banned = Role::create(['name' => 'banned']);
+        $role_banned->revokePermissionTo(Permission::all());
     }
 }

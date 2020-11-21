@@ -31,6 +31,8 @@ class CreateArticuloTable extends Migration
             $table->string('num_factura', 128)->nullable();
             $table->enum('activo_resguardo', ['no_disponible','activo','resguardo'])->nullable();
             $table->boolean('vigencia')->nullable();
+            $table->enum('disponibilidad',['sin_revisar','en_revision','revisado'])->nullable();
+            $table->dateTime('disponibilidad_updated_at')->nullable();
 
             $table->integer('fk_familia')->nullable()->index('fk_familia');
             $table->integer('fk_departamento')->nullable()->index('fk_departamento');
@@ -39,6 +41,7 @@ class CreateArticuloTable extends Migration
             $table->integer('fk_oficina')->nullable()->index('fk_oficina');
             $table->integer('fk_tipo_compra')->nullable()->index('fk_tipo_compra');
             $table->integer('fk_tipo_equipo')->nullable()->index('fk_tipo_equipo');
+            $table->integer('fk_revision')->nullable()->index('fk_revision');
 
             $table->timestamps();
             $table->softDeletes();

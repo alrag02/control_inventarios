@@ -28,11 +28,14 @@ class articuloController extends Controller
     public function index()
     {
 
+
         return view('inmobiliario.articulo.index', [
             'articulo' => articulo::all(),
             'area' => area::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'departamento' => departamento::all(),
             'familia' => familia::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            'empleado' => empleado::all(),
+            'encargo' => encargo::all(),
             'estado' => estado::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'tipo_compra' => tipo_compra::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'tipo_equipo' => tipo_equipo::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
@@ -89,6 +92,7 @@ class articuloController extends Controller
         $data->costo = $request->costo;
         $data->num_factura = $request->num_factura;
         $data->activo_resguardo = $request->activo_resguardo;
+        $data->fk_familia = $request->fk_familia;
         $data->fk_departamento = $request->fk_departamento;
         $data->fk_estado = $request->fk_estado;
         $data->fk_tipo_compra = $request->fk_tipo_compra;
@@ -106,10 +110,12 @@ class articuloController extends Controller
             '-'.
             //Numeros random, provisional
             mt_rand(0000,9999);
+
+        $data->fk_revision = null;
+        $data->disponibilidad = 'sin_revisar';
+        $data->disponibilidad_updated_at = null;
+
         $data->save();
-
-        //echo (new DNS1D)->getBarcodeHTML('ITSLM-16-CI-MOB-0029', 'C128');
-
 
         //Agregar los datos de articulo_Has_empleado
 
@@ -120,14 +126,8 @@ class articuloController extends Controller
         $art->encargo()->attach(4, ['fk_empleado' => ($request->articulo_has_empleado_4) ?? null]);
         $art->encargo()->attach(5, ['fk_empleado' => ($request->articulo_has_empleado_5) ?? null]);
 
-        //Agregar los datos de disponibilidad_articulo
-        $disp_art = new disponibilidad_articulo();
-        $disp_art->fk_articulo = $data->id;
-        $disp_art->estado = 'sin_revisar';
-        $disp_art->fk_revision = null;
-        $disp_art->save();
 
-        redirect("inmobiliario/articulo")->with('message', 'Modificado Correctamente');
+        return redirect("inmobiliario/articulo")->with('message', 'Modificado Correctamente');
     }
 
     /**
@@ -161,6 +161,7 @@ class articuloController extends Controller
             'edificio' => edificio::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'empleado' => empleado::get(['id', 'nombre', 'apellido_paterno','apellido_materno', 'vigencia'])->where('vigencia',1),
             'encargo' => encargo::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            'dns1d' => (new DNS1D)->getBarcodeHTML($id, 'C128')
         ]);
 
     }
@@ -213,7 +214,5 @@ class articuloController extends Controller
         return articulo::destroy($id) ? redirect("inmobiliario/articulo"): view("inmobiliario.articulo.edit", print 'Hubo un error al eliminar');
     }
 
-    public function generateBarCode($id){
-        echo (new DNS1D)->getBarcodeHTML($id, 'C128');
-    }
+
 }
