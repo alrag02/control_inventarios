@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Inmobiliario;
 
 use App\Http\Controllers\Controller;
+use App\Models\Revision\revision;
+use Illuminate\Support\Facades\DB;
 use App\Models\Inmobiliario\articulo;
 use App\Models\Inmobiliario\area;
 use App\Models\Inmobiliario\departamento;
@@ -14,7 +16,8 @@ use App\Models\Inmobiliario\oficina;
 use App\Models\Inmobiliario\tipo_compra;
 use App\Models\Inmobiliario\tipo_equipo;
 use App\Models\Inmobiliario\edificio;
-use App\Models\Revision\disponibilidad_articulo;
+
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Milon\Barcode\DNS1D;
 
@@ -27,6 +30,17 @@ class articuloController extends Controller
      */
     public function index()
     {
+        $articulo_has_empleado = DB::select("SELECT
+        encargo.nombre AS 'encargo_nombre',
+        empleado.nombre,
+        empleado.apellido_paterno,
+        empleado.apellido_materno,
+        empleado.nivel,
+        articulo_has_empleado.fk_articulo AS 'fk_articulo'
+        FROM articulo_has_empleado, empleado, encargo
+        WHERE articulo_has_empleado.fk_encargo = encargo.id
+        AND articulo_has_empleado.fk_empleado = empleado.id");
+
 
 
         return view('inmobiliario.articulo.index', [
@@ -41,6 +55,9 @@ class articuloController extends Controller
             'tipo_equipo' => tipo_equipo::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'oficina' => oficina::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'edificio' => edificio::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            'encargado_area' => DB::select('select * from articulo_has_empleado where fk_encargo = ?', [1]),
+            'articulo_has_empleado' => $articulo_has_empleado,
+            'revision' => revision::all(),
         ]);
 
     }
@@ -53,14 +70,14 @@ class articuloController extends Controller
     public function create()
     {
         return view('inmobiliario.articulo.create', [
-            'articulo' => articulo::all(),
+            'articulo' => articulo::all()->where('vigencia',1),
             'area' => area::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
-            'departamento' => departamento::all(),
+            'departamento' => departamento::all()->where('vigencia',1),
             'familia' => familia::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'estado' => estado::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'tipo_compra' => tipo_compra::get(['id', 'nombre', 'sigla' ,'vigencia'])->where('vigencia',1),
             'tipo_equipo' => tipo_equipo::get(['id', 'nombre', 'sigla' , 'vigencia'])->where('vigencia',1),
-            'oficina' => oficina::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            'oficina' => oficina::all()->where('vigencia',1),
             'edificio' => edificio::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'empleado' => empleado::get(['id', 'nombre', 'apellido_paterno','apellido_materno', 'vigencia'])->where('vigencia',1),
             'encargo' => encargo::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
@@ -87,6 +104,7 @@ class articuloController extends Controller
         $data->color = $request->color;
         $data->cantidad = $request->cantidad;
         $data->placas = $request->placas;
+        $data->vigencia = $request->vigencia;
         $data->observaciones = $request->observaciones;
         $data->fecha_adquisiscion = $request->fecha_adquisiscion;
         $data->costo = $request->costo;
@@ -108,7 +126,7 @@ class articuloController extends Controller
             '-'.
             $data->tipo_equipo->sigla.
             '-'.
-            //Numeros random, provisional
+            //TODO: Numeros random, provisional
             mt_rand(0000,9999);
 
         $data->fk_revision = null;
@@ -152,12 +170,12 @@ class articuloController extends Controller
         return view('inmobiliario.articulo.edit',[
             'articulo' => articulo::find($id),
             'area' => area::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
-            'departamento' => departamento::all(),
+            'departamento' => departamento::all()->where('vigencia',1),
             'familia' => familia::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
-            'estado' => estado::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            'estado' => estado::all()->where('vigencia',1),
             'tipo_compra' => tipo_compra::get(['id', 'nombre', 'sigla' ,'vigencia'])->where('vigencia',1),
             'tipo_equipo' => tipo_equipo::get(['id', 'nombre', 'sigla' , 'vigencia'])->where('vigencia',1),
-            'oficina' => oficina::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            'oficina' => oficina::all()->where('vigencia',1),
             'edificio' => edificio::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'empleado' => empleado::get(['id', 'nombre', 'apellido_paterno','apellido_materno', 'vigencia'])->where('vigencia',1),
             'encargo' => encargo::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
@@ -186,11 +204,13 @@ class articuloController extends Controller
         $data->color = $request->color;
         $data->cantidad = $request->cantidad;
         $data->placas = $request->placas;
+        $data->vigencia = $request->vigencia;
         $data->observaciones = $request->observaciones;
         $data->fecha_adquisiscion = $request->fecha_adquisiscion;
         $data->costo = $request->costo;
         $data->num_factura = $request->num_factura;
         $data->activo_resguardo = $request->activo_resguardo;
+        $data->fk_familia = $request->fk_familia;
         $data->fk_departamento = $request->fk_departamento;
         $data->fk_estado = $request->fk_estado;
         $data->fk_tipo_compra = $request->fk_tipo_compra;
@@ -208,11 +228,13 @@ class articuloController extends Controller
      */
     public function destroy($id)
     {
-        $data = articulo::find($id);
-        $data->vigencia = 0;
-        $data->save();
-        return articulo::destroy($id) ? redirect("inmobiliario/articulo"): view("inmobiliario.articulo.edit", print 'Hubo un error al eliminar');
+        $sec_data = encargo::all();
+
     }
 
-
+    public function printPDF(){
+        $pdf = PDF::make('dompdf.wrapper');
+        $pdf->loadHTML('<h1>Test</h1>');
+        return $pdf->stream();
+    }
 }

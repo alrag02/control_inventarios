@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class corte extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     protected $table = 'corte';
 
     protected $fillable = [

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Usuarios;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
@@ -22,6 +23,16 @@ class UsersController extends Controller
     {
         $users = User::all();
         return view('usuarios.registrados.index')->with('users', $users);
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function create()
+    {
+        $roles = Role::all()->pluck('name', 'id');
+        return view('usuarios.registrados.create', compact('roles'));
     }
 
      /**

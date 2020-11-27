@@ -19,7 +19,6 @@ class CreateDepartamentoTable extends Migration
             $table->boolean('vigencia')->nullable();
             $table->integer('fk_area')->nullable()->index('fk_area');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

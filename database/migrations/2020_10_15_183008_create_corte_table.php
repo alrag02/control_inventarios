@@ -18,7 +18,6 @@ class CreateCorteTable extends Migration
             $table->string('nombre', 128)->nullable();
             $table->string('descripcion', 128)->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

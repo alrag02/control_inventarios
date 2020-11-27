@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::namespace('usuarios')->prefix('usuarios')->name('usuarios.')->group(function (){
-        Route::resource('/registrados','UsersController', ['except' =>['show','create', 'store']]);
+        Route::resource('/registrados','UsersController');
 
     });
 
@@ -40,7 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('/departamento', 'departamentoController');
         Route::resource('/edificio', 'edificioController');
         Route::resource('/empleado', 'empleadoController');
-        Route::resource('/encargo', 'encargoController');
+        Route::resource('/encargo', 'encargoController')->except(['create', 'store', 'destroy']);
         Route::resource('/estado', 'estadoController');
         Route::resource('/familia', 'familiaController');
         Route::resource('/foto', 'estadoController');
@@ -51,10 +51,12 @@ Route::group(['middleware' => ['auth']], function () {
 
 
         Route::get('articulo/generateBarCode/{id}', [barcodeController::class, 'barcode'])->name('articulo.generateBarCode');
+        Route::get('articulo/printBarCode/{id}', [barcodeController::class, 'printPDFbarcode'])->name('articulo.printBarCode');
+
     });
 
     Route::namespace('Revision')->prefix('revision')->name('revision.')->group(function (){
-       // Route::resource('/registrados','UsersController', ['except' =>['show','create', 'store']]);
+       // Route::resource('/registrados','UsersController', ['except' =>['create', 'store']]);
         Route::view('/','revision.index');
         Route::resource('/corte','corteController');
         Route::resource('/revision','revisionController');

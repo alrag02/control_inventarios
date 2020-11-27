@@ -1,10 +1,11 @@
 @can('eliminar inmobiliarios')
-@php($nombre_concepto = 'departamento')
-<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal" id="btn_destroy">
-    Eliminar
-</button>
+@php($nombre_concepto = 'articulo')
 
-<!-- Modal -->
+
+<a type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModal" id="btn_destroy">Eliminar</a>
+
+
+<!-- Modal  TODO: PORQUE? no se muestra -->
 
     <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -16,10 +17,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Esta operación no se puede deshacer</p>
+                    <p>Esta operación no se puede deshacer, si no se quiere tener en cuenta este articulo para su revisión, se recomienda darlo de baja</p>
                 </div>
                 <div class="modal-footer">
-                    <form action="{{route('inmobiliario.'.$nombre_concepto.'.destroy',$departamento->id)}}" method="post" class="d-inline-block" id="eliminar">
+                    <form action="{{route('inmobiliario.'.$nombre_concepto.'.destroy',$articulo->id)}}" method="post" class="d-inline-block" id="eliminar">
                         {{method_field('DELETE')}}
                         @csrf
                     <input type="submit" class="btn btn-danger" value="Estoy Seguro" onclick=' this.hidden = true; document.getElementById("btn_destroy").hidden = true; document.getElementById("btn_edit").hidden = true; save();'>

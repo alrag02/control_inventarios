@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\inmobiliario;
+namespace App\Http\Controllers\Inmobiliario;
 
 use App\Http\Controllers\Controller;
 use App\Models\inmobiliario\foto;
@@ -11,7 +11,7 @@ class fotoController extends Controller
     /**
      * Listing Of images gallery
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
@@ -41,8 +41,7 @@ class fotoController extends Controller
         foto::create($input);
 
 
-        return back()
-            ->with('success','Image storeed successfully.');
+        return back()->with('success','Image stored successfully.');
     }
 
 

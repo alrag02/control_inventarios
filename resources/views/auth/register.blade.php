@@ -115,6 +115,18 @@
                             </div>
                         </div>
 
+                        <!-- Rol -->
+                        <div class="form-group row">
+                            <label for="role-asignar" class="col-md-4 col-form-label text-md-right">{{ __('Asigne un rol') }}</label>
+
+                            <div class="col-md-6">
+                                <select name="asignar" id="role">
+                                    @foreach($roles as $key => $value)
+                                        <option value="{{ $krey }}">{{ $value }}</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

@@ -26,9 +26,8 @@
                             <thead class="thead-dark">
                             <tr>
                                 <th>Id</th>
-                                <th>Nombre</th>
-                                <th>Area</th>
-                                <th>Vigencia</th>
+                                <th>Num. Trab</th>
+                                <th>Nombre Trab.</th>
                                 <th>Modificado el.</th>
                                 <th></th>
                             </tr>
@@ -39,9 +38,9 @@
                                     <tr>
                                         <td>{{$data->id}}</td>
                                         <td>{{$data->user->work_id}}</td>
+                                        <td>{{$data->user->name.' '.$data->user->last_name_p}}</td>
                                         <td>{{$data->created_at->format('d/M/Y h:i a')}}</td>
-                                        <td>{{$data->updated_at->format('d/M/Y h:i a')}}</td>
-                                        <td><a href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-outline-teal">Editar</a>
+                                        <td><a href="{{url('/revision/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-outline-teal">Detalles</a>
                                         </td>
                                     </tr>
                                 </a>

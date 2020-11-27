@@ -24,8 +24,7 @@
                                             <a class="dropdown-item" href="{{route('inmobiliario.'.$nombre_concepto.'.generateBarCode',$articulo->id)}}">Generar Etiqueta</a>
                                             <a class="dropdown-item" href="#">Dar de Baja</a>
                                             <div role="separator" class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Eliminar</a>
-                                        </div>
+                                            @include('inmobiliario.'.$nombre_concepto.'.destroy',["'".$nombre_concepto."'." => $articulo])                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -191,11 +190,72 @@
                                                         </select>
                                                     </div>
 
-                                                    <!-- empleados -->
+                                                    <!-- empleados  TODO: Asignar los nombres deibdos-->
+
                                                     <h4 class="card-title">Empleados</h4>
                                                     <div class="form-group col-md-12">
-                                                        @include('inmobiliario.articulo.assign_employees')
+                                                        <label for="inv_camp_articulo_has_encargo_1">Encargado de Area</label>
+                                                        <select name="articulo_has_empleado_1" id="inv_camp_articulo_has_encargo_1" class="form-select" required>
+                                                            <option selected disabled class="font-italic" value="null">Seleccione...</option>
+                                                            @foreach($empleado as $second_data)
+                                                                <option value="{{$second_data->id}}">{{
+                                                                                            $second_data->nombre.' '.
+                                                                                            $second_data->apellido_paterno.' '.
+                                                                                            $second_data->apellido_materno
+                                                                                        }}</option>
+                                                            @endforeach
+                                                        </select>
+
+                                                        <label for="inv_camp_articulo_has_encargo_2">Titular #1</label>
+                                                        <select name="articulo_has_empleado_2" id="inv_camp_articulo_has_encargo_2" class="form-select" required>
+                                                            <option selected disabled class="font-italic" value="null">Seleccione...</option>
+                                                            @foreach($empleado as $second_data)
+                                                                <option value="{{$second_data->id}}">{{
+                                                                                            $second_data->nombre.' '.
+                                                                                            $second_data->apellido_paterno.' '.
+                                                                                            $second_data->apellido_materno
+                                                                                        }}</option>
+                                                            @endforeach
+                                                        </select>
+
+                                                        <label for="inv_camp_articulo_has_encargo_3">Titular #2</label>
+                                                        <select name="articulo_has_empleado_3" id="inv_camp_articulo_has_encargo_3" class="form-select">
+                                                            <option selected disabled class="font-italic" value="null">Seleccione...</option>
+                                                            @foreach($empleado as $second_data)
+                                                                <option value="{{$second_data->id}}">{{
+                                                                                            $second_data->nombre.' '.
+                                                                                            $second_data->apellido_paterno.' '.
+                                                                                            $second_data->apellido_materno
+                                                                                        }}</option>
+                                                            @endforeach
+                                                        </select>
+
+                                                        <label for="inv_camp_articulo_has_encargo_4">Resguardante #1</label>
+                                                        <select name="articulo_has_empleado_4" id="inv_camp_articulo_has_encargo_4" class="form-select" required>
+                                                            <option selected disabled class="font-italic" value="null">Seleccione...</option>
+                                                            @foreach($empleado as $second_data)
+                                                                <option value="{{$second_data->id}}">{{
+                                                                                            $second_data->nombre.' '.
+                                                                                            $second_data->apellido_paterno.' '.
+                                                                                            $second_data->apellido_materno
+                                                                                        }}</option>
+                                                            @endforeach
+                                                        </select>
+
+                                                        <label for="inv_camp_articulo_has_encargo_5">Resguardante #2</label>
+                                                        <select name="articulo_has_empleado_5" id="inv_camp_articulo_has_encargo_5" class="form-select">
+                                                            <option selected disabled class="font-italic" value="null">Seleccione...</option>
+                                                            @foreach($empleado as $second_data)
+                                                                <option value="{{$second_data->id}}">{{
+                                                                                            $second_data->nombre.' '.
+                                                                                            $second_data->apellido_paterno.' '.
+                                                                                            $second_data->apellido_materno
+                                                                                        }}</option>
+                                                            @endforeach
+                                                        </select>
+
                                                     </div>
+
 
 
                                                     <!-- observaciones -->
@@ -263,15 +323,15 @@
                                                     <!-- activo_resguardo -->
                                                     <div class="form-group">
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="activo_resguardo" id="inv_camp_activo" value="2" checked>
+                                                            <input class="form-check-input" type="radio" name="activo_resguardo" id="inv_camp_activo" value="2" {{($data->activo_resguardo == 'activo') ? 'checked':''}}>
                                                             <label class="form-check-label" for="inv_camp_activo">Activo</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="activo_resguardo" id="inv_camp_resguardo" value="3">
+                                                            <input class="form-check-input" type="radio" name="activo_resguardo" id="inv_camp_resguardo" value="3" {{($data->activo_resguardo == 'resguardo') ? 'checked':''}}>
                                                             <label class="form-check-label" for="inv_camp_resguardo">Resguardo</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="activo_resguardo" id="inv_camp_nd" value="1">
+                                                            <input class="form-check-input" type="radio" name="activo_resguardo" id="inv_camp_nd" value="1" {{($data->activo_resguardo == 'no_disponible') ? 'checked':''}}>
                                                             <label class="form-check-label" for="inv_camp_nd">Nulo</label>
                                                         </div>
                                                     </div>

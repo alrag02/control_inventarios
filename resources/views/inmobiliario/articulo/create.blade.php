@@ -38,7 +38,7 @@
                                                                         <div class="form-row">
                                                                             <!--etiqueta_externa-->
                                                                             <div class="form-group col-md-12">
-                                                                                <label for="inv_camp_etiqueta_externa">Etiqueta TECMM</label>
+                                                                                <label for="inv_camp_etiqueta_externa">Etiqueta TECMM (Externa)</label>
                                                                                 <input type="text" name="etiqueta_externa" class="form-control" id="inv_camp_etiqueta_externa" placeholder="TECMM-XXXX-XX-XXXX">
                                                                             </div>
                                                                             <div class="form-group col-md-12">
@@ -77,7 +77,7 @@
                                                                         <div class="form-row">
                                                                             <!-- numero_serie -->
                                                                             <div class="form-group col-md-4">
-                                                                                <label for="inv_camp_numero_serie">No. de Serie</label>
+                                                                                <label for="inv_camp_numero_serie">No. Serie</label>
                                                                                 <input type="text" name="numero_serie" class="form-control" id="inv_camp_numero_serie" placeholder="#####">
                                                                             </div>
                                                                             <!-- color -->
@@ -107,7 +107,7 @@
                                                                             <div class="form-group col-md-6">
                                                                                 <label for="inv_camp_estado">Estado</label>
                                                                                 <select class="form-select" name="fk_estado" id="inv_camp_estado">
-                                                                                    <option selected disabled class="font-italic">Seleccione...</option>
+                                                                                    <option selected disabled class="font-italic" value="null">Seleccione...</option>
                                                                                     @foreach($estado as $data)
                                                                                         <option value="{{$data->id}}">{{$data->nombre}}</option>
                                                                                     @endforeach
@@ -138,7 +138,8 @@
                                                                         <h4 class="card-title">Ubicación</h4>
                                                                         <div class="form-row">
                                                                             <!-- edificio -->
-                                                                            <div class="form-group col-md-6">
+                                                                            <?php /*
+                                                                                  TODO: Alimentar el campo siguente de acuerdo a este campo                                                                      <div class="form-group col-md-6">
                                                                                 <label for="inv_camp_edificio">Edificio</label>
                                                                                 <select name="edificio" class="form-select" id="inv_camp_edificio">
                                                                                     <option selected disabled class="font-italic">Seleccione...</option>
@@ -147,27 +148,31 @@
                                                                                     @endforeach
                                                                                 </select>
                                                                             </div>
+                                                                            */ ?>
                                                                             <!-- fk_oficina -->
-                                                                            <div class="form-group col-md-6">
+                                                                            <div class="form-group col-md-12">
                                                                                 <label for="inv_camp_fk_oficina">Ubicación</label>
                                                                                 <select name="fk_oficina" class="form-select" id="inv_camp_fk_oficina">
                                                                                     <option selected disabled class="font-italic">Seleccione...</option>
                                                                                     @foreach($oficina as $data)
-                                                                                        <option value="{{$data->id}}">{{$data->nombre}}</option>
+                                                                                        <option value="{{$data->id}}">{{$data->nombre.'('.$data->edificio->nombre.')' }}</option>
                                                                                     @endforeach
                                                                                 </select>
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="form-row">
-                                                                            <!-- area -->
+                                                                            <?php /*
+                                                                             <!-- area -->
+                                                                                   TODO: Alimentar el campo siguente de acuerdo a este campo                                                                      <div class="form-group col-md-6">
+
                                                                             <div class="form-group col-md-6">
                                                                                 <label for="inv_camp_area">Area</label>
                                                                                 <select class="form-select" id="inv_camp_area" name="area"
                                                                                         onchange="
-                                                            document.getElementById('inv_camp_fk_departamento').disabled = false;
-                                                            d = document.getElementById('inv_camp_area').value;
-                                                            " type="text">
+                                                                                        document.getElementById('inv_camp_fk_departamento').disabled = false;
+                                                                                        d = document.getElementById('inv_camp_area').value;
+                                                                                        " type="text">
                                                                                     <option selected disabled class="font-italic" onclick="">Seleccione...</option>
                                                                                     @foreach($area as $data)
                                                                                         <option value="{{$data->id}}" >{{$data->nombre}}</option>
@@ -185,11 +190,80 @@
                                                                                     @endforeach
                                                                                 </select>
                                                                             </div>
-
+                                                                            */?>
+                                                                            <!-- fk_departamento -->
+                                                                                <div class="form-group col-md-12">
+                                                                                    <label for="inv_camp_fk_departamento">Departamento</label>
+                                                                                    <select type="text" name="fk_departamento" class="form-select" id="inv_camp_fk_departamento">
+                                                                                        <option selected disabled class="font-italic">Seleccione...</option>
+                                                                                        @foreach($departamento as $data)
+                                                                                            <option value="{{$data->id}}">{{$data->nombre.'('.$data->area->nombre.')'}}</option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                </div>
                                                                             <!-- empleados -->
                                                                             <h4 class="card-title">Empleados</h4>
                                                                             <div class="form-group col-md-12">
-                                                                                @include('inmobiliario.articulo.assign_employees')
+                                                                                <label for="inv_camp_articulo_has_encargo_1">Encargado de Area</label>
+                                                                                <select name="articulo_has_empleado_1" id="inv_camp_articulo_has_encargo_1" class="form-select" required>
+                                                                                    <option selected disabled class="font-italic" value="null">Seleccione...</option>
+                                                                                    @foreach($empleado as $second_data)
+                                                                                        <option value="{{$second_data->id}}">{{
+                                                                                            $second_data->nombre.' '.
+                                                                                            $second_data->apellido_paterno.' '.
+                                                                                            $second_data->apellido_materno
+                                                                                        }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+
+                                                                                <label for="inv_camp_articulo_has_encargo_2">Titular #1</label>
+                                                                                <select name="articulo_has_empleado_2" id="inv_camp_articulo_has_encargo_2" class="form-select" required>
+                                                                                    <option selected disabled class="font-italic" value="null">Seleccione...</option>
+                                                                                    @foreach($empleado as $second_data)
+                                                                                        <option value="{{$second_data->id}}">{{
+                                                                                            $second_data->nombre.' '.
+                                                                                            $second_data->apellido_paterno.' '.
+                                                                                            $second_data->apellido_materno
+                                                                                        }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+
+                                                                                <label for="inv_camp_articulo_has_encargo_3">Titular #2</label>
+                                                                                <select name="articulo_has_empleado_3" id="inv_camp_articulo_has_encargo_3" class="form-select">
+                                                                                    <option selected disabled class="font-italic" value="null">Seleccione...</option>
+                                                                                    @foreach($empleado as $second_data)
+                                                                                        <option value="{{$second_data->id}}">{{
+                                                                                            $second_data->nombre.' '.
+                                                                                            $second_data->apellido_paterno.' '.
+                                                                                            $second_data->apellido_materno
+                                                                                        }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+
+                                                                                <label for="inv_camp_articulo_has_encargo_4">Resguardante #1</label>
+                                                                                <select name="articulo_has_empleado_4" id="inv_camp_articulo_has_encargo_4" class="form-select" required>
+                                                                                    <option selected disabled class="font-italic" value="null">Seleccione...</option>
+                                                                                    @foreach($empleado as $second_data)
+                                                                                        <option value="{{$second_data->id}}">{{
+                                                                                            $second_data->nombre.' '.
+                                                                                            $second_data->apellido_paterno.' '.
+                                                                                            $second_data->apellido_materno
+                                                                                        }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+
+                                                                                <label for="inv_camp_articulo_has_encargo_5">Resguardante #2</label>
+                                                                                <select name="articulo_has_empleado_5" id="inv_camp_articulo_has_encargo_5" class="form-select">
+                                                                                    <option selected disabled class="font-italic" value="null">Seleccione...</option>
+                                                                                    @foreach($empleado as $second_data)
+                                                                                        <option value="{{$second_data->id}}">{{
+                                                                                            $second_data->nombre.' '.
+                                                                                            $second_data->apellido_paterno.' '.
+                                                                                            $second_data->apellido_materno
+                                                                                        }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+
                                                                             </div>
 
 

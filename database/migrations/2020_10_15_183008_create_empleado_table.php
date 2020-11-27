@@ -24,7 +24,6 @@ class CreateEmpleadoTable extends Migration
             $table->boolean('vigencia')->nullable();
             $table->integer('fk_departamento')->nullable()->index('fk_departamento');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

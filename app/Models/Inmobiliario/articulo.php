@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class articulo extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $table = 'articulo';
 
@@ -74,7 +74,6 @@ class articulo extends Model
     public function empleado()
     {
         return $this->belongsToMany('App\Models\Inmobiliario\empleado', 'articulo_has_empleado', 'fk_articulo', 'fk_empleado');
-
     }
 
     public function encargo()
@@ -94,6 +93,6 @@ class articulo extends Model
     }
 
     public function revision(){
-        return $this->belongsTo('App\Models\Inmobiliario\revision','fk_revision');
+        return $this->belongsTo('App\Models\Revision\revision','fk_revision');
     }
 }

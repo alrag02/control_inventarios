@@ -20,7 +20,6 @@ class CreateOficinaTable extends Migration
             $table->integer('planta')->nullable();
             $table->boolean('vigencia')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

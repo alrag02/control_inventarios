@@ -8,6 +8,9 @@
                     <div class="card-header">{{ __('Lista de usuarios registrados') }}</div>
 
                     <div class="card-body">
+                        <div class="justify-content-end pb-2">
+                            <a href="{{url('/usuarios/registrados/create')}}" class="btn btn-black">Nuevo Usuario</a>
+                        </div>
                         <table class="table table-striped">
                             <thead>
                             <tr>

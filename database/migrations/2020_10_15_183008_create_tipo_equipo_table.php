@@ -19,7 +19,6 @@ class CreateTipoEquipoTable extends Migration
             $table->string('sigla', 64)->nullable();
             $table->boolean('vigencia')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

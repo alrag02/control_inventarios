@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -7,19 +6,18 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        Editar usuario
+                        Nuevo usuario
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('usuarios.update', $usuario->id) }}" method="post">
-                            @method('PUT')
+                        <form action="{{ url('usuarios') }}" method="post">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" name="name" required class="form-control" value="{{ $usuario->name }}">
+                                <input type="text" name="name" required class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="text" name="email" required class="form-control" value="{{ $usuario->email }}">
+                                <input type="text" name="email" required class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
@@ -29,11 +27,7 @@
                                 <label for="email">Rol</label>
                                 <select class="form-control" name="rol">
                                     @foreach ($roles as $key => $value)
-                                        @if ($usuario->hasRole($value))
-                                            <option value="{{ $value }}" selected>{{ $value }}</option>
-                                        @else
-                                            <option value="{{ $value }}">{{ $value }}</option>
-                                        @endif
+                                        <option value="{{ $value }}">{{ $value }}</option>
                                     @endforeach
                                 </select>
                             </div>

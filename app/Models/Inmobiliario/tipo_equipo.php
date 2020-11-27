@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class
 tipo_equipo extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $table = 'tipo_equipo';
 
