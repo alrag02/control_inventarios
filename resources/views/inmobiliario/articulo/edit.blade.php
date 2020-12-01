@@ -113,7 +113,7 @@
                                                         <select class="form-select" name="fk_estado" id="inv_camp_estado">
                                                             <option selected disabled class="font-italic">Seleccione...</option>
                                                             @foreach($estado as $data)
-                                                                <option value="{{$data->id}}" {{($articulo->estado->id == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
+                                                                <option value="{{$data->id}}" {{(!empty($articulo->estado->id) == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -185,7 +185,7 @@
                                                                 disabled>
                                                             <option selected disabled class="font-italic">Seleccione...</option>
                                                             @foreach($departamento as $data)
-                                                                <option value="{{$data->id}}" {{($articulo->departamento->id == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
+                                                                <option value="{{$data->id}}" {{(!empty($articulo->departamento->id == $data->id)) ? 'selected':''}}>{{$data->nombre}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -314,7 +314,7 @@
                                                         <select type="text" name="fk_tipo_equipo" class="form-select" id="inv_camp_fk_tipo_equipo" >
                                                             <option selected disabled class="font-italic">Seleccione...</option>
                                                             @foreach($tipo_equipo as $data)
-                                                                <option value="{{$data->id}}" {{($articulo->tipo_equipo->id == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
+                                                                <option value="{{$data->id}}" {{(!empty($articulo->tipo_equipo->id == $data->id)) ? 'selected':''}}>{{$data->nombre}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>

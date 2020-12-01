@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //Route::apiResource('revision/{id_user}','Revision\revisionApi');
 
-Route::post('login', 'movil\ApiRest@login');
+//Route::post('login', 'movil\ApiRest@login');
 //Route::apiResource('articulo','Inmobiliario\articuloController');
 
 //Route::apiResource('departamento','Inmobiliario\departamentoController');
+
+Route::get('articles', [Api\articuloApiController::class, 'index']);
+Route::get('articles/{article}', [Api\articuloApiController::class, 'show']);
+Route::post('articles', [Api\articuloApiController::class, 'store']);
+Route::put('articles/{article}', [Api\articuloApiController::class, 'update']);
+

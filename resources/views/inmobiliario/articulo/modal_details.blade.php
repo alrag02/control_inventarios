@@ -1,4 +1,4 @@
-<button class="btn btn-outline-secondary" data-toggle="modal" data-target=".bd-example-modal-lg-{{$data->id}}">
+<button class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-lg-{{$data->id}}">
     Detalles
 </button>
 
@@ -7,8 +7,11 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content ">
             <div class="card bg-dark">
-                <div class="card-header bg-dark text-light">
+                <div class="modal-header card-header bg-dark text-light">
                     <h3>Detalles del articulo</h3>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="card-body bg-dark">
                     <div class="row">

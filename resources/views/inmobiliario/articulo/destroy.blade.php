@@ -2,8 +2,9 @@
 @php($nombre_concepto = 'articulo')
 
 
-<a type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModal" id="btn_destroy">Eliminar</a>
-
+<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal" id="btn_destroy">
+    Eliminar
+</button>
 
 <!-- Modal  TODO: PORQUE? no se muestra -->
 

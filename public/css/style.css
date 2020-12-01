@@ -41,3 +41,8 @@ body{
 .input-check input{
     display:none
 }
+
+.card-selection-revision{
+    background-image: linear-gradient(lightskyblue, cadetblue);
+
+}

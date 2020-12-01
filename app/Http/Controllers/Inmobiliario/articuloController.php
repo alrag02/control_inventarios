@@ -228,8 +228,11 @@ class articuloController extends Controller
      */
     public function destroy($id)
     {
-        $sec_data = encargo::all();
-
+        $data = articulo::find($id);
+        $data->vigencia = 0;
+        $data->save();
+        $data->encargo()->detach();
+        return departamento::destroy($id) ? redirect("inmobiliario/departamento"): view("inmobiliario.departamento.edit", print 'Hubo un error al eliminar');
     }
 
     public function printPDF(){

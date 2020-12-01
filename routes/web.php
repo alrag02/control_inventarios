@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\inmobiliario\barcodeController;
+use App\Http\Controllers\Revision\revisionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,6 +61,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::view('/','revision.index');
         Route::resource('/corte','corteController');
         Route::resource('/revision','revisionController');
+        Route::get('/revision/{id}/show_details', [revisionController::class, 'show_detalis'])->name('revision.revision.show_details');;
     });
 });
 

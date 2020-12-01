@@ -140,4 +140,36 @@ class revisionController extends Controller
     {
         //
     }
+
+    public function show_detalis($id)
+    {
+        $articulo_has_empleado = DB::select("SELECT
+        encargo.nombre AS 'encargo_nombre',
+        empleado.nombre,
+        empleado.apellido_paterno,
+        empleado.apellido_materno,
+        empleado.nivel,
+        articulo_has_empleado.fk_articulo AS 'fk_articulo'
+        FROM articulo_has_empleado, empleado, encargo
+        WHERE articulo_has_empleado.fk_encargo = encargo.id
+        AND articulo_has_empleado.fk_empleado = empleado.id");
+
+
+
+        return view('revision.revision.show_details', [
+            'articulo' => articulo::where('fk_revision', $id)->get(),
+            'area' => area::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            'departamento' => departamento::all(),
+            'familia' => familia::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            'empleado' => empleado::all(),
+            'encargo' => encargo::all(),
+            'estado' => estado::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            'tipo_compra' => tipo_compra::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            'tipo_equipo' => tipo_equipo::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            'oficina' => oficina::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            'edificio' => edificio::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            'articulo_has_empleado' => $articulo_has_empleado,
+            'revision' => revision::all(),
+        ]);
+    }
 }

@@ -19,6 +19,9 @@ class area extends Model
 
     public function departamento()
     {
-        return $this->hasMany('App\Models\Inmobiliario\departamento', 'fk_area','id');
+        return $this->hasMany(
+            'App\Models\Inmobiliario\departamento',
+            'fk_area',
+            'id');
     }
 }

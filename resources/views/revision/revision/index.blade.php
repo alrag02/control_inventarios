@@ -21,32 +21,29 @@
 
                     </div>
                     <div class="card-body">
-
-                        <table class="table table-bordered table-striped">
-                            <thead class="thead-dark">
-                            <tr>
-                                <th>Id</th>
-                                <th>Num. Trab</th>
-                                <th>Nombre Trab.</th>
-                                <th>Modificado el.</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
+                        <div class="row">
                             @foreach($revision as $data)
-                                <a href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}">
-                                    <tr>
-                                        <td>{{$data->id}}</td>
-                                        <td>{{$data->user->work_id}}</td>
-                                        <td>{{$data->user->name.' '.$data->user->last_name_p}}</td>
-                                        <td>{{$data->created_at->format('d/M/Y h:i a')}}</td>
-                                        <td><a href="{{url('/revision/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-outline-teal">Detalles</a>
-                                        </td>
-                                    </tr>
-                                </a>
+                                <div class="col-lg-3">
+                                    <div class="card card-selection-revision">
+                                        <div class="card-title">
+                                            <h5>{{$data->created_at->format('d/M/Y h:i a')}}</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <ul>
+                                                <li>ID: {{$data->id}}</li>
+                                                <li>ID Trabajador: {{$data->user->work_id}}</li>
+                                                <li>Usuario: {{$data->user->name.' '.$data->user->last_name_p}}</li>
+                                            </ul>
+                                        </div>
+                                        <div class="card-footer">
+                                            <a href="{{url('/revision/'.$nombre_concepto.'/'.$data->id.'/show_details')}}" class="btn btn-outline-teal">Detalles</a>
+                                            <a href="{{url('/revision/'.$nombre_concepto.'/'.$data->id.'/show_details')}}" class="btn btn-outline-teal">Genarar reporte</a>
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
-                            </tbody>
-                        </table>
+
+                        </div>
                     </div>
                 </div>
             </div>
