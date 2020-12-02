@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
         Route::get('articulo/generateBarCode/{id}', [barcodeController::class, 'barcode'])->name('articulo.generateBarCode');
-        Route::get('articulo/printBarCode/{id}', [barcodeController::class, 'printPDFbarcode'])->name('articulo.printBarCode');
+        Route::get('/articulo/{id}/printBarCode', [barcodeController::class, 'printBarCode'])->name('articulo.printBarCode');
 
     });
 

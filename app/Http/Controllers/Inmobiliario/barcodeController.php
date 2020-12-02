@@ -27,8 +27,8 @@ class barcodeController extends Controller
             'articulo' => articulo::find($id)]
         );
     }
-    public function printPDFbarcode($id){
-        $pdf = (new PDF)->loadHTML('<h1>Test</h1>');
+    public function printBarCode($id){
+        $pdf = (new PDF)->loadHTML('<h1>Test: '.$id.' </h1>', 'UTF-8');
         return $pdf->stream();
     }
 }
