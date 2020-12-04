@@ -69,6 +69,8 @@ class articuloController extends Controller
      */
     public function create()
     {
+
+
         return view('inmobiliario.articulo.create', [
             'articulo' => articulo::all()->where('vigencia',1),
             'area' => area::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
@@ -167,6 +169,18 @@ class articuloController extends Controller
      */
     public function edit($id)
     {
+        $articulo_has_empleado = DB::select("SELECT
+        encargo.nombre AS 'encargo_nombre',
+        empleado.id AS 'empleado_id',
+        empleado.nombre,
+        empleado.apellido_paterno,
+        empleado.apellido_materno,
+        empleado.nivel,
+        articulo_has_empleado.fk_articulo AS 'fk_articulo'
+        FROM articulo_has_empleado, empleado, encargo
+        WHERE articulo_has_empleado.fk_encargo = encargo.id
+        AND articulo_has_empleado.fk_empleado = empleado.id");
+
         return view('inmobiliario.articulo.edit',[
             'articulo' => articulo::find($id),
             'area' => area::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
@@ -179,7 +193,8 @@ class articuloController extends Controller
             'edificio' => edificio::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'empleado' => empleado::get(['id', 'nombre', 'apellido_paterno','apellido_materno', 'vigencia'])->where('vigencia',1),
             'encargo' => encargo::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
-            'dns1d' => (new DNS1D)->getBarcodeHTML($id, 'C128')
+            'dns1d' => (new DNS1D)->getBarcodeHTML($id, 'C128'),
+            'articulo_has_empleado' => $articulo_has_empleado,
         ]);
 
     }
@@ -194,7 +209,7 @@ class articuloController extends Controller
     public function update(Request $request, $id)
     {
         $data = articulo::find($id);
-        $data->etiqueta_local = $request->etiqueta_local;
+        //$data->etiqueta_local = $request->etiqueta_local;
         $data->etiqueta_externa = $request->etiqueta_externa;
         $data->concepto = $request->concepto;
         $data->marca = $request->marca;

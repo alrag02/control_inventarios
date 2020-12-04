@@ -13,7 +13,7 @@ class foto extends Model
     protected $table = 'foto';
 
     protected $fillable = [
-        'url',
         'descripcion',
+        'image',
     ];
 }

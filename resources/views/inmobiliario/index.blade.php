@@ -85,7 +85,7 @@
     <div class="row mx-auto">
         <!--Fotos -->
         <div class="col-lg-2 md-4 sm-6">
-            <a href="{{route('inmobiliario.foto.index')}}">
+            <a href="{{route('inmobiliario.foto.create')}}">
                 <div class="card card-selection text-dark">
                     <img class="card-img-top mx-auto d-block " src="https://image.flaticon.com/icons/png/512/14/14611.png" style="width: 96px; margin: 1em" alt="Card image cap">
                     <div class="card-body">

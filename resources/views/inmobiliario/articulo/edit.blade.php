@@ -8,6 +8,13 @@
             <div class="row mx-auto">
                 <div class="col-lg-12">
                     <div class="card card-wrapper_articulo">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opciones</button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{route('inmobiliario.'.$nombre_concepto.'.generateBarCode',$articulo->id)}}">Generar Etiqueta</a>
+                            <a class="dropdown-item" href="#">Dar de Baja</a>
+                            <div role="separator" class="dropdown-divider"></div>
+                            @include('inmobiliario.'.$nombre_concepto.'.destroy',["'".$nombre_concepto."'." => $articulo])                                        </div>
+
                         <form action="{{route('inmobiliario.'.$nombre_concepto.'.update',$articulo->id)}}" method="POST" onsubmit=" document.getElementById('btn_update').hidden = true; document.getElementById('btn_destroy').hidden = true;  save(); ">
                             {{method_field('PATCH')}}
                             @csrf
@@ -19,12 +26,6 @@
                                         <button type="submit" id="btn-store" class="btn btn-primary">
                                             Guardar
                                         </button>
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opciones</button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{route('inmobiliario.'.$nombre_concepto.'.generateBarCode',$articulo->id)}}">Generar Etiqueta</a>
-                                            <a class="dropdown-item" href="#">Dar de Baja</a>
-                                            <div role="separator" class="dropdown-divider"></div>
-                                            @include('inmobiliario.'.$nombre_concepto.'.destroy',["'".$nombre_concepto."'." => $articulo])                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -125,11 +126,11 @@
                                                     <!-- vigencia -->
                                                     <div class="form-group">
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="vigencia" id="inv_camp_vigencia" value="1" checked>
-                                                            <label class="form-check-label" for="inv_camp_vigencia">Activo</label>
+                                                            <input class="form-check-input" type="radio" name="vigencia" id="inv_camp_vigencia" value="1" {{($articulo->vigencia == '1') ? 'checked':''}}>
+                                                            <label class="form-check-label" for="inv_camp_vigencia">Vigente</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="vigencia" id="inv_camp_vigencia_baja" value="0">
+                                                            <input class="form-check-input" type="radio" name="vigencia" id="inv_camp_vigencia_baja" value="0" {{($articulo->vigencia == '0') ? 'checked':''}}>
                                                             <label class="form-check-label" for="inv_camp_vigencia_baja">En Baja</label>
                                                         </div>
                                                     </div>
@@ -141,51 +142,28 @@
                                             <div class="card card-body">
                                                 <h4 class="card-title">Ubicación</h4>
                                                 <div class="form-row">
-                                                    <!-- edificio -->
-                                                    <div class="form-group col-md-6">
-                                                        <label for="inv_camp_edificio">Edificio</label>
-                                                        <select name="edificio" class="form-select" id="inv_camp_edificio">
-                                                            <option selected disabled class="font-italic">Seleccione...</option>
-                                                            @foreach($edificio as $data)
-                                                                <option value="{{$data->id}}" {{($articulo->oficina->edificio->id == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
                                                     <!-- fk_oficina -->
-                                                    <div class="form-group col-md-6">
+                                                    <div class="form-group col-md-12">
                                                         <label for="inv_camp_fk_oficina">Ubicación</label>
                                                         <select name="fk_oficina" class="form-select" id="inv_camp_fk_oficina">
                                                             <option selected disabled class="font-italic">Seleccione...</option>
                                                             @foreach($oficina as $data)
-                                                                <option value="{{$data->id}}" {{($articulo->oficina->id == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
+                                                                <option value="{{$data->id}}" {{($articulo->oficina->id == $data->id) ? 'selected':''}}>{{$data->nombre.' ('.$data->edificio->nombre.')'}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-row">
-                                                    <!-- area -->
-                                                    <div class="form-group col-md-6">
-                                                        <label for="inv_camp_area">Area</label>
-                                                        <select class="form-select" id="inv_camp_area" name="area"
-                                                                onchange="
-                                                                document.getElementById('inv_camp_fk_departamento').disabled = false;
-                                                                d = document.getElementById('inv_camp_area').value;
-                                                                " type="text">
-                                                            <option selected disabled class="font-italic" onclick="">Seleccione...</option>
-                                                            @foreach($area as $data)
-                                                                <option value="{{$data->id}}" {{($articulo->departamento->area->id == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
+
                                                     <!-- fk_departamento -->
-                                                    <div class="form-group col-md-6">
+                                                    <div class="form-group col-md-12">
                                                         <label for="inv_camp_fk_departamento">Departamento</label>
                                                         <select type="text" name="fk_departamento" class="form-select" id="inv_camp_fk_departamento"
-                                                                disabled>
+                                                                >
                                                             <option selected disabled class="font-italic">Seleccione...</option>
                                                             @foreach($departamento as $data)
-                                                                <option value="{{$data->id}}" {{(!empty($articulo->departamento->id == $data->id)) ? 'selected':''}}>{{$data->nombre}}</option>
+                                                                <option value="{{$data->id}}" {{(!empty($articulo->departamento->id == $data->id)) ? 'selected':''}}>{{$data->nombre.' ('.$data->area->nombre.')'}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -323,15 +301,15 @@
                                                     <!-- activo_resguardo -->
                                                     <div class="form-group">
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="activo_resguardo" id="inv_camp_activo" value="2" {{($data->activo_resguardo == 'activo') ? 'checked':''}}>
+                                                            <input class="form-check-input" type="radio" name="activo_resguardo" id="inv_camp_activo" value="2" {{($articulo->activo_resguardo == 'activo') ? 'checked':''}}>
                                                             <label class="form-check-label" for="inv_camp_activo">Activo</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="activo_resguardo" id="inv_camp_resguardo" value="3" {{($data->activo_resguardo == 'resguardo') ? 'checked':''}}>
+                                                            <input class="form-check-input" type="radio" name="activo_resguardo" id="inv_camp_resguardo" value="3" {{($articulo->activo_resguardo == 'resguardo') ? 'checked':''}}>
                                                             <label class="form-check-label" for="inv_camp_resguardo">Resguardo</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="activo_resguardo" id="inv_camp_nd" value="1" {{($data->activo_resguardo == 'no_disponible') ? 'checked':''}}>
+                                                            <input class="form-check-input" type="radio" name="activo_resguardo" id="inv_camp_nd" value="1" {{($articulo->activo_resguardo == 'no_disponible') ? 'checked':''}}>
                                                             <label class="form-check-label" for="inv_camp_nd">Nulo</label>
                                                         </div>
                                                     </div>

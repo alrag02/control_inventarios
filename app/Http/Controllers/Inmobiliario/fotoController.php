@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Inmobiliario;
 use App\Http\Controllers\Controller;
 use App\Models\inmobiliario\foto;
 use Illuminate\Http\Request;
+use Image;
 
 class fotoController extends Controller
 {
@@ -15,35 +16,82 @@ class fotoController extends Controller
      */
     public function index()
     {
-        $images = foto::get();
+       /* $images = foto::get();
         return view('inmobiliario.foto.image-gallery',compact('images'));
+       */
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $images = foto::get();
+        return view('inmobiliario.foto.create',compact('images'));
     }
 
 
     /**
-     * store image function
+     * Store a newly created resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'descripcion' => 'required',
-            'url' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        $image       = $request->file('image');
+        $filename    = $image->getClientOriginalName();
 
+        //Fullsize
+        $image->move(public_path().'/full/',$filename);
 
-        $input['url'] = time().'.'.$request->url->getClientOriginalExtension();
-        $request->url->move(public_path('images'), $input['url']);
+        $image_resize = Image::make(public_path().'/full/'.$filename);
+        $image_resize->fit(92, 92);
+        $image_resize->save(public_path('thumbnail/' .$filename));
 
+        $product= new foto();
+        $product->name = $request->name;
+        $product->image = $filename;
+        $product->save();
 
-        $input['descripcion'] = $request->descripcion;
-        foto::create($input);
-
-
-        return back()->with('success','Image stored successfully.');
+        return back()->with('success', 'Your product saved with image!!!');
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
 
     /**
      * Remove Image function

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\inmobiliario\barcodeController;
+use App\Http\Controllers\Inmobiliario\fotoController;
 use App\Http\Controllers\Revision\revisionController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,15 +45,22 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('/encargo', 'encargoController')->except(['create', 'store', 'destroy']);
         Route::resource('/estado', 'estadoController');
         Route::resource('/familia', 'familiaController');
-        Route::resource('/foto', 'estadoController');
+        // Route::resource('/foto', 'estadoController');
         Route::resource('/oficina', 'oficinaController');
         Route::resource('/tipo_compra', 'tipo_compraController');
         Route::resource('/tipo_equipo', 'tipo_equipoController');
-        Route::resource('/foto','fotoController');
 
+
+       // Route::get('/foto/index', [fotoController::class, 'index'])->name('foto.index');;
+       // Route::get('/foto/resize_image', [fotoController::class, 'resize_image'])->name('foto.resize_image');;
+
+        Route::post('foto/store', [fotoController::class, 'store'])->name('foto.store');
+        Route::get('foto/create', [fotoController::class, 'create'])->name('foto.create');
+
+        //Route::resource('/foto', fotoController::class);
 
         Route::get('articulo/generateBarCode/{id}', [barcodeController::class, 'barcode'])->name('articulo.generateBarCode');
-        Route::get('/articulo/{id}/printBarCode', [barcodeController::class, 'printBarCode'])->name('articulo.printBarCode');
+        Route::get('articulo/{id}/printBarCode', [barcodeController::class, 'printBarCode'])->name('articulo.printBarCode');
 
     });
 
