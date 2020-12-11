@@ -7,6 +7,9 @@ use App\Models\Inmobiliario\articulo;
 use App\Models\Revision\corte;
 use App\Models\Revision\disponibilidad_articulo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class corteController extends Controller
 {
@@ -39,19 +42,18 @@ class corteController extends Controller
     public function store(Request $request)
     {
         //Obtener el dato
-
         $data = new corte();
 
         //Obtener los datos con los que se obtengan en el request
-
         $data->nombre = $request->nombre;
         $data->descripcion = $request->descripcion;
+        $data->llave = Str::random(16);
 
         //Almacenar el dato y dirigir al index con mensaje,
         // si no puede almacenar, regresar a create con mensaje de error
 
         $data->save();
-
+        $this->store_excel_corte($data->llave);
         //Actualizar tods los articulos para que aparecan sin revisar,
         foreach (articulo::get() as $disp_art){
             $disp_art->disponibilidad = 'sin_revisar';
@@ -61,6 +63,7 @@ class corteController extends Controller
             $disp_art->save();
         }
         return redirect("revision/corte")->with('message', 'Creado Correctamente');
+
     }
 
     /**
@@ -119,5 +122,16 @@ class corteController extends Controller
     public function destroy(corte $corte)
     {
         echo 'No deberias de eliminar un corte';
+    }
+
+    public function store_excel_corte($llave){
+
+        return Excel::store(new corteExportController, 'corte_inventario_'.$llave.'.xlsx', 'backups_excel');
+    }
+
+    public function get_excel_corte($llave){
+        return Storage::download('/backups/excel/corte_inventario_'.$llave.'.xlsx');
+
+
     }
 }

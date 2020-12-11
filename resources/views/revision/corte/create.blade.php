@@ -2,7 +2,7 @@
 
 @can('crear cortes')
 @section('content')
-
+    @include('layouts.alert')
     @php($nombre_concepto = 'corte')
     <div class="container">
         <div class="row justify-content-center">

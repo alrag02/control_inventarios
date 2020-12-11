@@ -10,7 +10,7 @@ class encargo extends Model
 {
     use HasFactory;
 
-    protected $table = 'encargo';
+   /* protected $table = 'encargo';
 
     protected $fillable = [
         'nombre',
@@ -28,4 +28,5 @@ class encargo extends Model
         return $this->belongsToMany('App\Models\Inmobiliario\empleado', 'articulo_has_empleado', 'fk_encargo', 'fk_empleado');
 
     }
+   */
 }

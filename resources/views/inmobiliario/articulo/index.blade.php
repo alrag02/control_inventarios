@@ -2,6 +2,7 @@
 
 @can('consultar inmobiliarios')
 @section('content')
+    @include('layouts.alert')
     @php($nombre_concepto = 'articulo')
     <div class="container">
         <div class="row justify-content-center">
@@ -42,7 +43,7 @@
                                     <td>{{($data->concepto) ?? '-'}}</td>
                                     <td>{{$data->updated_at->format('d/M/Y h:i a')}}</td>
                                     <td>
-                                        <a href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-outline-dark">Editar</a>
+                                        <a href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-dark">Editar</a>
                                     </td>
                                     <td>
                                         @include('inmobiliario.articulo.modal_details')

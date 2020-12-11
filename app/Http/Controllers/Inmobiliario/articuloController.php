@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Inmobiliario;
 
 use App\Http\Controllers\Controller;
+use App\Models\inmobiliario\foto;
 use App\Models\Revision\revision;
-use Illuminate\Support\Facades\DB;
 use App\Models\Inmobiliario\articulo;
 use App\Models\Inmobiliario\area;
 use App\Models\Inmobiliario\departamento;
 use App\Models\Inmobiliario\empleado;
-use App\Models\Inmobiliario\encargo;
 use App\Models\Inmobiliario\estado;
 use App\Models\Inmobiliario\familia;
 use App\Models\Inmobiliario\oficina;
@@ -23,14 +22,9 @@ use Milon\Barcode\DNS1D;
 
 class articuloController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $articulo_has_empleado = DB::select("SELECT
+        /*$articulo_has_empleado = DB::select("SELECT
         encargo.nombre AS 'encargo_nombre',
         empleado.nombre,
         empleado.apellido_paterno,
@@ -40,63 +34,71 @@ class articuloController extends Controller
         FROM articulo_has_empleado, empleado, encargo
         WHERE articulo_has_empleado.fk_encargo = encargo.id
         AND articulo_has_empleado.fk_empleado = empleado.id");
+        */
 
-
+        //$empleado = DB::select("SELECT empleado.nombre as 'nombre', empleado.apellido_paterno, empleado.apellido_materno, empleado.nivel FROM empleado");
 
         return view('inmobiliario.articulo.index', [
             'articulo' => articulo::all(),
-            'area' => area::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            'area' => area::get(['id', 'nombre', 'vigencia']),
             'departamento' => departamento::all(),
-            'familia' => familia::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            'familia' => familia::get(['id', 'nombre', 'vigencia']),
             'empleado' => empleado::all(),
-            'encargo' => encargo::all(),
-            'estado' => estado::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
-            'tipo_compra' => tipo_compra::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
-            'tipo_equipo' => tipo_equipo::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
-            'oficina' => oficina::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
-            'edificio' => edificio::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
-            'encargado_area' => DB::select('select * from articulo_has_empleado where fk_encargo = ?', [1]),
-            'articulo_has_empleado' => $articulo_has_empleado,
+            'estado' => estado::get(['id', 'nombre', 'vigencia']),
+            'foto' => foto::all(),
+            'tipo_compra' => tipo_compra::get(['id', 'nombre', 'vigencia']),
+            'tipo_equipo' => tipo_equipo::get(['id', 'nombre', 'vigencia']),
+            'oficina' => oficina::get(['id', 'nombre', 'vigencia']),
+            'edificio' => edificio::get(['id', 'nombre', 'vigencia']),
             'revision' => revision::all(),
         ]);
-
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
+    public function search(){
+        return view('inmobiliario.articulo.search');
+    }
+
+    public function show_search(){
+
+        return view('inmobiliario.articulo.index', [
+            'articulo' => articulo::where('id', 2)->get(),
+            'area' => area::get(['id', 'nombre', 'vigencia']),
+            'departamento' => departamento::all(),
+            'familia' => familia::get(['id', 'nombre', 'vigencia']),
+            'empleado' => empleado::all(),
+            'estado' => estado::get(['id', 'nombre', 'vigencia']),
+            'foto' => foto::all(),
+            'tipo_compra' => tipo_compra::get(['id', 'nombre', 'vigencia']),
+            'tipo_equipo' => tipo_equipo::get(['id', 'nombre', 'vigencia']),
+            'oficina' => oficina::get(['id', 'nombre', 'vigencia']),
+            'edificio' => edificio::get(['id', 'nombre', 'vigencia']),
+            'revision' => revision::all(),
+        ]);
+    }
+
     public function create()
     {
-
-
         return view('inmobiliario.articulo.create', [
             'articulo' => articulo::all()->where('vigencia',1),
             'area' => area::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'departamento' => departamento::all()->where('vigencia',1),
             'familia' => familia::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'estado' => estado::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            'foto' => foto::all(),
             'tipo_compra' => tipo_compra::get(['id', 'nombre', 'sigla' ,'vigencia'])->where('vigencia',1),
             'tipo_equipo' => tipo_equipo::get(['id', 'nombre', 'sigla' , 'vigencia'])->where('vigencia',1),
             'oficina' => oficina::all()->where('vigencia',1),
             'edificio' => edificio::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'empleado' => empleado::get(['id', 'nombre', 'apellido_paterno','apellido_materno', 'vigencia'])->where('vigencia',1),
-            'encargo' => encargo::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            //'encargo' => encargo::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
         ]);
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $data = new articulo();
-        $data->etiqueta_local = $request->etiqueta_local;
+
         $data->etiqueta_externa = $request->etiqueta_externa;
         $data->concepto = $request->concepto;
         $data->marca = $request->marca;
@@ -112,6 +114,13 @@ class articuloController extends Controller
         $data->costo = $request->costo;
         $data->num_factura = $request->num_factura;
         $data->activo_resguardo = $request->activo_resguardo;
+
+        $data->empleado_encargado_area = $request->empleado_encargado_area;
+        $data->empleado_titular = $request->empleado_titular;
+        $data->empleado_titular_secundario = $request->empleado_titular_secundario;
+        $data->empleado_resguardo = $request->empleado_resguardo;
+        $data->empleado_resguardo_secundario = $request->empleado_resguardo_secundario;
+
         $data->fk_familia = $request->fk_familia;
         $data->fk_departamento = $request->fk_departamento;
         $data->fk_estado = $request->fk_estado;
@@ -120,56 +129,30 @@ class articuloController extends Controller
         $data->fk_oficina = $request->fk_oficina;
 
         //Generar codigo interno
-        $data->etiqueta_local =
-            'ITSLM-'.
+        $data->etiqueta_local = 'ITSLM-'.
             substr( $data->fecha_adquisiscion->year, -2).
             '-'.
             $data->tipo_compra->sigla.
             '-'.
             $data->tipo_equipo->sigla.
             '-'.
-            //TODO: Numeros random, provisional
-            mt_rand(0000,9999);
+            mt_rand(1000,9999);
 
         $data->fk_revision = null;
         $data->disponibilidad = 'sin_revisar';
         $data->disponibilidad_updated_at = null;
 
-        $data->save();
-
-        //Agregar los datos de articulo_Has_empleado
-
-        $art = articulo::find($data->id);
-        $art->encargo()->attach(1, ['fk_empleado' => ($request->articulo_has_empleado_1) ?? null]);
-        $art->encargo()->attach(2, ['fk_empleado' => ($request->articulo_has_empleado_2) ?? null]);
-        $art->encargo()->attach(3, ['fk_empleado' => ($request->articulo_has_empleado_3) ?? null]);
-        $art->encargo()->attach(4, ['fk_empleado' => ($request->articulo_has_empleado_4) ?? null]);
-        $art->encargo()->attach(5, ['fk_empleado' => ($request->articulo_has_empleado_5) ?? null]);
-
-
-        return redirect("inmobiliario/articulo")->with('message', 'Modificado Correctamente');
+        return $data->save() ? redirect("inmobiliario/articulo")->with('message', 'Modificado Correctamente'):view("inmobiliario.articulo.create")->with('message', 'Error');;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Inmobiliario\articulo  $articulo
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         return articulo::find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Inmobiliario\articulo  $articulo
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        $articulo_has_empleado = DB::select("SELECT
+        /*$articulo_has_empleado = DB::select("SELECT
         encargo.nombre AS 'encargo_nombre',
         empleado.id AS 'empleado_id',
         empleado.nombre,
@@ -180,6 +163,7 @@ class articuloController extends Controller
         FROM articulo_has_empleado, empleado, encargo
         WHERE articulo_has_empleado.fk_encargo = encargo.id
         AND articulo_has_empleado.fk_empleado = empleado.id");
+        */
 
         return view('inmobiliario.articulo.edit',[
             'articulo' => articulo::find($id),
@@ -187,25 +171,19 @@ class articuloController extends Controller
             'departamento' => departamento::all()->where('vigencia',1),
             'familia' => familia::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'estado' => estado::all()->where('vigencia',1),
+            'foto' => foto::all(),
             'tipo_compra' => tipo_compra::get(['id', 'nombre', 'sigla' ,'vigencia'])->where('vigencia',1),
             'tipo_equipo' => tipo_equipo::get(['id', 'nombre', 'sigla' , 'vigencia'])->where('vigencia',1),
             'oficina' => oficina::all()->where('vigencia',1),
             'edificio' => edificio::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'empleado' => empleado::get(['id', 'nombre', 'apellido_paterno','apellido_materno', 'vigencia'])->where('vigencia',1),
-            'encargo' => encargo::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+            //'encargo' => encargo::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
             'dns1d' => (new DNS1D)->getBarcodeHTML($id, 'C128'),
-            'articulo_has_empleado' => $articulo_has_empleado,
+            //'articulo_has_empleado' => $articulo_has_empleado,
         ]);
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Inmobiliario\articulo  $articulo
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $data = articulo::find($id);
@@ -225,6 +203,14 @@ class articuloController extends Controller
         $data->costo = $request->costo;
         $data->num_factura = $request->num_factura;
         $data->activo_resguardo = $request->activo_resguardo;
+
+        $data->empleado_encargado_area = $request->empleado_encargado_area;
+        $data->empleado_titular = $request->empleado_titular;
+        $data->empleado_titular_secundario = $request->empleado_titular_secundario;
+        $data->empleado_resguardo = $request->empleado_resguardo;
+        $data->empleado_resguardo_secundario = $request->empleado_resguardo_secundario;
+
+        $data->fk_foto = $request->fk_foto;
         $data->fk_familia = $request->fk_familia;
         $data->fk_departamento = $request->fk_departamento;
         $data->fk_estado = $request->fk_estado;
@@ -235,19 +221,13 @@ class articuloController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Inmobiliario\articulo  $articulo
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $data = articulo::find($id);
         $data->vigencia = 0;
         $data->save();
-        $data->encargo()->detach();
-        return departamento::destroy($id) ? redirect("inmobiliario/departamento"): view("inmobiliario.departamento.edit", print 'Hubo un error al eliminar');
+        //$data->encargo()->detach();
+        return articulo::destroy($id) ? redirect("inmobiliario/articulo"): view("inmobiliario.articulo.edit", print 'Hubo un error al eliminar');
     }
 
     public function printPDF(){

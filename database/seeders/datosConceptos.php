@@ -155,11 +155,12 @@ class datosConceptos extends Seeder
             'vigencia' => '1',
             'fk_departamento' => '1'
         ]);
-
+        /*
         encargo::create([
             'nombre' => 'Encargado de Area',
             'vigencia' => '1'
         ]);
+
 
         encargo::create([
             'nombre' => 'Titular 1',
@@ -180,6 +181,7 @@ class datosConceptos extends Seeder
             'nombre' => 'Resguardante 2',
             'vigencia' => '1'
         ]);
+        */
 
         tipo_compra::create([
             'nombre' => 'Compra Licitacion',

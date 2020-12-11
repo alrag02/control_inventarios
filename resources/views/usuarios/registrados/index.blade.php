@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('layouts.alert')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
@@ -19,6 +20,7 @@
                                 <th>Apellidos</th>
                                 <th>No. Trabajo</th>
                                 <th>Email</th>
+                                <th>Rol</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>

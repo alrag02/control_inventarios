@@ -11,6 +11,7 @@ class AddForeignKeysToArticuloHasEmpleadoTable extends Migration
      *
      * @return void
      */
+    /*
     public function up()
     {
         Schema::table('articulo_has_empleado', function (Blueprint $table) {
@@ -24,7 +25,7 @@ class AddForeignKeysToArticuloHasEmpleadoTable extends Migration
      * Reverse the migrations.
      *
      * @return void
-     */
+
     public function down()
     {
         Schema::table('articulo_has_empleado', function (Blueprint $table) {
@@ -34,4 +35,5 @@ class AddForeignKeysToArticuloHasEmpleadoTable extends Migration
 
         });
     }
+    */
 }

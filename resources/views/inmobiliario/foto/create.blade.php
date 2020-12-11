@@ -1,5 +1,5 @@
 @include('layouts.app')
-
+@include('layouts.alert')
 <div class="container">
 
     <div class="row">
@@ -14,11 +14,11 @@
                         <div class="row">
                             <div class="form-group">
                                 <label for="lbl_name">Descripción</label>
-                                <input type="text" name="name" id="lbl_name" class="form-control" placeholder="Describa lo que hay en la foto">
+                                <input type="text" name="name" id="lbl_name" class="form-control" placeholder="Describa lo que hay en la foto" required>
                             </div>
                             <div class="form-group">
                                 <label for="lbl_image">Imagen</label>
-                                <input type="file" id="lbl_image" name="image" class="form-control">
+                                <input type="file" id="lbl_image" name="image" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-info">Subir</button>

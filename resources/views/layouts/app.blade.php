@@ -71,7 +71,7 @@
                                     <a class="dropdown-item" href="{{route('inmobiliario.articulo.index')}}">
                                         {{__('Lista de inmobiliarios')}}
                                     </a>
-                                    <a class="dropdown-item" href="{{route('inmobiliario.articulo.index')}}">
+                                    <a class="dropdown-item" href="{{route('inmobiliario.articulo.search')}}">
                                         {{__('Búsqueda Avanzada')}}
                                     </a>
                                 </div>
@@ -111,8 +111,12 @@
                                     </a>
                                     @endcan
                                     @can('revisar inventarios')
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{route('revision.revision.create')}}">
                                         {{__('Realizar revisión de inventarios')}}
+                                    </a>
+                                    <a class="dropdown-item" href="{{route('revision.revision.index')}}">
+                                        {{__('Revisión de inventarios')}}
                                     </a>
                                     @endcan
                                 </div>

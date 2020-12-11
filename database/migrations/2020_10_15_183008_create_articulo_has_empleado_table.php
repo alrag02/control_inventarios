@@ -6,11 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateArticuloHasEmpleadoTable extends Migration
 {
-    /**
+    /*
+     *
      * Run the migrations.
      *
      * @return void
-     */
+
     public function up()
     {
         Schema::create('articulo_has_empleado', function (Blueprint $table) {
@@ -21,13 +22,14 @@ class CreateArticuloHasEmpleadoTable extends Migration
         });
     }
 
-    /**
+    *
      * Reverse the migrations.
      *
      * @return void
-     */
+
     public function down()
     {
         Schema::dropIfExists('articulo_has_empleado');
     }
+     */
 }

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row mx-auto">
         <!--Articulo -->
-        <div class="col-lg-2 md-4 sm-6">
+        <div class="col-lg-4 md-4 sm-6">
             <a href="{{route('inmobiliario.articulo.index')}}">
                 <div class="card card-selection text-dark">
                     <img class="card-img-top mx-auto d-block" src="https://image.flaticon.com/icons/png/512/65/65843.png" style="width: 96px;  margin: 1em" alt="Card image cap">
@@ -65,21 +65,6 @@
                 </div>
             </a>
         </div>
-
-        <!--Encargos -->
-        <div class="col-lg-2 md-4 sm-6">
-            <a href="{{route('inmobiliario.encargo.index')}}">
-                <div class="card card-selection text-dark">
-                    <img class="card-img-top mx-auto d-block" src="https://www.flaticon.es/svg/static/icons/svg/1412/1412129.svg" style="width: 96px;  margin: 1em" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Roles de empleado</h5>
-                        <p class="card-text">Los encargos de un empleado respecto a un articulo.</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-
     </div>
     <br>
     <div class="row mx-auto">

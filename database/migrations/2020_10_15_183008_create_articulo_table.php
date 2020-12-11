@@ -34,6 +34,12 @@ class CreateArticuloTable extends Migration
             $table->enum('disponibilidad',['sin_revisar','en_revision','revisado'])->nullable();
             $table->dateTime('disponibilidad_updated_at')->nullable();
 
+            $table->integer('empleado_encargado_area')->nullable()->index('empleado_encargado_area');
+            $table->integer('empleado_titular')->nullable()->index('empleado_titular');
+            $table->integer('empleado_titular_secundario')->nullable()->index('empleado_titular_secundario');
+            $table->integer('empleado_resguardo')->nullable()->index('empleado_resguardo');
+            $table->integer('empleado_resguardo_secundario')->nullable()->index('empleado_resguardo_secundario');
+
             $table->integer('fk_familia')->nullable()->index('fk_familia');
             $table->integer('fk_departamento')->nullable()->index('fk_departamento');
             $table->integer('fk_estado')->nullable()->index('fk_estado');

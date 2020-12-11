@@ -2,6 +2,7 @@
 
 @can('consultar conceptos')
 @section('content')
+@include('layouts.alert')
     @php($nombre_concepto = 'departamento')
     <div class="container">
         <div class="row justify-content-center">

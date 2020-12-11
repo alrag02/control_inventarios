@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\inmobiliario\foto;
 use Illuminate\Http\Request;
 use Image;
+use Illuminate\Support\Facades\Storage;
+
 
 class fotoController extends Controller
 {
@@ -56,7 +58,7 @@ class fotoController extends Controller
         $product->image = $filename;
         $product->save();
 
-        return back()->with('success', 'Your product saved with image!!!');
+        return back()->with('message', 'Se ha guardado la imagen');
     }
 
     /**
@@ -100,8 +102,10 @@ class fotoController extends Controller
      */
     public function destroy($id)
     {
+        //Storage::delete('/full/');
+
         foto::find($id)->delete();
         return back()
-            ->with('success','Image removed successfully.');
+            ->with('message','Imagen eliminada.');
     }
 }

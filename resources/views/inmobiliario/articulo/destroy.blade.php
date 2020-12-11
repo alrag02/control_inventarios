@@ -2,7 +2,7 @@
 @php($nombre_concepto = 'articulo')
 
 
-<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal" id="btn_destroy">
+<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" id="btn_destroy">
     Eliminar
 </button>
 

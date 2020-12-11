@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card-wrapper_articulo">
-                    <div class="">
+                    <div class="card-header">
                         <div class="form-row">
                             <div class="col-lg-2">
                                 <img class="card-img-left mx-auto d-block" src=" https://www.flaticon.com/svg/static/icons/svg/1642/1642054.svg " style="width: 48px; " alt="">
@@ -23,10 +23,11 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Etiq. Local</th>
-                                <th>Etiq. Externa</th>
                                 <th>Concepto </th>
+                                <th>Edificio</th>
+                                <th>Planta</th>
                                 <th>Actualizado a</th>
-                                <th></th>
+                                <th>Disponibilidad</th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -35,11 +36,26 @@
                                 <tr class="showed" >
                                     <td>{{$data->id}}</td>
                                     <td>{{($data->etiqueta_local) ?? '-'}}</td>
-                                    <td>{{($data->etiqueta_externa) ?? '-'}}</td>
                                     <td>{{($data->concepto) ?? '-'}}</td>
+                                    <td>{{($data->oficina->nombre) ? $data->oficina->nombre.' ('.$data->oficina->edificio->nombre.')':'-'}}</td>
+                                    <td>
+                                        @switch($data->oficina->planta)
+                                            @case(1)
+                                                Baja
+                                                @break
+                                            @case(2)
+                                                Alta
+                                                @break
+                                            @default
+                                                {{$data->oficina->planta}}
+                                        @endswitch
+                                    </td>
                                     <td>{{$data->updated_at->format('d/M/Y h:i a')}}</td>
                                     <td>
-                                        <a href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-outline-dark">Editar</a>
+                                        @include('revision.revision.edit_disponibilidad')
+                                    </td>
+                                    <td>
+                                        <a href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-secondary">Editar</a>
                                     </td>
                                     <td>
                                         @include('inmobiliario.articulo.modal_details')

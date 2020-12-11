@@ -15,6 +15,9 @@ class corte extends Model
         'nombre',
         'descripcion'
     ];
+    /**
+     * @var mixed
+     */
 
     public function revision(){
         return $this->hasMany('App\Models\Revision\revision', 'fk_revision','id');

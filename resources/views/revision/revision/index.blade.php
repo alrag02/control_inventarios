@@ -2,6 +2,7 @@
 
 @can('consultar cortes')
 @section('content')
+    @include('layouts.alert')
     @php($nombre_concepto = 'revision')
     <div class="container">
         <div class="row justify-content-center">
@@ -25,19 +26,19 @@
                             @foreach($revision as $data)
                                 <div class="col-lg-3">
                                     <div class="card card-selection-revision">
-                                        <div class="card-title">
+                                        <div class="card-header">
                                             <h5>{{$data->created_at->format('d/M/Y h:i a')}}</h5>
                                         </div>
                                         <div class="card-body">
                                             <ul>
-                                                <li>ID: {{$data->id}}</li>
+                                                <li>Corte: {{$data->corte->nombre.', '.$data->corte->created_at}}</li>
                                                 <li>ID Trabajador: {{$data->user->work_id}}</li>
                                                 <li>Usuario: {{$data->user->name.' '.$data->user->last_name_p}}</li>
                                             </ul>
                                         </div>
                                         <div class="card-footer">
-                                            <a href="{{url('/revision/'.$nombre_concepto.'/'.$data->id.'/show_details')}}" class="btn btn-outline-teal">Detalles</a>
-                                            <a href="{{url('/revision/'.$nombre_concepto.'/'.$data->id.'/show_details')}}" class="btn btn-outline-teal">Genarar reporte</a>
+                                            <a href="{{url('/revision/'.$nombre_concepto.'/'.$data->id.'/show_details')}}" class="btn btn-primary">Detalles</a>
+                                            <a href="{{url('/revision/'.$nombre_concepto.'/'.$data->id.'/get_excel_revision')}}" class="btn btn-success">Generar reporte (Excel)</a>
                                         </div>
                                     </div>
                                 </div>

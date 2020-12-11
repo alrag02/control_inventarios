@@ -22,6 +22,13 @@ class AddForeignKeysToArticuloTable extends Migration
             $table->foreign('fk_tipo_equipo', 'articulo_ibfk_6')->references('id')->on('tipo_equipo')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->foreign('fk_familia', 'articulo_ibfk_7')->references('id')->on('familia')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->foreign('fk_revision', 'articulo_ibfk_8')->references('id')->on('revision')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+
+            $table->foreign('empleado_encargado_area', 'articulo_ibfk_9')->references('id')->on('empleado')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('empleado_titular', 'articulo_ibfk_10')->references('id')->on('empleado')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('empleado_titular_secundario', 'articulo_ibfk_11')->references('id')->on('empleado')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('empleado_resguardo', 'articulo_ibfk_12')->references('id')->on('empleado')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('empleado_resguardo_secundario', 'articulo_ibfk_13')->references('id')->on('empleado')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+
         });
     }
 
@@ -41,6 +48,11 @@ class AddForeignKeysToArticuloTable extends Migration
             $table->dropForeign('articulo_ibfk_6');
             $table->dropForeign('articulo_ibfk_7');
             $table->dropForeign('articulo_ibfk_8');
+            $table->dropForeign('articulo_ibfk_9');
+            $table->dropForeign('articulo_ibfk_10');
+            $table->dropForeign('articulo_ibfk_11');
+            $table->dropForeign('articulo_ibfk_12');
+            $table->dropForeign('articulo_ibfk_13');
         });
     }
 }

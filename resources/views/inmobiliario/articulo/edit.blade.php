@@ -8,19 +8,12 @@
             <div class="row mx-auto">
                 <div class="col-lg-12">
                     <div class="card card-wrapper_articulo">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opciones</button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{route('inmobiliario.'.$nombre_concepto.'.generateBarCode',$articulo->id)}}">Generar Etiqueta</a>
-                            <a class="dropdown-item" href="#">Dar de Baja</a>
-                            <div role="separator" class="dropdown-divider"></div>
-                            @include('inmobiliario.'.$nombre_concepto.'.destroy',["'".$nombre_concepto."'." => $articulo])                                        </div>
-
                         <form action="{{route('inmobiliario.'.$nombre_concepto.'.update',$articulo->id)}}" method="POST" onsubmit=" document.getElementById('btn_update').hidden = true; document.getElementById('btn_destroy').hidden = true;  save(); ">
                             {{method_field('PATCH')}}
                             @csrf
                             <div class="card-header">
                                 <div class="row">
-                                    <div class="col-lg-9"><h1>Inmobiliario</h1></div>
+                                    <div class="col-lg-9"><h1>Editar Articulo: {{$articulo->etiqueta_local}}</h1></div>
                                     <div class="col-lg-3">
                                         <!-- btn_store -->
                                         <button type="submit" id="btn-store" class="btn btn-primary">
@@ -50,10 +43,16 @@
                                                         <!-- familia -->
                                                         <label for="inv_camp_familia">Tipo Inmobiliario</label>
                                                         <select name="fk_familia" class="form-select" id="inv_camp_familia">
-                                                            <option selected disabled class="font-italic">Seleccione...</option>
-                                                            @foreach($familia as $data)
-                                                                <option value="{{$data->id}}" {{($articulo->familia->id == $data->id) ? 'selected':''}} >{{$data->nombre}}</option>
-                                                            @endforeach
+                                                            @if(!empty($articulo->estado->id))
+                                                                @foreach($familia as $data)
+                                                                    <option value="{{$data->id}}" {{($articulo->familia->id == $data->id) ? 'selected':''}} >{{$data->nombre}}</option>
+                                                                @endforeach
+                                                            @else
+                                                                <option selected disabled class="font-italic" value="">Seleccione...</option>
+                                                                @foreach($familia as $data)
+                                                                    <option value="{{$data->id}}" >{{$data->nombre}}</option>
+                                                                @endforeach
+                                                            @endif
                                                         </select>
                                                     </div>
                                                 </div>
@@ -112,10 +111,16 @@
                                                     <div class="form-group col-md-6">
                                                         <label for="inv_camp_estado">Estado</label>
                                                         <select class="form-select" name="fk_estado" id="inv_camp_estado">
-                                                            <option selected disabled class="font-italic">Seleccione...</option>
-                                                            @foreach($estado as $data)
-                                                                <option value="{{$data->id}}" {{(!empty($articulo->estado->id) == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
-                                                            @endforeach
+                                                            @if(!empty($articulo->estado->id))
+                                                                @foreach($estado as $data)
+                                                                    <option value="{{$data->id}}" {{($articulo->estado->id == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
+                                                                @endforeach
+                                                            @else
+                                                                <option selected disabled class="font-italic" value="">Seleccione...</option>
+                                                                @foreach($estado as $data)
+                                                                    <option value="{{$data->id}}">{{$data->nombre}}</option>
+                                                                @endforeach
+                                                            @endif
                                                         </select>
                                                     </div>
                                                     <!-- placas -->
@@ -146,10 +151,16 @@
                                                     <div class="form-group col-md-12">
                                                         <label for="inv_camp_fk_oficina">Ubicación</label>
                                                         <select name="fk_oficina" class="form-select" id="inv_camp_fk_oficina">
-                                                            <option selected disabled class="font-italic">Seleccione...</option>
-                                                            @foreach($oficina as $data)
-                                                                <option value="{{$data->id}}" {{($articulo->oficina->id == $data->id) ? 'selected':''}}>{{$data->nombre.' ('.$data->edificio->nombre.')'}}</option>
-                                                            @endforeach
+                                                            @if(!empty($articulo->estado->id))
+                                                                @foreach($oficina as $data)
+                                                                    <option value="{{$data->id}}" {{($articulo->oficina->id == $data->id) ? 'selected':''}} >{{$data->nombre.' ('.$data->edificio->nombre.')'}}</option>
+                                                                @endforeach
+                                                            @else
+                                                                <option selected disabled class="font-italic" value="">Seleccione...</option>
+                                                                @foreach($oficina as $data)
+                                                                    <option value="{{$data->id}}" >{{$data->nombre}}</option>
+                                                                @endforeach
+                                                            @endif
                                                         </select>
                                                     </div>
                                                 </div>
@@ -159,79 +170,93 @@
                                                     <!-- fk_departamento -->
                                                     <div class="form-group col-md-12">
                                                         <label for="inv_camp_fk_departamento">Departamento</label>
-                                                        <select type="text" name="fk_departamento" class="form-select" id="inv_camp_fk_departamento"
-                                                                >
-                                                            <option selected disabled class="font-italic">Seleccione...</option>
-                                                            @foreach($departamento as $data)
-                                                                <option value="{{$data->id}}" {{(!empty($articulo->departamento->id == $data->id)) ? 'selected':''}}>{{$data->nombre.' ('.$data->area->nombre.')'}}</option>
-                                                            @endforeach
+                                                        <select type="text" name="fk_departamento" class="form-select" id="inv_camp_fk_departamento">
+                                                            @if(!empty($articulo->departamento->id))
+                                                                @foreach($departamento as $data)
+                                                                    <option value="{{$data->id}}" {{(($articulo->departamento->id) == $data->id) ? 'selected':''}}>{{$data->nombre.' ('.$data->area->nombre.')'}}</option>
+                                                                @endforeach
+                                                            @else
+                                                                <option selected disabled class="font-italic">Seleccione...</option>
+                                                                @foreach($departamento as $data)
+                                                                    <option value="{{$data->id}}">{{$data->nombre.' ('.$data->area->nombre.')'}}</option>
+                                                                @endforeach
+                                                            @endif
                                                         </select>
                                                     </div>
 
-                                                    <!-- empleados  TODO: Asignar los nombres deibdos-->
-
+                                                    <!-- empleados -->
                                                     <h4 class="card-title">Empleados</h4>
                                                     <div class="form-group col-md-12">
                                                         <label for="inv_camp_articulo_has_encargo_1">Encargado de Area</label>
-                                                        <select name="articulo_has_empleado_1" id="inv_camp_articulo_has_encargo_1" class="form-select" required>
-                                                            <option selected disabled class="font-italic" value="null">Seleccione...</option>
-                                                            @foreach($empleado as $second_data)
-                                                                <option value="{{$second_data->id}}">{{
-                                                                                            $second_data->nombre.' '.
-                                                                                            $second_data->apellido_paterno.' '.
-                                                                                            $second_data->apellido_materno
-                                                                                        }}</option>
-                                                            @endforeach
+                                                        <select name="empleado_encargado_area" id="inv_camp_articulo_has_encargo_1" class="form-select" required>
+                                                            @if(!empty($articulo->empleado_encargado_area))
+                                                                @foreach($empleado as $data)
+                                                                    <option value="{{$data->id}}" {{($articulo->empleado_encargado_area == $data->id) ? 'selected':''}}>{{$data->nombre.' '.$data->apellido_paterno.' '.$data->apellido_materno}}</option>
+                                                                @endforeach
+                                                            @else
+                                                                <option selected disabled class="font-italic">Seleccione...</option>
+                                                                @foreach($empleado as $data)
+                                                                    <option value="{{$data->id}}">{{$data->nombre.' '.$data->apellido_paterno.' '.$data->apellido_materno}}</option>
+                                                                @endforeach
+                                                            @endif
                                                         </select>
 
                                                         <label for="inv_camp_articulo_has_encargo_2">Titular #1</label>
-                                                        <select name="articulo_has_empleado_2" id="inv_camp_articulo_has_encargo_2" class="form-select" required>
-                                                            <option selected disabled class="font-italic" value="null">Seleccione...</option>
-                                                            @foreach($empleado as $second_data)
-                                                                <option value="{{$second_data->id}}">{{
-                                                                                            $second_data->nombre.' '.
-                                                                                            $second_data->apellido_paterno.' '.
-                                                                                            $second_data->apellido_materno
-                                                                                        }}</option>
-                                                            @endforeach
+                                                        <select name="empleado_titular" id="inv_camp_articulo_has_encargo_2" class="form-select" required>
+                                                            @if(!empty($articulo->empleado_titular))
+                                                                @foreach($empleado as $data)
+                                                                    <option value="{{$data->id}}" {{($articulo->empleado_titular == $data->id) ? 'selected':''}}>{{$data->nombre.' '.$data->apellido_paterno.' '.$data->apellido_materno}}</option>
+                                                                @endforeach
+                                                            @else
+                                                                <option selected disabled class="font-italic">Seleccione...</option>
+                                                                @foreach($empleado as $data)
+                                                                    <option value="{{$data->id}}">{{$data->nombre.' '.$data->apellido_paterno.' '.$data->apellido_materno}}</option>
+                                                                @endforeach
+                                                            @endif
                                                         </select>
 
                                                         <label for="inv_camp_articulo_has_encargo_3">Titular #2</label>
-                                                        <select name="articulo_has_empleado_3" id="inv_camp_articulo_has_encargo_3" class="form-select">
-                                                            <option selected disabled class="font-italic" value="null">Seleccione...</option>
-                                                            @foreach($empleado as $second_data)
-                                                                <option value="{{$second_data->id}}">{{
-                                                                                            $second_data->nombre.' '.
-                                                                                            $second_data->apellido_paterno.' '.
-                                                                                            $second_data->apellido_materno
-                                                                                        }}</option>
-                                                            @endforeach
+                                                        <select name="empleado_titular_secundario" id="inv_camp_articulo_has_encargo_3" class="form-select">
+                                                            @if(!empty($articulo->empleado_titular_secundario))
+                                                                @foreach($empleado as $data)
+                                                                    <option value="{{$data->id}}" {{($articulo->empleado_titular_secundario == $data->id) ? 'selected':''}}>{{$data->nombre.' '.$data->apellido_paterno.' '.$data->apellido_materno}}</option>
+                                                                @endforeach
+                                                            @else
+                                                                <option selected disabled class="font-italic">Seleccione...</option>
+                                                                @foreach($empleado as $data)
+                                                                    <option value="{{$data->id}}">{{$data->nombre.' '.$data->apellido_paterno.' '.$data->apellido_materno}}</option>
+                                                                @endforeach
+                                                            @endif
                                                         </select>
 
                                                         <label for="inv_camp_articulo_has_encargo_4">Resguardante #1</label>
-                                                        <select name="articulo_has_empleado_4" id="inv_camp_articulo_has_encargo_4" class="form-select" required>
-                                                            <option selected disabled class="font-italic" value="null">Seleccione...</option>
-                                                            @foreach($empleado as $second_data)
-                                                                <option value="{{$second_data->id}}">{{
-                                                                                            $second_data->nombre.' '.
-                                                                                            $second_data->apellido_paterno.' '.
-                                                                                            $second_data->apellido_materno
-                                                                                        }}</option>
-                                                            @endforeach
+                                                        <select name="empleado_resguardo" id="inv_camp_articulo_has_encargo_4" class="form-select" required>
+                                                            @if(!empty($articulo->empleado_resguardo))
+                                                                @foreach($empleado as $data)
+                                                                    <option value="{{$data->id}}" {{($articulo->empleado_resguardo == $data->id) ? 'selected':''}}>{{$data->nombre.' '.$data->apellido_paterno.' '.$data->apellido_materno}}</option>
+                                                                @endforeach
+                                                            @else
+                                                                <option selected disabled class="font-italic">Seleccione...</option>
+                                                                @foreach($empleado as $data)
+                                                                    <option value="{{$data->id}}">{{$data->nombre.' '.$data->apellido_paterno.' '.$data->apellido_materno}}</option>
+                                                                @endforeach
+                                                            @endif
                                                         </select>
 
                                                         <label for="inv_camp_articulo_has_encargo_5">Resguardante #2</label>
-                                                        <select name="articulo_has_empleado_5" id="inv_camp_articulo_has_encargo_5" class="form-select">
+                                                        <select name="empleado_resguardo_secundario" id="inv_camp_articulo_has_encargo_5" class="form-select">
                                                             <option selected disabled class="font-italic" value="null">Seleccione...</option>
-                                                            @foreach($empleado as $second_data)
-                                                                <option value="{{$second_data->id}}">{{
-                                                                                            $second_data->nombre.' '.
-                                                                                            $second_data->apellido_paterno.' '.
-                                                                                            $second_data->apellido_materno
-                                                                                        }}</option>
-                                                            @endforeach
+                                                            @if(!empty($articulo->empleado_resguardo_secundario))
+                                                                @foreach($empleado as $data)
+                                                                    <option value="{{$data->id}}" {{($articulo->empleado_resguardo_secundario == $data->id) ? 'selected':''}}>{{$data->nombre.' '.$data->apellido_paterno.' '.$data->apellido_materno}}</option>
+                                                                @endforeach
+                                                            @else
+                                                                <option selected disabled class="font-italic">Seleccione...</option>
+                                                                @foreach($empleado as $data)
+                                                                    <option value="{{$data->id}}">{{$data->nombre.' '.$data->apellido_paterno.' '.$data->apellido_materno}}</option>
+                                                                @endforeach
+                                                            @endif
                                                         </select>
-
                                                     </div>
 
 
@@ -280,20 +305,33 @@
                                                     <div class="form-group col-md-6">
                                                         <label for="inv_camp_fk_tipo_compra">Tipo de Compra</label>
                                                         <select type="text" name="fk_tipo_compra" class="form-select" id="inv_camp_fk_tipo_compra" >
-                                                            <option selected disabled class="font-italic">Seleccione...</option>
-                                                            @foreach($tipo_compra as $data)
-                                                                <option value="{{$data->id}}" {{($articulo->tipo_compra->id == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
-                                                            @endforeach
+                                                            @if(!empty($articulo->tipo_compra->id))
+                                                                @foreach($tipo_compra as $data)
+                                                                    <option value="{{$data->id}}" {{($articulo->tipo_compra->id == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
+                                                                @endforeach
+                                                            @else
+                                                                <option selected disabled class="font-italic">Seleccione...</option>
+                                                                @foreach($tipo_compra as $data)
+                                                                    <option value="{{$data->id}}">{{$data->nombre}}</option>
+                                                                @endforeach
+                                                            @endif
                                                         </select>
                                                     </div>
                                                     <!-- fk_tipo_equipo -->
                                                     <div class="form-group col-md-6">
                                                         <label for="inv_camp_fk_tipo_equipo">Tipo de equipo</label>
                                                         <select type="text" name="fk_tipo_equipo" class="form-select" id="inv_camp_fk_tipo_equipo" >
-                                                            <option selected disabled class="font-italic">Seleccione...</option>
-                                                            @foreach($tipo_equipo as $data)
-                                                                <option value="{{$data->id}}" {{(!empty($articulo->tipo_equipo->id == $data->id)) ? 'selected':''}}>{{$data->nombre}}</option>
-                                                            @endforeach
+                                                                @if(!empty($articulo->tipo_equipo->id))
+                                                                    <option selected disabled class="font-italic">Seleccione...</option>
+                                                                    @foreach($tipo_equipo as $data)
+                                                                        <option value="{{$data->id}}" {{($articulo->tipo_equipo->id == $data->id) ? 'selected':''}}>{{$data->nombre}}</option>
+                                                                    @endforeach
+                                                                @else
+                                                                    <option selected disabled class="font-italic">Seleccione...</option>
+                                                                    @foreach($tipo_equipo as $data)
+                                                                        <option value="{{$data->id}}">{{$data->nombre}}</option>
+                                                                    @endforeach
+                                                                @endif
                                                         </select>
                                                     </div>
                                                 </div>
@@ -320,6 +358,12 @@
                                 </div>
                             </div>
                         </form>
+                        <div class="card-footer">
+                            <a href="{{route('inmobiliario.'.$nombre_concepto.'.generateBarCode',$articulo->id)}}">
+                                <button class="btn btn-secondary " type="button">Generar Código de barras</button>
+                            </a>
+                            @include('inmobiliario.'.$nombre_concepto.'.destroy',["'".$nombre_concepto."'." => $articulo])
+                        </div>
                     </div>
                 </div>
             </div>

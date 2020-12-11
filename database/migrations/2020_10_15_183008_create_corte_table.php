@@ -17,6 +17,7 @@ class CreateCorteTable extends Migration
             $table->integer('id', true);
             $table->string('nombre', 128)->nullable();
             $table->string('descripcion', 128)->nullable();
+            $table->string('llave', 16);
             $table->timestamps();
         });
     }

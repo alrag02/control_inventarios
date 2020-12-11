@@ -167,8 +167,8 @@ return [
          */
         Spatie\Permission\PermissionServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-
-        //
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        //Collective\Bus\BusServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         /*
          * Application Service Providers...
@@ -199,6 +199,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
 
         'Image' => Intervention\Image\Facades\Image::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,

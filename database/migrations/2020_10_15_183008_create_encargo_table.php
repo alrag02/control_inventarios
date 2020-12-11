@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateEncargoTable extends Migration
 {
-    /**
+    /*
      * Run the migrations.
      *
      * @return void
-     */
+
     public function up()
     {
         Schema::create('encargo', function (Blueprint $table) {
@@ -21,13 +21,14 @@ class CreateEncargoTable extends Migration
         });
     }
 
-    /**
+
      * Reverse the migrations.
      *
      * @return void
-     */
+     *
     public function down()
     {
         Schema::dropIfExists('encargo');
     }
+    */
 }

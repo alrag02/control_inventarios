@@ -17,6 +17,10 @@
                     <div class="row">
                         <div class="col-lg-4 mg-4">
                             <div class="card card-body">
+                                <img src="{{(!empty($data->foto->id) ? url('/thumbnail/'.$data->foto->image) : "")}}"  style="width: 64px;">
+                            </div>
+                            <br>
+                            <div class="card card-body">
                                 <h4>Detalles</h4>
                                 <ul>
                                     <li><h5>Vigencia: {{($data->vigencia == 1 ? 'Articulo vigente':'Articulo dado de baja')}}</h5></li>
@@ -26,6 +30,8 @@
                                     <li>Concepto: {{($data->concepto) ?? '-'}}</li>
                                     <li>Marca: {{($data->marca) ?? '-'}}</li>
                                     <li>Modelo: {{($data->modelo) ?? '-'}}</li>
+                                    <li>Cantidad: {{($data->cantidad) ?? '-'}}</li>
+                                    <li>Num de Serie: {{($data->num_serie) ?? '-'}}</li>
                                     <li>Color: {{($data->color) ?? '-'}}</li>
                                     <li>Estado: {{($data->estado->nombre) ?? '-'}}</li>
                                 </ul>
@@ -45,11 +51,45 @@
                             <div class="card card-body">
                                 <h4>Empleados</h4>
                                 <ul>
-                                    @foreach ($articulo_has_empleado as $role)
-                                        @if($role->fk_articulo == $data->id)
-                                            <li>{{$role->encargo_nombre.': '.$role->nivel.' '.$role->nombre.' '.$role->apellido_paterno.' '.$role->apellido_materno}}</li>
-                                        @endif
-                                    @endforeach
+                                    <li>Encargado de area:
+                                        @foreach($empleado as $dato_s)
+                                            @if($dato_s->id == $data->empleado_encargado_area)
+                                                {{$dato_s->nivel.' '.$dato_s->nombre.' '.$dato_s->apellido_paterno.' '.$dato_s->apellido_materno}}
+                                            @endif
+                                        @endforeach
+                                    </li>
+
+                                    <li>Titular #1:
+                                        @foreach($empleado as $dato_s)
+                                            @if($dato_s->id == $data->empleado_titular)
+                                                {{$dato_s->nivel.' '.$dato_s->nombre.' '.$dato_s->apellido_paterno.' '.$dato_s->apellido_materno}}
+                                            @endif
+                                        @endforeach
+                                    </li>
+
+                                    <li>Titular #2:
+                                        @foreach($empleado as $dato_s)
+                                            @if($dato_s->id == $data->empleado_titular_secundario)
+                                                {{$dato_s->nivel.' '.$dato_s->nombre.' '.$dato_s->apellido_paterno.' '.$dato_s->apellido_materno}}
+                                            @endif
+                                        @endforeach
+                                    </li>
+
+                                    <li>Resguardo #1:
+                                        @foreach($empleado as $dato_s)
+                                            @if($dato_s->id == $data->empleado_resguardo)
+                                                {{$dato_s->nivel.' '.$dato_s->nombre.' '.$dato_s->apellido_paterno.' '.$dato_s->apellido_materno}}
+                                            @endif
+                                        @endforeach
+                                    </li>
+
+                                    <li>Resguardo #2:
+                                        @foreach($empleado as $dato_s)
+                                            @if($dato_s->id == $data->empleado_resguardo_secundario)
+                                                {{$dato_s->nivel.' '.$dato_s->nombre.' '.$dato_s->apellido_paterno.' '.$dato_s->apellido_materno}}
+                                            @endif
+                                        @endforeach
+                                    </li>
                                 </ul>
                             </div>
                         </div>

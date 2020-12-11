@@ -28,6 +28,11 @@ class articulo extends Model
         'costo',
         'num_factura',
         'activo_resguardo',
+        'empleado_encargado_area',
+        'empleado_titular',
+        'empleado_titular_secundario',
+        'empleado_resguardo',
+        'empleado_resguardo_secundario',
         'fk_familia',
         'fk_departamento',
         'fk_estado',
@@ -70,17 +75,49 @@ class articulo extends Model
     {
         return $this->belongsTo('App\Models\Inmobiliario\familia','fk_familia');
     }
-
+    /*
     public function empleado()
     {
         return $this->belongsToMany('App\Models\Inmobiliario\empleado', 'articulo_has_empleado', 'fk_articulo', 'fk_empleado');
     }
+    */
 
+    public function empleado_encargado_area()
+    {
+        return $this->belongsTo('App\Models\Inmobiliario\empleado', 'empleado_encargado_area');
+    }
+
+    public function empleado_titular()
+    {
+        return $this->belongsTo('App\Models\Inmobiliario\empleado', 'empleado_titular');
+    }
+
+    public function empleado_titular_secundario()
+    {
+        return $this->belongsTo('App\Models\Inmobiliario\empleado', 'empleado_titular_secundario');
+    }
+
+    public function empleado_resguardo()
+    {
+        return $this->belongsTo('App\Models\Inmobiliario\empleado', 'empleado_resguardo');
+    }
+
+    public function empleado_resguardo_secundario()
+    {
+        return $this->belongsTo('App\Models\Inmobiliario\empleado', 'empleado_resguardo_secundario');
+
+    }
+
+    public function foto(){
+        return $this->belongsTo('App\Models\Inmobiliario\empleado', 'fk_foto');
+    }
+
+    /*
     public function encargo()
     {
         return $this->belongsToMany('App\Models\Inmobiliario\encargo', 'articulo_has_empleado', 'fk_articulo', 'fk_encargo');
 
-    }
+    }*/
 
     //Obtener los datos separadas de las fechas, esto para poder general las etiquetas con el año de
     //adquisisción,

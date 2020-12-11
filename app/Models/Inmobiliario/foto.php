@@ -13,7 +13,12 @@ class foto extends Model
     protected $table = 'foto';
 
     protected $fillable = [
-        'descripcion',
+        'name',
         'image',
     ];
+
+    public function articulo()
+    {
+        return $this->hasMany('App\Models\Inmobiliario\articulo', 'fk_foto','id');
+    }
 }

@@ -46,6 +46,13 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+
+        ],
+
+        'backups_excel' => [
+            'driver' => 'local',
+            'root' => storage_path('app/backups/excel'),
+
         ],
 
         'public' => [

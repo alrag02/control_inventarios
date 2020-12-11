@@ -204,11 +204,12 @@
                                                                             <!-- empleados -->
                                                                             <h4 class="card-title">Empleados</h4>
                                                                             <div class="form-group col-md-12">
-                                                                                <label for="inv_camp_articulo_has_encargo_1">Encargado de Area</label>
-                                                                                <select name="articulo_has_empleado_1" id="inv_camp_articulo_has_encargo_1" class="form-select" required>
-                                                                                    <option selected disabled class="font-italic" value="null">Seleccione...</option>
+                                                                                <label for="inv_camp_articulo_has_encargo_1">Encargado de Area<small> (Obligatorio)</small></label>
+                                                                                <select name="empleado_encargado_area" id="inv_camp_articulo_has_encargo_1" class="form-select" required>
+                                                                                    <option selected disabled class="font-italic" value="">Seleccione...</option>
                                                                                     @foreach($empleado as $second_data)
                                                                                         <option value="{{$second_data->id}}">{{
+                                                                                            $second_data->nivel.' '.
                                                                                             $second_data->nombre.' '.
                                                                                             $second_data->apellido_paterno.' '.
                                                                                             $second_data->apellido_materno
@@ -216,11 +217,12 @@
                                                                                     @endforeach
                                                                                 </select>
 
-                                                                                <label for="inv_camp_articulo_has_encargo_2">Titular #1</label>
-                                                                                <select name="articulo_has_empleado_2" id="inv_camp_articulo_has_encargo_2" class="form-select" required>
-                                                                                    <option selected disabled class="font-italic" value="null">Seleccione...</option>
+                                                                                <label for="inv_camp_articulo_has_encargo_2">Titular #1<small> (Obligatorio)</small></label>
+                                                                                <select name="empleado_titular" id="inv_camp_articulo_has_encargo_2" class="form-select" required>
+                                                                                    <option selected disabled class="font-italic" value="">Seleccione...</option>
                                                                                     @foreach($empleado as $second_data)
                                                                                         <option value="{{$second_data->id}}">{{
+                                                                                            $second_data->nivel.' '.
                                                                                             $second_data->nombre.' '.
                                                                                             $second_data->apellido_paterno.' '.
                                                                                             $second_data->apellido_materno
@@ -229,10 +231,11 @@
                                                                                 </select>
 
                                                                                 <label for="inv_camp_articulo_has_encargo_3">Titular #2</label>
-                                                                                <select name="articulo_has_empleado_3" id="inv_camp_articulo_has_encargo_3" class="form-select">
-                                                                                    <option selected disabled class="font-italic" value="null">Seleccione...</option>
+                                                                                <select name="empleado_titular_secundario" id="inv_camp_articulo_has_encargo_3" class="form-select">
+                                                                                    <option selected disabled class="font-italic" value="">Seleccione...</option>
                                                                                     @foreach($empleado as $second_data)
                                                                                         <option value="{{$second_data->id}}">{{
+                                                                                            $second_data->nivel.' '.
                                                                                             $second_data->nombre.' '.
                                                                                             $second_data->apellido_paterno.' '.
                                                                                             $second_data->apellido_materno
@@ -240,11 +243,12 @@
                                                                                     @endforeach
                                                                                 </select>
 
-                                                                                <label for="inv_camp_articulo_has_encargo_4">Resguardante #1</label>
-                                                                                <select name="articulo_has_empleado_4" id="inv_camp_articulo_has_encargo_4" class="form-select" required>
-                                                                                    <option selected disabled class="font-italic" value="null">Seleccione...</option>
+                                                                                <label for="inv_camp_articulo_has_encargo_4">Resguardante #1<small> (Obligatorio)</small></label>
+                                                                                <select name="empleado_resguardo" id="inv_camp_articulo_has_encargo_4" class="form-select" required>
+                                                                                    <option selected disabled class="font-italic" value="">Seleccione...</option>
                                                                                     @foreach($empleado as $second_data)
                                                                                         <option value="{{$second_data->id}}">{{
+                                                                                            $second_data->nivel.' '.
                                                                                             $second_data->nombre.' '.
                                                                                             $second_data->apellido_paterno.' '.
                                                                                             $second_data->apellido_materno
@@ -253,10 +257,11 @@
                                                                                 </select>
 
                                                                                 <label for="inv_camp_articulo_has_encargo_5">Resguardante #2</label>
-                                                                                <select name="articulo_has_empleado_5" id="inv_camp_articulo_has_encargo_5" class="form-select">
-                                                                                    <option selected disabled class="font-italic" value="null">Seleccione...</option>
+                                                                                <select name="empleado_resguardo_secundario" id="inv_camp_articulo_has_encargo_5" class="form-select">
+                                                                                    <option selected disabled class="font-italic" value="">Seleccione...</option>
                                                                                     @foreach($empleado as $second_data)
                                                                                         <option value="{{$second_data->id}}">{{
+                                                                                            $second_data->nivel.' '.
                                                                                             $second_data->nombre.' '.
                                                                                             $second_data->apellido_paterno.' '.
                                                                                             $second_data->apellido_materno
@@ -284,7 +289,7 @@
                                                                         <div class="form-row">
                                                                             <!-- fecha_adquisiscion -->
                                                                             <div class="form-group col-md-12">
-                                                                                <label for="inv_camp_fecha_adquisiscion">Fecha de adquisición</label>
+                                                                                <label for="inv_camp_fecha_adquisiscion">Fecha de adquisición<small> (Obligatorio)</small></label>
                                                                                 <input type="date" name="fecha_adquisiscion" class="form-control" id="inv_camp_fecha_adquisiscion" placeholder="" required>
                                                                             </div>
                                                                         </div>
@@ -303,9 +308,9 @@
                                                                         <div class="form-row">
                                                                             <!-- fk_tipo_compra -->
                                                                             <div class="form-group col-md-12">
-                                                                                <label for="inv_camp_fk_tipo_compra">Tipo de Compra</label>
+                                                                                <label for="inv_camp_fk_tipo_compra">Tipo de Compra<small> (Obligatorio)</small></label>
                                                                                 <select type="text" name="fk_tipo_compra" class="form-select" id="inv_camp_fk_tipo_compra" required>
-                                                                                    <option selected disabled class="font-italic">Seleccione...</option>
+                                                                                    <option selected disabled class="font-italic" value="">Seleccione...</option>
                                                                                     @foreach($tipo_compra as $data)
                                                                                         <option value="{{$data->id}}">{{$data->nombre}}</option>
                                                                                     @endforeach
@@ -313,9 +318,9 @@
                                                                             </div>
                                                                             <!-- fk_tipo_equipo -->
                                                                             <div class="form-group col-md-12">
-                                                                                <label for="inv_camp_fk_tipo_equipo">Tipo de equipo</label>
+                                                                                <label for="inv_camp_fk_tipo_equipo">Tipo de equipo<small> (Obligatorio)</small></label>
                                                                                 <select type="text" name="fk_tipo_equipo" class="form-select" id="inv_camp_fk_tipo_equipo" required>
-                                                                                    <option selected disabled class="font-italic">Seleccione...</option>
+                                                                                    <option selected disabled class="font-italic" value="">Seleccione...</option>
                                                                                     @foreach($tipo_equipo as $data)
                                                                                         <option value="{{$data->id}}">{{$data->nombre}}</option>
                                                                                     @endforeach

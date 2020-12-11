@@ -27,19 +27,37 @@ class empleado extends Model
         return $this->belongsTo('App\Models\Inmobiliario\departamento','fk_departamento');
     }
 
-
-
-    public function articulo()
+    public function empleado_encargado_area()
     {
-        return $this->belongsToMany('App\Models\Inmobiliario\articulo', 'articulo_has_empleado', 'fk_empleado', 'fk_articulo');
+        return $this->HasMany('App\Models\Inmobiliario\articulo', 'empleado_encargado_area', 'id');
+    }
+
+    public function empleado_titular()
+    {
+        return $this->HasMany('App\Models\Inmobiliario\articulo', 'empleado_titular', 'id');
+    }
+
+    public function empleado_titular_secundario()
+    {
+        return $this->HasMany('App\Models\Inmobiliario\articulo', 'empleado_titular_secundario','id');
+    }
+
+    public function empleado_resguardo()
+    {
+        return $this->HasMany('App\Models\Inmobiliario\articulo', 'empleado_resguardo','id');
+    }
+
+    public function empleado_resguardo_secundario()
+    {
+        return $this->HasMany('App\Models\Inmobiliario\articulo', 'empleado_resguardo_secundario','id');
 
     }
 
-    public function encargo()
+    /*public function encargo()
     {
         return $this->belongsToMany('App\Models\Inmobiliario\encargo', 'articulo_has_empleado', 'fk_empleado', 'fk_encargo');
 
-    }
+    }*/
 
 
 }
