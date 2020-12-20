@@ -71,17 +71,17 @@
                                                                             <!-- descripcion -->
                                                                             <div class="form-group col-md-12">
                                                                                 <label for="inv_camp_descripcion">Descripción</label>
-                                                                                <input type="textarea" name="descripcion" class="form-control" id="inv_camp_descripcion" placeholder="Descripción breve">
+                                                                                <textarea rows="3" name="descripcion" class="form-control" id="inv_camp_descripcion" placeholder="Descripción breve"></textarea>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-row">
                                                                             <!-- numero_serie -->
-                                                                            <div class="form-group col-md-4">
+                                                                            <div class="form-group col-md-12">
                                                                                 <label for="inv_camp_numero_serie">No. Serie</label>
                                                                                 <input type="text" name="numero_serie" class="form-control" id="inv_camp_numero_serie" placeholder="#####">
                                                                             </div>
                                                                             <!-- color -->
-                                                                            <div class="form-group col-md-5">
+                                                                            <div class="form-group col-md-6">
                                                                                 <label for="inv_camp_color">Color</label>
                                                                                 <select type="text" name="color" class="form-select" id="inv_camp_color">
                                                                                     <option selected disabled hidden class="font-italic">Seleccione</option>
@@ -97,7 +97,7 @@
                                                                                 </select>
                                                                             </div>
                                                                             <!-- cantidad -->
-                                                                            <div class="form-group col-md-3">
+                                                                            <div class="form-group col-md-6">
                                                                                 <label for="inv_camp_cantidad">Cant.</label>
                                                                                 <input type="number" name="cantidad" class="form-control" id="inv_camp_cantidad" min="1" placeholder="#">
                                                                             </div>
@@ -137,18 +137,6 @@
                                                                     <div class="card card-body">
                                                                         <h4 class="card-title">Ubicación</h4>
                                                                         <div class="form-row">
-                                                                            <!-- edificio -->
-                                                                            <?php /*
-                                                                                  TODO: Alimentar el campo siguente de acuerdo a este campo                                                                      <div class="form-group col-md-6">
-                                                                                <label for="inv_camp_edificio">Edificio</label>
-                                                                                <select name="edificio" class="form-select" id="inv_camp_edificio">
-                                                                                    <option selected disabled class="font-italic">Seleccione...</option>
-                                                                                    @foreach($edificio as $data)
-                                                                                        <option value="{{$data->id}}">{{$data->nombre}}</option>
-                                                                                    @endforeach
-                                                                                </select>
-                                                                            </div>
-                                                                            */ ?>
                                                                             <!-- fk_oficina -->
                                                                             <div class="form-group col-md-12">
                                                                                 <label for="inv_camp_fk_oficina">Ubicación</label>
@@ -162,35 +150,6 @@
                                                                         </div>
 
                                                                         <div class="form-row">
-                                                                            <?php /*
-                                                                             <!-- area -->
-                                                                                   TODO: Alimentar el campo siguente de acuerdo a este campo                                                                      <div class="form-group col-md-6">
-
-                                                                            <div class="form-group col-md-6">
-                                                                                <label for="inv_camp_area">Area</label>
-                                                                                <select class="form-select" id="inv_camp_area" name="area"
-                                                                                        onchange="
-                                                                                        document.getElementById('inv_camp_fk_departamento').disabled = false;
-                                                                                        d = document.getElementById('inv_camp_area').value;
-                                                                                        " type="text">
-                                                                                    <option selected disabled class="font-italic" onclick="">Seleccione...</option>
-                                                                                    @foreach($area as $data)
-                                                                                        <option value="{{$data->id}}" >{{$data->nombre}}</option>
-                                                                                    @endforeach
-                                                                                </select>
-                                                                            </div>
-                                                                            <!-- fk_departamento -->
-                                                                            <div class="form-group col-md-6">
-                                                                                <label for="inv_camp_fk_departamento">Departamento</label>
-                                                                                <select type="text" name="fk_departamento" class="form-select" id="inv_camp_fk_departamento"
-                                                                                        disabled>
-                                                                                    <option selected disabled class="font-italic">Seleccione...</option>
-                                                                                    @foreach($departamento as $data)
-                                                                                        <option value="{{$data->id}}">{{$data->nombre}}</option>
-                                                                                    @endforeach
-                                                                                </select>
-                                                                            </div>
-                                                                            */?>
                                                                             <!-- fk_departamento -->
                                                                                 <div class="form-group col-md-12">
                                                                                     <label for="inv_camp_fk_departamento">Departamento</label>
@@ -268,14 +227,12 @@
                                                                                         }}</option>
                                                                                     @endforeach
                                                                                 </select>
-
                                                                             </div>
-
 
                                                                             <!-- observaciones -->
                                                                             <div class="form-group col-md-12">
                                                                                 <label for="inv_camp_observaciones">Observaciones</label>
-                                                                                <input type="text" name="observaciones" class="form-control" id="inv_camp_observaciones" placeholder="#">
+                                                                                <textarea rows="3" name="observaciones" class="form-control" id="inv_camp_observaciones" placeholder="Escriba algun detalle reciente"></textarea>
                                                                             </div>
                                                                         </div>
                                                                     </div>

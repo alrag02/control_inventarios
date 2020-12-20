@@ -20,7 +20,6 @@
                                 <th>Apellidos</th>
                                 <th>No. Trabajo</th>
                                 <th>Email</th>
-                                <th>Rol</th>
                                 <th>Acciones</th>
                             </tr>
                             </thead>
