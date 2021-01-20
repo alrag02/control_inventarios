@@ -10,27 +10,21 @@ use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $users = User::all();
-        //$rol = $users->roles-;
-        return view('usuarios.registrados.index')->with('users', $users);
+        $roles = Role::all()->pluck('name');
+        return view('usuarios.registrados.index', ['users' => $users , 'roles' => $roles]);
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
+
+
     public function create()
     {
         $roles = Role::all()->pluck('name', 'id');
@@ -61,25 +55,14 @@ class UsersController extends Controller
         return User::find($id);
     }
 
-     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
 
         return view('usuarios.registrados.edit',["usuario" => User::find($id), 'roles' => Role::all()->pluck('name', 'id')]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         $data = User::find($id);
@@ -91,26 +74,29 @@ class UsersController extends Controller
         $data->email = $request->email;
         //$data->password = bcrypt($request->password_LOGIN);
         $data->assignRole($request->rol);
-        if($data->save()){
-            return redirect("usuarios/registrados")->with('message', 'Editado Correctamente');
-        }else{
-            return redirect("usuarios/registrados")->with('message', 'Hubo Un Error');
-        }
+        return $data->save() ? redirect("usuarios/registrados")->with('message', 'Editado Correctamente') : redirect("usuarios/registrados")->with('message', 'Hubo Un Error');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         return User::destroy($id) ? redirect("usuarios/registrados")->with('message', 'Elemento eliminado'): view("usuarios/registrados", print 'Hubo un error al eliminar');
     }
 
-    public function validate_password($pass){
-         return (strlen($pass) >= 8) && (1 === preg_match('~[0-9]~', $pass)) ? true:falseyy;
 
+    public function validate_password($pass){
+         //return (strlen($pass) >= 8) && (1 === preg_match('~[0-9]~', $pass)) ? true:false);
+
+    }
+
+    public function edit_password($id)
+    {
+        return view('usuarios.registrados.edit_password',["usuario" => User::find($id)]);
+    }
+
+    public function update_password(Request $request, $id){
+        $data = User::find($id);
+        $data->password = bcrypt($request->password_login);
+        return $data->save() ? redirect("usuarios/registrados")->with('message', 'Editado Correctamente') : redirect("usuarios/registrados")->with('message', 'Hubo Un Error');
     }
 }

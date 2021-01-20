@@ -15,10 +15,16 @@ class foto extends Model
     protected $fillable = [
         'name',
         'image',
+        'fk_familia'
     ];
 
     public function articulo()
     {
         return $this->hasMany('App\Models\Inmobiliario\articulo', 'fk_foto','id');
+    }
+
+    public function familia()
+    {
+        return $this->belongsTo('App\Models\Inmobiliario\familia','fk_familia');
     }
 }

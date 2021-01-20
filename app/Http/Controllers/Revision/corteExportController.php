@@ -8,6 +8,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 
 class corteExportController extends Controller implements FromCollection
 {
+
     public function collection()
     {
         return collect(DB::select("

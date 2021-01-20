@@ -55,6 +55,18 @@ return [
 
         ],
 
+        'img_full' => [
+            'driver' => 'local',
+            'root' => storage_path('app/img/full'),
+
+        ],
+
+        'img_thumbnail' => [
+            'driver' => 'local',
+            'root' => storage_path('app/img/thumbnail'),
+
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
@@ -87,6 +99,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('thumbnail') => storage_path('app/img/thumbnail'),
     ],
 
 ];

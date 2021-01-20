@@ -4,13 +4,14 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Editar usuario</h4>
+                        <h4>Cambiar datos de usuario</h4>
+                        <input type="submit" value="Guardar" class="btn btn-primary">
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('usuarios.registrados.update', $usuario->id) }}" method="post">
+                        <form action="{{ route('usuarios.registrados.update', $usuario->id) }}" method="post" autocomplete="off">
                             @method('PUT')
                             @csrf
                             <div class="form-group">
@@ -31,7 +32,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="email">Rol</label>
-                                <select class="form-control" name="rol">
+                                <select  class="form-select"  name="rol">
                                     @foreach ($roles as $key => $value)
                                         @if ($usuario->hasRole($value))
                                             <option value="{{ $value }}" selected>{{ $value }}</option>
@@ -41,10 +42,13 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="justify-content-end">
-                                <input type="submit" value="Enviar" class="btn btn-success">
-                            </div>
                         </form>
+                            <div class="card-footer">
+                                <div class="float-right">
+                                    @include('usuarios.registrados.delete',["'usuario. " => $usuario->id])
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

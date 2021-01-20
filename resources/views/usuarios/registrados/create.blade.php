@@ -9,7 +9,7 @@
                         <h4>Nuevo Usuario</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('usuarios.registrados.store') }}" method="POST">
+                        <form action="{{ route('usuarios.registrados.store') }}" method="POST" autocomplete="off">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Nombre</label>

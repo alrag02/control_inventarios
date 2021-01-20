@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Inmobiliario;
 
 use App\Http\Controllers\Controller;
 use App\Models\inmobiliario\foto;
+use App\Models\inmobiliario\familia;
 use Illuminate\Http\Request;
 use Image;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Input;
 
 class fotoController extends Controller
 {
@@ -31,7 +32,7 @@ class fotoController extends Controller
     public function create()
     {
         $images = foto::get();
-        return view('inmobiliario.foto.create',compact('images'));
+        return view('inmobiliario.foto.create',['images' =>  foto::get() , 'familia' => familia::all() ]);
     }
 
 
@@ -43,22 +44,19 @@ class fotoController extends Controller
      */
     public function store(Request $request)
     {
-        $image       = $request->file('image');
-        $filename    = $image->getClientOriginalName();
+             $filename    = pathinfo($request->file('image'), PATHINFO_FILENAME);
 
-        //Fullsize
-        $image->move(public_path().'/full/',$filename);
+            $image = Image::make($request->file('image')->getRealPath())->resize(92, 92)->encode('jpg', 75);
+            Storage::disk('img_thumbnail')->put($filename.'.jpg', $image);
 
-        $image_resize = Image::make(public_path().'/full/'.$filename);
-        $image_resize->fit(92, 92);
-        $image_resize->save(public_path('thumbnail/' .$filename));
+            $product= new foto();
+            $product->name = $request->name;
+            $product->image = "".$filename;
+            $product->fk_familia =  $request->fk_familia;
+            $product->save();
 
-        $product= new foto();
-        $product->name = $request->name;
-        $product->image = $filename;
-        $product->save();
+            return back()->with('message', 'Se ha guardado la imagen');
 
-        return back()->with('message', 'Se ha guardado la imagen');
     }
 
     /**

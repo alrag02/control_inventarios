@@ -109,7 +109,7 @@ class articulo extends Model
     }
 
     public function foto(){
-        return $this->belongsTo('App\Models\Inmobiliario\empleado', 'fk_foto');
+        return $this->belongsTo('App\Models\Inmobiliario\foto', 'fk_foto');
     }
 
     /*

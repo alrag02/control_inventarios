@@ -14,22 +14,22 @@ class articuloApiController extends Controller
         return articulo::with('estado','departamento','oficina','revision')->get();
     }
 
-
-    public function create()
+    public function index_por_work_id()
     {
-        //
+        return articulo::with('estado','departamento','oficina','revision')->get();
     }
 
+    /*
     public function store(Request $request)
     {
         $article = articulo::create($request->all());
 
         return response()->json($article, 201);
     }
-
-    public function show(articulo $articulo)
+    */
+    public function show($id)
     {
-        return $articulo;
+        return articulo::with('estado','departamento','oficina','revision')->find($id);
     }
 
 
@@ -47,8 +47,10 @@ class articuloApiController extends Controller
     }
 
 
+    /*
     public function destroy(articulo $articulo)
     {
         //
     }
+    */
 }

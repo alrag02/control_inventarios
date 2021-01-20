@@ -12,6 +12,11 @@ body{
     height: 24rem;
 }
 
+.card-home{
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-image: linear-gradient(#fff070, #ffd670);
+}
+
 .card-wrapper_articulo{
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background-image: linear-gradient(ghostwhite ,#d2ecec);

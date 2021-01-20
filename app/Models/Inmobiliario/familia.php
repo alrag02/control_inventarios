@@ -22,4 +22,9 @@ class familia extends Model
     {
         return $this->hasMany('App\Models\Inmobiliario\articulo', 'fk_familia','id');
     }
+
+    public function foto()
+    {
+        return $this->hasMany('App\Models\Inmobiliario\foto', 'fk_familia','id');
+    }
 }

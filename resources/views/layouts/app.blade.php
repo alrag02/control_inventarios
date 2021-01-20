@@ -11,16 +11,10 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <?php /* <script src="{{asset('js/jquery.js')}}"></script> */?>
-
-<!-- Latest compiled and minified CSS
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
--->
-<!-- References: https://github.com/fancyapps/fancyBox -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-
+    <script src="{{ asset('js/jquery.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/datatables.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables.buttons.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables.responsive.min.js')}}"></script>
 
 
     <!-- Fonts -->
@@ -29,9 +23,12 @@
 
     <!-- Styles -->
     <link href="{{ url('css/app.css') }}" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/1.0.0/mdb.min.css" rel="stylesheet"/>
     <link href="{{ url('css/style.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url('css/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ url('css/buttons.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ url('css/responsive.dataTables.min.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/1.0.0/mdb.min.css" rel="stylesheet"/>
 
 </head>
 <body>
@@ -137,7 +134,7 @@
                                     </a>
                                     @endcan
                                     <!--Ayuda-->
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{ route('ayuda.index') }}">
                                         {{ __('Ayuda') }}
                                     </a>
                                     <!--Cerrar Sesión-->

@@ -15,10 +15,10 @@ use App\Http\Controllers\Api;
 |
 */
 
-/*
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});*/
+});
 
 //Route::apiResource('revision/{id_user}','Revision\revisionApi');
 
@@ -27,8 +27,33 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //Route::apiResource('departamento','Inmobiliario\departamentoController');
 
-Route::get('articles', [Api\articuloApiController::class, 'index']);
+
+Route::get('articles',           [Api\articuloApiController::class, 'index']);
 Route::get('articles/{article}', [Api\articuloApiController::class, 'show']);
-Route::post('articles', [Api\articuloApiController::class, 'store']);
 Route::put('articles/{article}', [Api\articuloApiController::class, 'update']);
+
+Route::post('login',
+    [Api\apiController::class, 'login']);
+
+Route::post('ConsultarArticulosPorWorkId',
+    [Api\apiController::class, 'ConsultarArticulosPorWorkId']);
+
+Route::post('ConsultarDetallesArticuloPorEtiquetaLocal',
+    [Api\apiController::class, 'ConsultarDetallesArticuloPorEtiquetaLocal']);
+
+Route::post('ConsultarArticulosPorRevision',
+    [Api\apiController::class, 'ConsultarArticulosPorRevision']);
+
+Route::post('ComprobarArticuloExiste',
+    [Api\apiController::class, 'ComprobarArticuloExiste']);
+
+Route::post('ObtenerDisponibilidadArticulo',
+    [Api\apiController::class, 'ObtenerDisponibilidadArticulo']);
+
+Route::post('ComprobarArticuloPerteneceRevision',
+    [Api\apiController::class, 'ComprobarArticuloPerteneceRevision']);
+
+Route::post('EditarDisponblidadArticulo',
+    [Api\apiController::class, 'EditarDisponblidadArticulo']);
+
 

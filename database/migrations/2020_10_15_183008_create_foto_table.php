@@ -17,6 +17,7 @@ class CreateFotoTable extends Migration
             $table->integer('id', true);
             $table->string('name');
             $table->string('image');
+            $table->integer('fk_familia');
             $table->timestamps();
         });
     }

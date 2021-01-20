@@ -1,12 +1,8 @@
-<script>
-    const dataTable = new simpleDatatables.DataTable(".table", {
-        searchable: true,
-        labels: {
-            placeholder: "Busque cualquier campo",
-            perPage: "{select} entradas por página",
-            noRows: "No se encontraron entradas",
-            info: "Mostrando {start}-{end} de {rows} entradas",
-        },
-        sortable: true
-    })
+<script type="text/javascript">
+    $(document).ready( function () {
+        $('.table').DataTable({
+            "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+            responsive: true,
+        });
+    } );
 </script>
