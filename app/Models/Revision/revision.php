@@ -14,6 +14,7 @@ class revision extends Model
     protected $fillable = [
         'fk_user',
         'fk_corte',
+        'fk_departamento'
     ];
 
     public function user()
@@ -29,5 +30,9 @@ class revision extends Model
     public function articulo()
     {
         return $this->hasMany('App\Models\Inmobiliario\articulo', 'fk_revision','id');
+    }
+    public function departamento()
+    {
+        return $this->hasMany('App\Models\Inmobiliario\departamento', 'fk_departamento','id');
     }
 }

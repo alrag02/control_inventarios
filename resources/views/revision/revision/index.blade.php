@@ -27,13 +27,17 @@
                                 <div class="col-lg-3">
                                     <div class="card card-selection-revision">
                                         <div class="card-header">
-                                            <h5>{{$data->created_at->format('d/M/Y h:i a')}}</h5>
+                                            <h5>ID: {{$data->id}}</h5>
                                         </div>
                                         <div class="card-body">
                                             <ul>
+                                                <li>Fecha: {{$data->created_at->format('d/M/Y h:i a')}}</li>
                                                 <li>Corte: {{$data->corte->nombre.', '.$data->corte->created_at}}</li>
-                                                <li>ID Trabajador: {{$data->user->work_id}}</li>
+                                                <li>Num. Trabajador: {{$data->user->work_id}}</li>
                                                 <li>Usuario: {{$data->user->name.' '.$data->user->last_name_p}}</li>
+
+                                                <li>Departamento: {$data->departamento->nombre}}</li>
+                                                -->
                                             </ul>
                                         </div>
                                         <div class="card-footer">

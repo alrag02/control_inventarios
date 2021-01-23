@@ -20,6 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/',
+    [Api\apiController::class, 'home']);
 //Route::apiResource('revision/{id_user}','Revision\revisionApi');
 
 //Route::post('login', 'movil\ApiRest@login');
@@ -28,15 +30,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Route::apiResource('departamento','Inmobiliario\departamentoController');
 
 
-Route::get('articles',           [Api\articuloApiController::class, 'index']);
-Route::get('articles/{article}', [Api\articuloApiController::class, 'show']);
-Route::put('articles/{article}', [Api\articuloApiController::class, 'update']);
+// Route::get('articles',           [Api\articuloApiController::class, 'index']);
+// Route::get('articles/{article}', [Api\articuloApiController::class, 'show']);
+// Route::put('articles/{article}', [Api\articuloApiController::class, 'update']);
 
 Route::post('login',
     [Api\apiController::class, 'login']);
 
 Route::post('ConsultarArticulosPorWorkId',
     [Api\apiController::class, 'ConsultarArticulosPorWorkId']);
+
+Route::post('ConsultarRevisionesPorWorkId',
+    [Api\apiController::class, 'ConsultarRevisionesPorWorkId']);
 
 Route::post('ConsultarDetallesArticuloPorEtiquetaLocal',
     [Api\apiController::class, 'ConsultarDetallesArticuloPorEtiquetaLocal']);

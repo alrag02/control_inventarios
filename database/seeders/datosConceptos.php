@@ -9,6 +9,7 @@ use App\Models\Inmobiliario\empleado;
 use App\Models\Inmobiliario\encargo;
 use App\Models\Inmobiliario\estado;
 use App\Models\Inmobiliario\familia;
+use App\Models\inmobiliario\foto;
 use App\Models\Inmobiliario\oficina;
 use App\Models\Inmobiliario\tipo_compra;
 use App\Models\Inmobiliario\tipo_equipo;
@@ -262,6 +263,44 @@ class datosConceptos extends Seeder
             'nombre' => 'Equipo de cómputo y Telecomunicaciones',
             'sigla' => '5150',
             'vigencia' => '1'
+        ]);
+
+
+
+        foto::create([
+            'name' => 'Automovil Nissan Tiida',
+            'image' => 'phpA4E8',
+            'fk_familia' => '4',
+        ]);
+
+        foto::create([
+            'name' => 'Silla Negra',
+            'image' => 'php6C96',
+            'fk_familia' => '1',
+        ]);
+
+        foto::create([
+            'name' => 'Computadora Apple Mac',
+            'image' => 'phpE184',
+            'fk_familia' => '6',
+        ]);
+
+        foto::create([
+            'name' => 'Computadora HP Compaq',
+            'image' => 'phpE31E',
+            'fk_familia' => '6',
+        ]);
+
+        foto::create([
+            'name' => 'Carpeta Verde para Archivo',
+            'image' => 'php5C76',
+            'fk_familia' => '1',
+        ]);
+
+        foto::create([
+            'name' => 'Escritorio Blanco',
+            'image' => 'php3C77',
+            'fk_familia' => '1',
         ]);
     }
 }

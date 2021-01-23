@@ -15,6 +15,9 @@
     <script type="text/javascript" src="{{ asset('js/datatables.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/dataTables.buttons.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/dataTables.responsive.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables.select.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables.searchPanes.min.js')}}"></script>
+
 
 
     <!-- Fonts -->
@@ -28,6 +31,8 @@
     <link rel="stylesheet" href="{{ url('css/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ url('css/buttons.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ url('css/responsive.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ url('css/select.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ url('css/searchPanes.dataTables.min.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/1.0.0/mdb.min.css" rel="stylesheet"/>
 
 </head>

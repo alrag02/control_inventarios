@@ -27,12 +27,16 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="card card-body">
-                                                <h4 class="card-title">Información General</h4>
+                                                <h4>Imagen</h4>
                                                 <div class="form-row">
-                                                    <a href="#">
-                                                        <img src="https://www.coppel.com/images/catalog/pm/3836613-1.jpg" alt="" width="200px " class="card-image-top mx-auto d-block P-2">
-                                                    </a>
+                                                    <img src="{{ $articulo->foto ? asset('thumbnail/'.$articulo->foto->image.'.jpg') : '#'}}" alt="" width="120px " class="card-image-top mx-auto d-block P-2">
+                                                    <a href="{{url('inmobiliario/articulo/'.$articulo->id.'/edit_foto')}}"><button class="btn btn-dark" type="button">Cambiar Imagen</button></a>
                                                 </div>
+                                            </div>
+
+                                            <br>
+                                            <div class="card card-body">
+                                                <h4 class="card-title">Información General</h4>
                                                 <div class="form-row">
                                                     <!--etiqueta_externa-->
                                                     <div class="form-group col-md-12">

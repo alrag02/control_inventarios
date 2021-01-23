@@ -54,15 +54,17 @@
                                     <th>Img</th>
                                     <th>Descripción</th>
                                     <th>Familia</th>
-                                    <th></th>
+                                    <th>Fecha subida</th>
+                                    <th>Acualizado a</th>
                                 </tr>
                             </thead>
                             @foreach($images as $data)
                                 <tr>
-                                    <td><img src="{{ asset('thumbnail/'.$data->image.'.jpg')}}" alt=""></td>
+                                    <td><img src="{{ asset('thumbnail/'.$data->image.'.jpg')}}" alt="" style="width: 92px;"></td>
                                     <td>{{($data->name) ?? '-'}}</td>
                                     <td>{{($data->familia->nombre) ?? '-'}}</td>
-                                    <td>but</td>
+                                    <td>{{$data->created_at->format('d/M/Y h:i a')}}</td>
+                                    <td>{{$data->updated_at->format('d/M/Y h:i a')}}</td>
                                 </tr>
                             @endforeach
                         </table>

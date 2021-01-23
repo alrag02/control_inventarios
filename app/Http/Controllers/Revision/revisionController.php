@@ -66,9 +66,9 @@ class revisionController extends Controller
         $data = new revision();
         $data->fk_user = $request->fk_user;
         $data->fk_corte = corte::latest()->first()['id'];
+        $data->fk_departamento = $request->fk_departamento;
         if ($data->save()){
-            //Asignar las revisiones (faltan algunos parametros)
-            //                     ->whereBetween('fecha_adquisiscion', array($request->fk_fecha_adquisiscion_inicio, $request->fk_fecha_adquisiscion_final ))
+            //->whereBetween('fecha_adquisiscion', array($request->fk_fecha_adquisiscion_inicio, $request->fk_fecha_adquisiscion_final ))
             foreach (
                 articulo::where('fk_departamento', $request->fk_departamento)
                     ->get() as $disp_art){

@@ -18,7 +18,7 @@ class UsersWithPermissions extends Seeder
             'name' => 'Jaime',
             'last_name_p' => 'Perez',
             'last_name_m' => 'Gonzañes',
-            'work_id' => 'wid00002',
+            'work_id' => 'wid02',
             'email' => 'NineBaboon@maildrop.cc',
             'password' => bcrypt('AlejandroG21')
         ]);
@@ -28,7 +28,7 @@ class UsersWithPermissions extends Seeder
             'name' => 'Oscar',
             'last_name_p' => 'Perez',
             'last_name_m' => 'Montelongo',
-            'work_id' => 'wid00003',
+            'work_id' => 'wid03',
             'email' => 'osacar.montelongo@lagos.tecmm.edu.mx',
             'password' => bcrypt('AlejandroG22')
         ]);

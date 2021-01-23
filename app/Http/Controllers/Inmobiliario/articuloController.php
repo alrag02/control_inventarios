@@ -152,18 +152,6 @@ class articuloController extends Controller
 
     public function edit($id)
     {
-        /*$articulo_has_empleado = DB::select("SELECT
-        encargo.nombre AS 'encargo_nombre',
-        empleado.id AS 'empleado_id',
-        empleado.nombre,
-        empleado.apellido_paterno,
-        empleado.apellido_materno,
-        empleado.nivel,
-        articulo_has_empleado.fk_articulo AS 'fk_articulo'
-        FROM articulo_has_empleado, empleado, encargo
-        WHERE articulo_has_empleado.fk_encargo = encargo.id
-        AND articulo_has_empleado.fk_empleado = empleado.id");
-        */
 
         return view('inmobiliario.articulo.edit',[
             'articulo' => articulo::find($id),
@@ -210,7 +198,7 @@ class articuloController extends Controller
         $data->empleado_resguardo = $request->empleado_resguardo;
         $data->empleado_resguardo_secundario = $request->empleado_resguardo_secundario;
 
-        $data->fk_foto = $request->fk_foto;
+        //$data->fk_foto = $request->fk_foto;
         $data->fk_familia = $request->fk_familia;
         $data->fk_departamento = $request->fk_departamento;
         $data->fk_estado = $request->fk_estado;
@@ -234,5 +222,20 @@ class articuloController extends Controller
         $pdf = PDF::make('dompdf.wrapper');
         $pdf->loadHTML('<h1>Test</h1>');
         return $pdf->stream();
+    }
+
+    public function edit_foto($id){
+        return view('inmobiliario.articulo.edit_foto', [
+            'articulo' => articulo::find($id),
+            'foto' => foto::all(),
+            'familia' => familia::get(['id', 'nombre', 'vigencia'])->where('vigencia',1),
+        ]);
+    }
+
+    public function update_foto(Request $request, $id){
+        $data = articulo::find($id);
+        $data->fk_foto = $request->fk_foto;
+        return $data->save() ? redirect("inmobiliario/articulo/".$id."/edit") : view("inmobiliario.articulo.edit_foto");
+
     }
 }

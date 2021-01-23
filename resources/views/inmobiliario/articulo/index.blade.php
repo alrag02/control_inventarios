@@ -40,34 +40,34 @@
                                             </div>
                                             <div class="col-lg-3">
                                                 <label for="desde">Desde:  </label>
-                                                <input class="form-control" type="date">
+                                                <input class="form-control" type="date" id="col0_filter">
                                             </div>
                                             <div class="col-lg-3">
                                                 <label  for="desde">Hasta:  </label>
-                                                <input class="form-control" type="date">
+                                                <input class="form-control" type="date" id="col1_filter">
                                             </div>
                                             <div class="col-lg-3">
                                                 <label for="desde">Edificio </label>
-                                                <input class="form-control" type="text">
+                                                <input class="form-control" type="text" id="col2_filter">
                                             </div>
                                             <div class="col-lg-3">
                                                 <label for="desde">Planta</label>
-                                                <input class="form-control" type="text">
+                                                <input class="form-control" type="text" id="col3_filter">
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-lg-3">
                                                 <label for="area">Areas</label>
-                                                <input class="form-control" type="text">
+                                                <input class="form-control" type="text" id="col4_filter">
                                             </div>
                                             <div class="col-lg-3">
                                                 <label for="departamento">Departamento</label>
-                                                <input class="form-control" type="text">
+                                                <input class="form-control" type="text" id="col5_filter">
                                             </div>
                                             <div class="col-lg-3">
                                                 <label for="desde">Responsable</label>
-                                                <input class="form-control" type="text">
+                                                <input class="form-control" type="text" id="col6_filter">
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-check">
@@ -90,7 +90,7 @@
                             </div>
                         </div>
                         <br>
-                        <table id="table-edit" class="table table-bordered table-striped">
+                        <table id="table-edit" class="table table-bordered table-striped" >
                             <thead class="thead-dark">
                             <tr>
                                 <th></th>
@@ -113,7 +113,7 @@
                                         <a href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-dark">Editar</a>
                                     </td>
                                     <td>
-                                        <img src="{{($data->foto) ? asset('thumbnail/'.$data->foto->image.'.jpg') : '-'}}" alt="{{($data->foto) ? $data->foto->name : 'Descripción no disponible'}}" style="width: 48px;">
+                                        <img src="{{($data->foto) ? asset('thumbnail/'.$data->foto->image.'.jpg') : '-'}}" alt="{{($data->foto) ? $data->foto->name : '-'}}" style="width: 48px;">
                                     </td>
                                     <td>{{($data->concepto) ?? '-'}}</td>
                                     <td>{{($data->etiqueta_local) ?? '-'}}</td>
