@@ -11,7 +11,7 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
-    window.simpleDatatables = require('simple-datatables');
+    // window.simpleDatatables = require('simple-datatables');
 } catch (e) {}
 
 /**

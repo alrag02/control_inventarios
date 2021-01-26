@@ -33,15 +33,15 @@
                             </div>
                             <div class="form-group">
                                 <label for="password_LOGIN">Escriba la nueva contraseña</label>
-                                <input type="password" name="password_LOGIN" min="8" required class="form-control" placeholder="Minimo 8 carácteres">
+                                <input type="password" id="camp_password_LOGIN" name="password_LOGIN" min="8" required class="form-control" placeholder="Minimo 8 carácteres">
                             </div>
                             <div class="form-group">
                                 <label for="password_repeat">Confirme la contraseña</label>
-                                <input type="password" name="password_repeat" min="8" required class="form-control" placeholder="Los dos campos deben coincidir">
+                                <input type="password" id="camp_password_repeat" name="password_repeat" min="8" required class="form-control" placeholder="Los dos campos deben coincidir">
                             </div>
                             <div class="form-group">
                                 <label for="rol">Rol</label>
-                                <select class="form-select" name="rol">
+                                <select class="form-select" name="rol" required>
                                     <option selected disabled class="font-italic">Seleccione...</option>
                                 @foreach ($roles as $key => $value)
                                         <option value="{{ $value }}">{{ $value }}</option>
@@ -49,7 +49,7 @@
                                 </select>
                             </div>
                             <div class="justify-content-end">
-                                <input type="submit" value="Enviar" class="btn btn-success">
+                                <input type="submit" disabled value="Enviar" class="btn btn-success" id="btn_store">
                             </div>
                         </form>
                     </div>
@@ -57,4 +57,5 @@
             </div>
         </div>
     </div>
+@include('usuarios.registrados.validate_password_query')
 @endsection

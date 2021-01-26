@@ -142,7 +142,7 @@ class articuloController extends Controller
         $data->disponibilidad = 'sin_revisar';
         $data->disponibilidad_updated_at = null;
 
-        return $data->save() ? redirect("inmobiliario/articulo")->with('message', 'Modificado Correctamente'):view("inmobiliario.articulo.create")->with('message', 'Error');;
+        return $data->save() ? redirect("inmobiliario/articulo")->with('message', 'Agregado Correctamente'): view("inmobiliario.articulo.create")->with('message', 'Error');;
     }
 
     public function show($id)
@@ -233,6 +233,7 @@ class articuloController extends Controller
     }
 
     public function update_foto(Request $request, $id){
+
         $data = articulo::find($id);
         $data->fk_foto = $request->fk_foto;
         return $data->save() ? redirect("inmobiliario/articulo/".$id."/edit") : view("inmobiliario.articulo.edit_foto");

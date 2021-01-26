@@ -16,21 +16,21 @@
                             <h5 class="text-center">Asegúrese de notificar al usuario de este cambio.</h5>
                             <div class="form-group">
                                 <label for="password_login">Escriba la nueva contraseña</label>
-                                <input type="password" name="password_login" min="8" required class="form-control" placeholder="Minimo 8 carácteres">
+                                <input type="password" id="camp_password_LOGIN" name="password_login" min="8" required class="form-control" placeholder="Minimo 8 carácteres">
                             </div>
                             <div class="form-group">
                                 <label for="password_repeat">Confirme la contraseña</label>
-                                <input type="password" name="password_repeat" min="8" required class="form-control" placeholder="Los dos campos deben coincidir">
+                                <input type="password" id="camp_password_repeat" name="password_repeat" min="8" required class="form-control" placeholder="Los dos campos deben coincidir">
                             </div>
                         </div>
                         <div class="card-footer">
-                            <input type="submit" class="btn btn-primary" value="Cambiar" onclick=' this.hidden = true; document.getElementById("btn_change_password").hidden = true; document.getElementById("btn_update").hidden = true; save();'>
+                            <input type="submit" disabled class="btn btn-primary" value="Cambiar" onclick=' this.hidden = true; document.getElementById("btn_change_password").hidden = true; document.getElementById("btn_update").hidden = true; save();'>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
+@include('usuarios.registrados.validate_password_query')
 @endsection
 @endcan
