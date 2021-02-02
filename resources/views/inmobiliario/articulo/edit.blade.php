@@ -8,7 +8,9 @@
             <div class="row mx-auto">
                 <div class="col-lg-12">
                     <div class="card card-wrapper_articulo">
-                        <form action="{{route('inmobiliario.'.$nombre_concepto.'.update',$articulo->id)}}" method="POST" onsubmit=" document.getElementById('btn_update').hidden = true; document.getElementById('btn_destroy').hidden = true;  save(); ">
+                        <form action="{{route('inmobiliario.'.$nombre_concepto.'.update',$articulo->id)}}" method="POST" onsubmit="
+                        document.getElementById('btn_update').hidden = true;
+                        document.getElementById('btn_destroy').hidden = true; ">
                             {{method_field('PATCH')}}
                             @csrf
                             <div class="card-header">

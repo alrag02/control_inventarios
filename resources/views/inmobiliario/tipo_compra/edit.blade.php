@@ -10,7 +10,9 @@
                     <div class="card">
                         <div class="card-header"><h1>{{ __('Editar '.$nombre_concepto) }}</h1></div>
                         <div class="card-body">
-                            <form action="{{route('inmobiliario.'.$nombre_concepto.'.update',$tipo_compra->id)}}" method="POST" onsubmit=" document.getElementById('btn_update').hidden = true; document.getElementById('btn_destroy').hidden = true;  save(); ">
+                            <form action="{{route('inmobiliario.'.$nombre_concepto.'.update',$tipo_compra->id)}}" method="POST" onsubmit="
+                            document.getElementById('btn_update').hidden = true;
+                            document.getElementById('btn_destroy').hidden = true;  ">
                                 {{method_field('PATCH')}}
                                 @csrf
                                 <!-- nombre -->

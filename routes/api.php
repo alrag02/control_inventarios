@@ -61,4 +61,11 @@ Route::post('ComprobarArticuloPerteneceRevision',
 Route::post('EditarDisponblidadArticulo',
     [Api\apiController::class, 'EditarDisponblidadArticulo']);
 
+Route::post('ObtenerEstados',
+    [Api\apiController::class, 'ObtenerEstados']);
 
+Route::post('ObtenerUbicaciones',
+    [Api\apiController::class, 'ObtenerUbicaciones']);
+
+Route::post('EditarDetallesArticulo',
+    [Api\apiController::class, 'EditarDetallesArticulo']);

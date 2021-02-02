@@ -21,8 +21,10 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="card-body">
                         <div id="accordion">
+                            <!--
                             <div class="card">
                                 <div class="card-header" id="headingOne">
                                     <h5 class="mb-0">
@@ -88,13 +90,15 @@
                                     <br>
                                 </div>
                             </div>
+                            -->
                         </div>
                         <br>
                         <table id="table-edit" class="table table-bordered table-striped" >
                             <thead class="thead-dark">
                             <tr>
-                                <th></th>
-                                <th>Img</th>
+                                <th class="not-export-col not-search-col"></th>
+                                <th class="not-export-col not-search-col"></th>
+                                <th class="not-export-col not-search-col">Img</th>
                                 <th>Concepto</th>
                                 <th>Etiq. Local</th>
                                 <th>Etiq. Externa</th>
@@ -113,17 +117,20 @@
                                         <a href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-dark">Editar</a>
                                     </td>
                                     <td>
+                                        @include('inmobiliario.articulo.modal_details')
+                                    </td>
+                                    <td>
                                         <img src="{{($data->foto) ? asset('thumbnail/'.$data->foto->image.'.jpg') : '-'}}" alt="{{($data->foto) ? $data->foto->name : '-'}}" style="width: 48px;">
                                     </td>
-                                    <td>{{($data->concepto) ?? '-'}}</td>
-                                    <td>{{($data->etiqueta_local) ?? '-'}}</td>
-                                    <td>{{($data->etiqueta_externa) ?? '-'}}</td>
-                                    <td>{{($data->oficina->edificio->nombre) ?? '-'}}</td>
-                                    <td>{{($data->oficina->nombre) ?? '-'}}</td>
-                                    <td>{{($data->departamento->area->nombre) ?? '-'}}</td>
-                                    <td>{{($data->departamento->nombre) ?? '-'}}</td>
-                                    <td>{{($data->marca) ?? '-'}}</td>
-                                    <td>{{($data->modelo) ?? '-'}}</td>
+                                    <td>{{($data->concepto) ?? '(Ninguno)'}}</td>
+                                    <td>{{($data->etiqueta_local) ?? '(Ninguno)'}}</td>
+                                    <td>{{($data->etiqueta_externa) ?? '(Ninguno)'}}</td>
+                                    <td>{{($data->oficina->edificio->nombre) ?? '(Ninguno)'}}</td>
+                                    <td>{{($data->oficina->nombre) ?? '(Ninguno)'}}</td>
+                                    <td>{{($data->departamento->area->nombre) ?? '(Ninguno)'}}</td>
+                                    <td>{{($data->departamento->nombre) ?? '(Ninguno)'}}</td>
+                                    <td>{{($data->marca) ?? '(Ninguno)'}}</td>
+                                    <td>{{($data->modelo) ?? '(Ninguno)'}}</td>
 
                                     <td>{{$data->updated_at->format('d/M/Y h:i a')}}</td>
                                     <!--

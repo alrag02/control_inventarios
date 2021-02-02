@@ -23,7 +23,10 @@
                     <form action="{{route('inmobiliario.'.$nombre_concepto.'.destroy',$encargo->id)}}" method="post" class="d-inline-block" id="eliminar">
                         {{method_field('DELETE')}}
                         @csrf
-                        <input type="submit" class="btn btn-danger" value="Estoy Seguro" onclick=' this.hidden = true; document.getElementById("btn_destroy").hidden = true; document.getElementById("btn_update").hidden = true; save();'>
+                        <input type="submit" class="btn btn-danger" value="Estoy Seguro" onclick='
+                        this.hidden = true;
+                        document.getElementById("btn_destroy").hidden = true;
+                        document.getElementById("btn_update").hidden = true; '>
                     </form>
                 </div>
 

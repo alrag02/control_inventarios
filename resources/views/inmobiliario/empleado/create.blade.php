@@ -13,8 +13,8 @@
                     <div class="card-header"> <h1>{{ __('Cree un nuevo '.$nombre_concepto) }}</h1> </div>
 
                     <div class="card-body">
-                        <form action="{{route('inmobiliario.'.$nombre_concepto.'.store')}}" method="POST" onsubmit="document.getElementById('btn_store').hidden = true; save();">
-                            @csrf
+                        <form action="{{route('inmobiliario.'.$nombre_concepto.'.store')}}" method="POST" onsubmit="
+                        document.getElementById('btn_store').hidden = true; ">
                             @csrf
                             <div class="form-row">
                                 <!-- nombre -->
@@ -36,20 +36,21 @@
                             <br>
                             <div class="form-row">
                                 <!-- num_ref -->
-                                <div class="col-lg-3">
+                                <div class="col-lg-6">
                                     <label for="inv_camp_num_ref">Numero de Referencia</label>
                                     <input type="text" class="form-control" name="num_ref" id="inv_camp_num_ref" placeholder="xxxx-xxxx-xxxx-xxxx" required>
                                 </div>
                                 <!-- email -->
-                                <div class="col-lg-5">
+                                <div class="col-lg-6">
                                     <label for="inv_camp_email">Correo electrónico</label>
                                     <input type="text" class="form-control" name="email" id="inv_camp_email"  placeholder="ejemplo@tecmm.edu.mx" required>
                                 </div>
-                                <!-- nivel -->
+                                <!-- nivel --
                                 <div class="col-lg-4">
                                     <label for="inv_camp_nivel">¿Como se refieren a usted?</label>
                                     <input type="text" class="form-control" name="nivel" id="inv_camp_nivel" placeholder="Inserte el nombre aquí" required>
                                 </div>
+                                -->
                             </div>
                             <br>
                             <div class="form-row">

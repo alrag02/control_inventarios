@@ -65,10 +65,11 @@
                         @else
                         <!--Consulta de inmobiliario -->
                             @can('consultar inmobiliarios')
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdownConsulta" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <li class="nav-item">
+                                <a id="navbarDropdownConsulta" class="nav-link" href="{{route('inmobiliario.articulo.index')}}">
                                     {{__('Consulta de inmobiliario')}}
                                 </a>
+                                <!--
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="{{route('inmobiliario.articulo.index')}}">
                                         {{__('Lista de inmobiliarios')}}
@@ -77,6 +78,7 @@
                                         {{__('Búsqueda Avanzada')}}
                                     </a>
                                 </div>
+                                -->
                             </li>
                             @endcan
                             <!--Agregar Datos -->

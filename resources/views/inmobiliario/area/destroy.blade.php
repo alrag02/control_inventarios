@@ -24,7 +24,10 @@
                     <form action="{{route('inmobiliario.'.$nombre_concepto.'.destroy',$area->id)}}" method="post" class="d-inline-block" id="eliminar">
                         {{method_field('DELETE')}}
                         @csrf
-                    <input type="submit" class="btn btn-danger" value="Estoy Seguro" onclick=' this.hidden = true; document.getElementById("btn_destroy").hidden = true; document.getElementById("btn_update").hidden = true; save();'>
+                    <input type="submit" class="btn btn-danger" value="Estoy Seguro" onclick='
+                        this.hidden = true;
+                        document.getElementById("btn_destroy").hidden = true;
+                        document.getElementById("btn_update").hidden = true;'>
                     </form>
                 </div>
                 @else
@@ -39,8 +42,11 @@
                 </div>
                 <div class="modal-footer">
                     <a href="{{route('inmobiliario.departamento.index')}}">
-                        <button type="submit" class="btn btn-warning" onclick=' this.hidden = true; document.getElementById("btn_destroy").hidden = true; document.getElementById("btn_update").hidden = true; save();'>
-                            Revisar
+                        <button type="submit" class="btn btn-warning" onclick='
+                            this.hidden = true;
+                            document.getElementById("btn_destroy").hidden = true;
+                            document.getElementById("btn_update").hidden = true;'>
+                        Revisar
                         </button>
                     </a>
                 </div>

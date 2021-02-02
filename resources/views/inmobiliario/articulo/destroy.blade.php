@@ -6,8 +6,6 @@
     Eliminar
 </button>
 
-<!-- Modal  TODO: PORQUE? no se muestra -->
-
     <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -24,7 +22,10 @@
                     <form action="{{route('inmobiliario.'.$nombre_concepto.'.destroy',$articulo->id)}}" method="post" class="d-inline-block" id="eliminar">
                         {{method_field('DELETE')}}
                         @csrf
-                    <input type="submit" class="btn btn-danger" value="Estoy Seguro" onclick=' this.hidden = true; document.getElementById("btn_destroy").hidden = true; document.getElementById("btn_edit").hidden = true; save();'>
+                    <input type="submit" class="btn btn-danger" value="Estoy Seguro" onclick='
+                        this.hidden = true;
+                        document.getElementById("btn_destroy").hidden = true;
+                        document.getElementById("btn_edit").hidden = true;'>
                     </form>
                 </div>
             </div>

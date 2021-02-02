@@ -14,7 +14,8 @@
                                     <div class="row mx-auto">
                                         <div class="col-lg-12">
                                             <div class="card card-wrapper_articulo">
-                                                <form action="{{route('inmobiliario.'.$nombre_concepto.'.store')}}" method="POST" onsubmit="document.getElementById('btn_store').hidden = true; save();">
+                                                <form action="{{route('inmobiliario.'.$nombre_concepto.'.store')}}" method="POST" onsubmit="
+                                                document.getElementById('btn_store').hidden = true;">
                                                     @csrf
                                                     <div class="card-header">
                                                         <div class="row">

@@ -13,7 +13,8 @@
                     <div class="card-header"> <h1>{{ __('Cree una nueva '.$nombre_concepto) }}</h1> </div>
 
                     <div class="card-body">
-                        <form action="{{route('inmobiliario.'.$nombre_concepto.'.store')}}" method="POST" onsubmit="document.getElementById('btn_store').hidden = true; save();">
+                        <form action="{{route('inmobiliario.'.$nombre_concepto.'.store')}}" method="POST" onsubmit="
+                        document.getElementById('btn_store').hidden = true; save();">
                             @csrf
                             <!-- nombre -->
                             <div class="form-group">

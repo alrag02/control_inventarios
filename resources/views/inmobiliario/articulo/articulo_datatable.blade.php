@@ -21,13 +21,32 @@
 
             //Botones para exportación
             buttons: [
-                { extend: 'searchPanes', text: 'Búsqueda Avanzada' },
+                { extend: 'searchPanes', text: 'Búsqueda Avanzada'
+                },
                 //{ extend: 'csv', text: 'CSV' },
-                { extend: 'excel', text: 'Exportar (.xlsx)' },
-                { extend: 'pdf', text: 'Exportar (.pdf)', orientation: 'landscape',pageSize: 'LEGAL'}
+                { extend: 'excel', text: 'Exportar (.xlsx)',
+                    exportOptions: {
+                        columns: ':not(.not-export-col)'
+                    }
+                },
+                { extend: 'pdf', text: 'Exportar (.pdf)', orientation: 'landscape',pageSize: 'LEGAL',
+                    exportOptions: {
+                        columns: ':not(.not-export-col)'
+                    }
+                },
+
             ],
 
+            //Paneles de busqueda
 
+            columnDefs: [
+                {
+                    searchPanes: {
+                        show: true
+                    },
+                    targets: [3,4,5,6,7,8,9,10,11,12]
+                },
+            ],
 
             //Cambiar idioma
             language: {

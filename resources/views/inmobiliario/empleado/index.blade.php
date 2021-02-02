@@ -32,7 +32,7 @@
                                     <th>Nombre</th>
                                     <th>Apellidos</th>
                                     <th>Email</th>
-                                    <th>Nivel</th>
+
                                     <th>Departamento</th>
                                     <th>Vigencia</th>
                                     <th>Modificado el.</th>
@@ -47,7 +47,7 @@
                                         <td>{{$data->nombre }}</td>
                                         <td>{{$data->apellido_paterno.' '.$data->apellido_materno}}</td>
                                         <td>{{$data->email}}</td>
-                                        <td>{{$data->nivel}}</td>
+
                                         <td>{{$data->departamento->nombre}}</td>
                                         <td>{{($data->vigencia == 1) ? 'Activo' : 'En Baja'}}</td>
                                         <td>{{$data->updated_at}}</td>

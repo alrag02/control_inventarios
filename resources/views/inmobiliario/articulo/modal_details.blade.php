@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col-lg-4 mg-4">
                             <div class="card card-body">
-                                <img src="{{(!empty($data->foto->id) ? url('/thumbnail/'.$data->foto->image) : "")}}"  style="width: 64px;">
+                                <img src="{{($data->foto) ? asset('thumbnail/'.$data->foto->image.'.jpg') : '-'}}" alt="{{($data->foto) ? $data->foto->name : '-'}}" style="width: 100px;">
                             </div>
                             <br>
                             <div class="card card-body">
@@ -54,7 +54,7 @@
                                     <li>Encargado de area:
                                         @foreach($empleado as $dato_s)
                                             @if($dato_s->id == $data->empleado_encargado_area)
-                                                {{$dato_s->nivel.' '.$dato_s->nombre.' '.$dato_s->apellido_paterno.' '.$dato_s->apellido_materno}}
+                                                {{$dato_s->nombre.' '.$dato_s->apellido_paterno.' '.$dato_s->apellido_materno}}
                                             @endif
                                         @endforeach
                                     </li>
@@ -62,7 +62,7 @@
                                     <li>Titular #1:
                                         @foreach($empleado as $dato_s)
                                             @if($dato_s->id == $data->empleado_titular)
-                                                {{$dato_s->nivel.' '.$dato_s->nombre.' '.$dato_s->apellido_paterno.' '.$dato_s->apellido_materno}}
+                                                {{$dato_s->nombre.' '.$dato_s->apellido_paterno.' '.$dato_s->apellido_materno}}
                                             @endif
                                         @endforeach
                                     </li>
@@ -70,7 +70,7 @@
                                     <li>Titular #2:
                                         @foreach($empleado as $dato_s)
                                             @if($dato_s->id == $data->empleado_titular_secundario)
-                                                {{$dato_s->nivel.' '.$dato_s->nombre.' '.$dato_s->apellido_paterno.' '.$dato_s->apellido_materno}}
+                                                {{$dato_s->nombre.' '.$dato_s->apellido_paterno.' '.$dato_s->apellido_materno}}
                                             @endif
                                         @endforeach
                                     </li>
@@ -78,7 +78,7 @@
                                     <li>Resguardo #1:
                                         @foreach($empleado as $dato_s)
                                             @if($dato_s->id == $data->empleado_resguardo)
-                                                {{$dato_s->nivel.' '.$dato_s->nombre.' '.$dato_s->apellido_paterno.' '.$dato_s->apellido_materno}}
+                                                {{$dato_s->nombre.' '.$dato_s->apellido_paterno.' '.$dato_s->apellido_materno}}
                                             @endif
                                         @endforeach
                                     </li>
@@ -86,7 +86,7 @@
                                     <li>Resguardo #2:
                                         @foreach($empleado as $dato_s)
                                             @if($dato_s->id == $data->empleado_resguardo_secundario)
-                                                {{$dato_s->nivel.' '.$dato_s->nombre.' '.$dato_s->apellido_paterno.' '.$dato_s->apellido_materno}}
+                                                {{$dato_s->nombre.' '.$dato_s->apellido_paterno.' '.$dato_s->apellido_materno}}
                                             @endif
                                         @endforeach
                                     </li>
