@@ -19,9 +19,7 @@ class fotoController extends Controller
      */
     public function index()
     {
-       /* $images = foto::get();
-        return view('inmobiliario.foto.image-gallery',compact('images'));
-       */
+        return view('inmobiliario.foto.index',['images' =>  foto::all() , 'familia' => familia::all() ]);
     }
 
     /**
@@ -31,8 +29,6 @@ class fotoController extends Controller
      */
     public function create()
     {
-        $images = foto::get();
-        return view('inmobiliario.foto.create',['images' =>  foto::get() , 'familia' => familia::all() ]);
     }
 
 
@@ -78,7 +74,7 @@ class fotoController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('inmobiliario.foto.edit',["foto" => foto::find($id), "familia" => familia::all()]);
     }
 
     /**
@@ -90,7 +86,19 @@ class fotoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Obtener el dato
+
+        $data = foto::find($id);
+
+        //Cambiar los datos con los que se obtengan del request en edit
+
+        $data->name = $request->name;
+        $data->fk_familia = $request->fk_familia;
+
+        //Actualizar el dato y dirigir al index con mensaje,
+        // si no puede actualizar, regresar a edit con mensaje de error
+
+        return $data->save() ? redirect("inmobiliario/foto/")->with('message', 'Modificado Correctamente') : view("inmobiliario.area.edit");
     }
 
     /**
@@ -100,10 +108,31 @@ class fotoController extends Controller
      */
     public function destroy($id)
     {
-        //Storage::delete('/full/');
+        //Obtener el dato
 
-        foto::find($id)->delete();
-        return back()
-            ->with('message','Imagen eliminada.');
+        $data = foto::find($id);
+
+        //Determinar si el dato contiene otros datos dependientes
+
+        if( count($data->articulo) > 0 ){
+
+            //En caso de ser ser así regresar al index con mensaje de error
+
+            return redirect("inmobiliario/foto")->with('message', 'Tiene '.count($data->departamento).' articulos dependientes, editelos para que no dependan de este campo.');
+        }else{
+
+            //Quitar la imagen del storage
+
+            $filename = $data->image;
+            if (Storage::disk('img_thumbnail')->delete($filename.'.jpg')){
+
+                //Eliminar el dato y dirigir al index con mensaje,
+                // si no puede eliminarlo, regresar a edit con mensaje de error
+
+                return foto::destroy($id) ? redirect("inmobiliario/foto")->with('message', 'Elemento eliminado'): view("inmobiliario.foto.edit")->with('message', 'No se pudo eliminar');
+            }else{
+                return view("inmobiliario.foto.edit")->with('message', 'No se pudo eliminar');
+            }
+        }
     }
 }

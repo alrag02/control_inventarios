@@ -1,13 +1,4 @@
 <script type="text/javascript">
-    function filterColumn ( i ) {
-        $('.table').DataTable().column( i ).search(
-            $('#col'+i+'_filter').val(),
-            $('#col'+i+'_regex').prop('checked'),
-            $('#col'+i+'_smart').prop('checked')
-        ).draw();
-    }
-
-
     $(document).ready( function () {
         $('.table').DataTable({
             //Mostrar números de registros
@@ -188,10 +179,6 @@
                 "thousands": "."
             },
         });
-
-        $('input.column_filter').on( 'keyup click', function () {
-            filterColumn( $(this).parents('tr').attr('data-column') );
-        } );
 
     } );
 </script>

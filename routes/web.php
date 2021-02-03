@@ -103,8 +103,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('/tipo_equipo', 'tipo_equipoController');
 
         //Seccion de "foto"
-        Route::post('foto/store', [fotoController::class, 'store'])->name('foto.store');
-        Route::get('foto/create', [fotoController::class, 'create'])->name('foto.create');
+        Route::resource('/foto', 'fotoController');
+
+        //Route::post('foto/store', [fotoController::class, 'store'])->name('foto.store');
+        //Route::get('foto/create', [fotoController::class, 'create'])->name('foto.create');
 
     });
 
