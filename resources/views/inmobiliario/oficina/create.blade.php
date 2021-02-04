@@ -41,9 +41,8 @@
                                     <option value="2">Planta Alta (Piso #2)</option>
                                 </select>
                             </div>
-                            @can('baja conceptos')
                             <!-- vigencia -->
-                            <div class="form-group">
+                            <div class="form-group" @cannot('baja conceptos') hidden @endcan>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="vigencia" id="inv_camp_vigencia" value="1" checked>
                                     <label class="form-check-label" for="inv_camp_vigencia">Activo</label>
@@ -53,7 +52,6 @@
                                     <label class="form-check-label" for="inv_camp_vigencia_baja">En Baja</label>
                                 </div>
                             </div>
-                            @endcan
                             <!-- button_store -->
                             <button type="submit" class="btn btn-primary" id="btn_store">Guardar</button>
                         </form>

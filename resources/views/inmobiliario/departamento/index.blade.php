@@ -17,14 +17,14 @@
                                 <h1>{{ __('Lista de '.$nombre_concepto.'s') }}</h1>
                             </div>
                             <div class="col-lg-3 d-inline-flex p-2">
-                                <a href="{{url('/inmobiliario/'.$nombre_concepto.'/create')}}"><button class="btn btn-primary">Crear {{ $nombre_concepto }}</button></a>
+                                <a @cannot('crear conceptos') hidden @endcan href="{{url('/inmobiliario/'.$nombre_concepto.'/create')}}"><button class="btn btn-primary">Crear {{ $nombre_concepto }}</button></a>
                             </div>
                         </div>
 
                     </div>
                     <div class="card-body">
 
-                            <table class="table table-bordered table-striped">
+                            <table id="table-datatable" class="table table-bordered table-striped">
                                 <thead class="thead-dark">
                                 <tr>
                                     <th>Id</th>
@@ -44,7 +44,7 @@
                                             <td>{{(!empty($data->area->nombre)) ? $data->area->nombre:''}}</td>
                                             <td>{{($data->vigencia == 1) ? 'Activo' : 'En Baja'}}</td>
                                             <td>{{$data->updated_at->format('d/M/Y h:i a')}}</td>
-                                            <td><a href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-outline-teal">Editar</a>
+                                            <td><a @cannot('editar conceptos') hidden @endcan href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-outline-teal">Editar</a>
                                             </td>
                                         </tr>
                                     </a>

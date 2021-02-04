@@ -135,7 +135,7 @@
                                                         <input type="text" name="placas" value="{{$articulo->placas}}" class="form-control" id="inv_camp_placas" placeholder="Solo si es vehiculo">
                                                     </div>
                                                     <!-- vigencia -->
-                                                    <div class="form-group">
+                                                    <div class="form-group" @cannot('baja inmobiliarios') hidden @endcan>
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio" name="vigencia" id="inv_camp_vigencia" value="1" {{($articulo->vigencia == '1') ? 'checked':''}}>
                                                             <label class="form-check-label" for="inv_camp_vigencia">Vigente</label>
@@ -279,6 +279,9 @@
                                         <div class="col-md-4">
                                             <div class="card card-body">
                                                 <h4 class="card-title">Datos de Adquisición</h4>
+                                                <!--
+                                                                                            </div>
+
                                                 <label for="inv_camp_fecha_adquisiscion">Etiqueta</label>
                                                 <div class="form-row">
                                                     <div class="container text-center bg-light p-2">
@@ -287,6 +290,7 @@
                                                         }}" alt="barcode" />
                                                     </div>
                                                 </div>
+                                                -->
                                                 <div class="form-row">
                                                     <!-- fecha_adquisiscion -->
                                                     <div class="form-group col-md-12">
@@ -365,10 +369,14 @@
                             </div>
                         </form>
                         <div class="card-footer">
+                            @can('crear etiquetas')
                             <a href="{{route('inmobiliario.'.$nombre_concepto.'.generateBarCode',$articulo->id)}}">
-                                <button class="btn btn-secondary " type="button">Generar Código de barras</button>
+                                <button class="btn btn-secondary " type="button" >Generar Código de barras</button>
                             </a>
-                            @include('inmobiliario.'.$nombre_concepto.'.destroy',["'".$nombre_concepto."'." => $articulo])
+                            @endcan
+                            @can('eliminar inmobiliarios')
+                                @include('inmobiliario.'.$nombre_concepto.'.destroy',["'".$nombre_concepto."'." => $articulo])
+                            @endcan
                         </div>
                     </div>
                 </div>

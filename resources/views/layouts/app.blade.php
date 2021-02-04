@@ -17,23 +17,17 @@
     <script type="text/javascript" src="{{ asset('js/dataTables.responsive.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/dataTables.select.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/dataTables.searchPanes.min.js')}}"></script>
-
-
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <script type="text/javascript" src="{{ asset('js/mdb.min.js')}}"></script>
 
     <!-- Styles -->
     <link href="{{ url('css/app.css') }}" rel="stylesheet">
     <link href="{{ url('css/style.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="{{ url('css/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ url('css/buttons.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ url('css/responsive.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ url('css/select.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ url('css/searchPanes.dataTables.min.css') }}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/1.0.0/mdb.min.css" rel="stylesheet"/>
+    <link href="{{ url('css/mdb.min.css') }}" rel="stylesheet"/>
 
 </head>
 <body>

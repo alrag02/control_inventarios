@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@can('crear cortes')
+@can('consultar inmobiliarios')
 @section('content')
 
 @php($nombre_concepto = 'articulo')

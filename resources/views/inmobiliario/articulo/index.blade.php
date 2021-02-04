@@ -17,7 +17,7 @@
                                 <h1>{{ __('Lista de '.$nombre_concepto.'s') }}</h1>
                             </div>
                             <div class="col-lg-3 d-inline-flex p-2">
-                                <a href="{{url('/inmobiliario/'.$nombre_concepto.'/create')}}"><button class="btn btn-primary">Crear {{ $nombre_concepto }}</button></a>
+                                <a @cannot('crear inmobiliarios') hidden @endcan href="{{url('/inmobiliario/'.$nombre_concepto.'/create')}}"><button class="btn btn-primary">Crear {{ $nombre_concepto }}</button></a>
                             </div>
                         </div>
                     </div>
@@ -93,9 +93,10 @@
                             -->
                         </div>
                         <br>
-                        <table id="table-edit" class="table table-bordered table-striped" >
+                        <table id="table-datatable-articulo" class="table table-bordered table-striped" >
                             <thead class="thead-dark">
                             <tr>
+
                                 <th class="not-export-col not-search-col"></th>
                                 <th class="not-export-col not-search-col"></th>
                                 <th class="not-export-col not-search-col">Img</th>
@@ -114,7 +115,7 @@
                             @foreach($articulo as $data)
                                 <tr>
                                     <td>
-                                        <a href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-dark">Editar</a>
+                                        <a @cannot('editar inmobiliarios') hidden @endcan href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-dark">Editar</a>
                                     </td>
                                     <td>
                                         @include('inmobiliario.articulo.modal_details')
@@ -147,6 +148,6 @@
         </div>
     </div>
 
-    @include('inmobiliario.articulo.articulo_datatable')
+    @include('layouts.table_datatable')
 @endsection
 @endcan

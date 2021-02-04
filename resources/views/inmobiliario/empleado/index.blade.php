@@ -17,14 +17,14 @@
                                 <h1>{{ __('Lista de '.$nombre_concepto.'s') }}</h1>
                             </div>
                             <div class="col-lg-3 d-inline-flex p-2">
-                                <a href="{{url('/inmobiliario/'.$nombre_concepto.'/create')}}"><button class="btn btn-primary">Crear {{ $nombre_concepto }}</button></a>
+                                <a @cannot('crear conceptos') hidden @endcan href="{{url('/inmobiliario/'.$nombre_concepto.'/create')}}"><button class="btn btn-primary">Crear {{ $nombre_concepto }}</button></a>
                             </div>
                         </div>
 
                     </div>
                     <div class="card-body">
                         <div class="container">
-                            <table class="table table-bordered table-striped">
+                            <table id="table-datatable" class="table table-bordered table-striped">
                                 <thead class="thead-light">
                                 <tr>
                                     <th>Id</th>
@@ -51,7 +51,7 @@
                                         <td>{{$data->departamento->nombre}}</td>
                                         <td>{{($data->vigencia == 1) ? 'Activo' : 'En Baja'}}</td>
                                         <td>{{$data->updated_at}}</td>
-                                        <td><a href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-light">Editar</a>
+                                        <td><a @cannot('editar conceptos') hidden @endcan href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-light">Editar</a>
                                         </td>
                                     </tr>
                                 @endforeach

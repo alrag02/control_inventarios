@@ -65,8 +65,7 @@
                                 </div>
                             </div>
                             <br>
-                            @can('baja conceptos')
-                                <div class="form-row">
+                                <div class="form-row" @cannot('baja conceptos') hidden @endcan>
                                     <!-- vigencia -->
                                     <div class="col-lg-12">
                                         <div class="form-check form-check-inline">
@@ -79,7 +78,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endcan
                             <br>
                             <div class="float-left">
                                 <button type="submit" class="btn btn-primary" id="btn_update" >Guardar</button>

@@ -21,9 +21,8 @@
                                 <label for="inv_camp_nombre">Nombre del {{$nombre_concepto}}</label>
                                 <input type="text" class="form-control" name="nombre" id="inv_camp_nombre" placeholder="Inserte el nombre aquí" required>
                             </div>
-                            @can('baja conceptos')
                             <!-- vigencia -->
-                            <div class="form-group">
+                            <div class="form-group" @cannot('baja conceptos') hidden @endcan>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="vigencia" id="inv_camp_vigencia" value="1" checked>
                                     <label class="form-check-label" for="inv_camp_vigencia">Activo</label>
@@ -33,7 +32,6 @@
                                     <label class="form-check-label" for="inv_camp_vigencia_baja">En Baja</label>
                                 </div>
                             </div>
-                            @endcan
                             <!-- btn_store -->
                             <button type="submit" class="btn btn-primary" id="btn_store" >Guardar</button>
                         </form>

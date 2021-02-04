@@ -1,3 +1,4 @@
+@can('crear conceptos')
 <div class="card">
     <div class="card-header">
         <h3>Agregue una foto</h3>
@@ -31,3 +32,4 @@
         </form>
     </div>
 </div>
+@endcan

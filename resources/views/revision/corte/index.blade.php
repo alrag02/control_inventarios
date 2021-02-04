@@ -22,7 +22,7 @@
                     </div>
                     <div class="card-body">
 
-                        <table class="table table-bordered table-striped">
+                        <table id="table-datatable" class="table table-bordered table-striped">
                             <thead class="thead-dark">
                             <tr>
                                 <th>Id</th>

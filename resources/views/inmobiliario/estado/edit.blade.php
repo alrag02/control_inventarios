@@ -19,9 +19,8 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="nombre" id="inv_camp_nombre" value="{{$estado->nombre}}" placeholder="Nombre" required>
                                 </div>
-                                @can('baja conceptos')
                                 <!-- vigencia -->
-                                <div class="form-group">
+                                <div class="form-group" @cannot('baja conceptos') hidden @endcan>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="vigencia" id="inv_camp_vigencia" value="1" {{($estado->vigencia == 1) ? 'checked':''}}>
                                         <label class="form-check-label" for="inv_camp_vigencia">Activo</label>
@@ -31,12 +30,11 @@
                                         <label class="form-check-label" for="inv_camp_vigencia_baja">En Baja</label>
                                     </div>
                                 </div>
-                                @endcan
                                 <div class="float-left">
                                         <button type="submit" class="btn btn-primary" id="btn_update" >Guardar</button>
                                 </div>
                             </form>
-                                <div class="float-right">
+                                <div class="float-right" @cannot('eliminar conceptos') hidden @endcan>
                                         @include('inmobiliario.'.$nombre_concepto.'.destroy',["'".$nombre_concepto."." => $estado])
                                 </div>
                             <br>

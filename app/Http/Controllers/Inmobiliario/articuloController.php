@@ -218,11 +218,6 @@ class articuloController extends Controller
         return articulo::destroy($id) ? redirect("inmobiliario/articulo"): view("inmobiliario.articulo.edit", print 'Hubo un error al eliminar');
     }
 
-    public function printPDF(){
-        $pdf = PDF::make('dompdf.wrapper');
-        $pdf->loadHTML('<h1>Test</h1>');
-        return $pdf->stream();
-    }
 
     public function edit_foto($id){
         return view('inmobiliario.articulo.edit_foto', [

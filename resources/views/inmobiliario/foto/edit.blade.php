@@ -41,8 +41,9 @@
                             </div>
                             @csrf
                         </form>
+                        @can('eliminar conceptos')
                         @include('inmobiliario.'.$nombre_concepto.'.destroy',["foto" => $foto])
-
+                        @endcan
                     </div>
                 </div>
             </div>

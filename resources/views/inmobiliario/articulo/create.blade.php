@@ -120,10 +120,10 @@
                                                                                 <input type="text" name="placas" class="form-control" id="inv_camp_placas" placeholder="Solo si es vehiculo">
                                                                             </div>
                                                                             <!-- vigencia -->
-                                                                            <div class="form-group">
+                                                                            <div class="form-group" @cannot('baja inmobiliarios') hidden @endcan>
                                                                                 <div class="form-check form-check-inline">
                                                                                     <input class="form-check-input" type="radio" name="vigencia" id="inv_camp_vigencia" value="1" checked>
-                                                                                    <label class="form-check-label" for="inv_camp_vigencia">Activo</label>
+                                                                                    <label class="form-check-label" for="inv_camp_vigencia">Vigente</label>
                                                                                 </div>
                                                                                 <div class="form-check form-check-inline">
                                                                                     <input class="form-check-input" type="radio" name="vigencia" id="inv_camp_vigencia_baja" value="0">

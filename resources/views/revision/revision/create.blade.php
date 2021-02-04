@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@can('crear cortes')
+@can('revisar inventarios')
 @section('content')
 
     @php($nombre_concepto = 'revision')

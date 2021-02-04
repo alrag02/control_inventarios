@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@can('crear cortes')
+@can('revisar inventarios')
 @section('content')
     @php($nombre_concepto = 'articulo')
     <div class="container">
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered table-striped" onload="document.getElementsByClassName('table-toggle').style.display = 'none';">
+                        <table id="table-datatable" class="table table-bordered table-striped" onload="document.getElementsByClassName('table-toggle').style.display = 'none';">
                             <thead class="thead-light">
                             <tr>
                                 <th>Id</th>

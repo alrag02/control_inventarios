@@ -17,7 +17,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <table id="table-foto" class="table table-bordered table-striped table-foto">
+                            <table id="table-datatable-foto" class="table table-bordered table-striped table-foto">
                                 <thead>
                                 <tr>
                                     <th>Img</th>
@@ -31,7 +31,7 @@
                                 @foreach($images as $data)
                                     <tr>
                                         <td><img src="{{ asset('thumbnail/'.$data->image.'.jpg')}}" alt="" style="width: 92px;"></td>
-                                        <td><a href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-dark">Editar</a></td>
+                                        <td><a @cannot('editar conceptos') hidden @endcan href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-dark">Editar</a></td>
                                         <td>{{($data->name) ?? '-'}}</td>
                                         <td>{{($data->familia->nombre) ?? '-'}}</td>
                                         <td>{{$data->created_at->format('d/M/Y h:i a')}}</td>

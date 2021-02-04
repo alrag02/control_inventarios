@@ -18,7 +18,7 @@
                     </div>
             </div>
             <div class="card-footer">
-                <a class="text-black" href="{{url('/inmobiliario/articulo/'.$articulo->etiqueta_local.'/printBarCode')}}">Generar Etiqueta en PDF</a>
+                <a class="text-black" href="{{url('/inmobiliario/articulo/'.$articulo->id.'/printBarCode')}}">Generar Etiqueta en PDF</a>
             </div>
         </div>
 

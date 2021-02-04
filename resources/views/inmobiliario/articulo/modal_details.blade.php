@@ -31,7 +31,7 @@
                                     <li>Marca: {{($data->marca) ?? '-'}}</li>
                                     <li>Modelo: {{($data->modelo) ?? '-'}}</li>
                                     <li>Cantidad: {{($data->cantidad) ?? '-'}}</li>
-                                    <li>Num de Serie: {{($data->num_serie) ?? '-'}}</li>
+                                    <li>Num de Serie: {{($data->numero_serie) ?? '-'}}</li>
                                     <li>Color: {{($data->color) ?? '-'}}</li>
                                     <li>Estado: {{($data->estado->nombre) ?? '-'}}</li>
                                 </ul>
@@ -128,17 +128,21 @@
                         </div>
                     </div>
                 </div>
+                @can('editar inmobiliarios')
                 <div class="card-footer bg-dark">
                     <div class="row">
                         <div class="col-lg-3">
                             <a href="{{url('/inmobiliario/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-block btn-primary">Editar</a>
                         </div>
+                        @can('crear etiquetas')
                         <div class="col-lg-3">
                             <a href="{{route('inmobiliario.'.$nombre_concepto.'.generateBarCode',$data->id)}}" class="btn btn-block btn-secondary">Generar código de barras</a>
                         </div>
+                        @endcan
                         <div class="col-lg-3"></div>
                     </div>
                 </div>
+                @endcan
             </div>
         </div>
     </div>

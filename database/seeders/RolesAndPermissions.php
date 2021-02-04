@@ -35,6 +35,9 @@ class RolesAndPermissions extends Seeder
         Permission::create(['name' => 'baja inmobiliarios']);
         Permission::create(['name' => 'eliminar inmobiliarios']);
 
+        Permission::create(['name' => 'crear etiquetas']);
+
+
         //Permisos de consulta y modificación de conceptos de inmobiliarios
         Permission::create(['name' => 'crear conceptos']);
         Permission::create(['name' => 'editar conceptos']);
@@ -48,15 +51,11 @@ class RolesAndPermissions extends Seeder
         Permission::create(['name' => 'revisar inventarios']);
 
 
-
-        // create roles and assign created permissions
-
-        // this can be done as separate statements
+        //Rol de consultores
         $role_consultor = Role::create(['name' => 'consultor']);
         $role_consultor->givePermissionTo([
                 //  Inmobiliarios
                 'consultar inmobiliarios',
-                'consultar cortes'
             ]);
 
         // Rol del editor de aplicaciones
@@ -67,7 +66,7 @@ class RolesAndPermissions extends Seeder
                 'editar inmobiliarios',
                 'consultar inmobiliarios',
                 //  Cortes y revision
-                'crear cortes',
+                    //'crear cortes',
                 'consultar cortes',
                 'revisar inventarios'
             ]);
