@@ -47,6 +47,9 @@ class datosArticulo extends Seeder
             'fk_tipo_compra'=>1,
             'fk_tipo_equipo'=>2,
             'fk_revision'=>NULL,
+            'disponibilidad_updated_by'=>NULL,
+            'updated_by'=>NULL,
+
         ] );
 
         Articulo::create( [
@@ -82,6 +85,8 @@ class datosArticulo extends Seeder
             'fk_tipo_compra'=>1,
             'fk_tipo_equipo'=>2,
             'fk_revision'=>NULL,
+            'disponibilidad_updated_by'=>NULL,
+            'updated_by'=>NULL,
         ] );
 
         Articulo::create( [
@@ -117,6 +122,8 @@ class datosArticulo extends Seeder
             'fk_tipo_compra'=>1,
             'fk_tipo_equipo'=>3,
             'fk_revision'=>NULL,
+            'disponibilidad_updated_by'=>NULL,
+            'updated_by'=>NULL,
         ] );
 
         Articulo::create( [
@@ -152,6 +159,8 @@ class datosArticulo extends Seeder
             'fk_tipo_compra'=>1,
             'fk_tipo_equipo'=>2,
             'fk_revision'=>NULL,
+            'disponibilidad_updated_by'=>NULL,
+            'updated_by'=>NULL,
         ] );
 
         Articulo::create( [
@@ -187,6 +196,8 @@ class datosArticulo extends Seeder
             'fk_tipo_compra'=>1,
             'fk_tipo_equipo'=>2,
             'fk_revision'=>NULL,
+            'disponibilidad_updated_by'=>NULL,
+            'updated_by'=>NULL,
         ] );
 
         Articulo::create( [
@@ -222,6 +233,8 @@ class datosArticulo extends Seeder
             'fk_tipo_compra'=>1,
             'fk_tipo_equipo'=>2,
             'fk_revision'=>NULL,
+            'disponibilidad_updated_by'=>NULL,
+            'updated_by'=>NULL,
         ] );
 
     }

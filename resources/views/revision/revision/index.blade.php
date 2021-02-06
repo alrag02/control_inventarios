@@ -36,8 +36,7 @@
                                                 <li>Num. Trabajador: {{$data->user->work_id}}</li>
                                                 <li>Usuario: {{$data->user->name.' '.$data->user->last_name_p}}</li>
 
-                                                <li>Departamento: {$data->departamento->nombre}}</li>
-                                                -->
+                                                <li>Departamento: {{$data->departamento->nombre}}</li>
                                             </ul>
                                         </div>
                                         <div class="card-footer">

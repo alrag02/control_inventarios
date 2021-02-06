@@ -68,7 +68,7 @@
                                     <a class="dropdown-item" href="{{route('inmobiliario.articulo.index')}}">
                                         {{__('Lista de inmobiliarios')}}
                                     </a>
-                                    <a class="dropdown-item" href="{{route('inmobiliario.articulo.search')}}">
+                                    <a class="dropdown-item" href="#">
                                         {{__('Búsqueda Avanzada')}}
                                     </a>
                                 </div>

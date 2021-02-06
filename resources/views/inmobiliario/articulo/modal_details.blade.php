@@ -110,6 +110,13 @@
                                 <h4>Observaciones</h4>
                                 <ul>
                                     <li>{{$data->observaciones ?? 'Ninguno'}}</li>
+                                    <li>Ultima modificacion por: {{$data->updated_by ?
+                                            $user->where('id', $data->updated_by)->implode('name','').
+                                        ' '.$user->where('id', $data->updated_by)->implode('last_name_p','').
+                                        ' '.$user->where('id', $data->updated_by)->implode('last_name_m','').
+                                        ' ('.' '.$user->where('id', $data->updated_by)->implode('work_id','').')' : '[Ninguno]'}}
+                                    </li>
+                                    <li>{{'Fecha/Hora modificacion: '.$data->updated_at}}</li>
                                 </ul>
                             </div>
                             <br>
@@ -117,11 +124,17 @@
                                 <h4>Revisión</h4>
                                 <ul>
                                     <li>Estado de revisión: {{$data->disponibilidad ?? 'Ninguno'}}</li>
-                                    @if ($data->fk_revision)
-                                        <li>{{'Revisado por: '.$data->revision->user->name.'
+                                    @if ($data->revision)
+                                        <li>{{'Revision asignado a: '.$data->revision->user->name.'
                                             '.$data->revision->user->last_name_p.'
                                             '.$data->revision->user->last_name_m}}</li>
                                     @endif
+                                    <li>Revisado por ultima vez por: {{$data->disponibilidad_updated_by ?
+                                            $user->where('id', $data->disponibilidad_updated_by)->implode('name','').
+                                        ' '.$user->where('id', $data->disponibilidad_updated_by)->implode('last_name_p','').
+                                        ' '.$user->where('id', $data->disponibilidad_updated_by)->implode('last_name_m','').
+                                        ' ('.' '.$user->where('id', $data->disponibilidad_updated_by)->implode('work_id','').')' : ''}}</li>
+                                    <li>{{'Fecha/Hora revision: '.$data->disponibilidad_updated_at}}</li>
 
                                 </ul>
                             </div>

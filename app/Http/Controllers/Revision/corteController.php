@@ -7,6 +7,7 @@ use App\Models\Inmobiliario\articulo;
 use App\Models\Revision\corte;
 use App\Models\Revision\disponibilidad_articulo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
@@ -61,10 +62,16 @@ class corteController extends Controller
         $this->store_excel_corte($data->llave);
         //Actualizar tods los articulos para que aparecan sin revisar,
         foreach (articulo::get() as $disp_art){
+            //Reiniciar disponibilidad
             $disp_art->disponibilidad = 'sin_revisar';
+            //Quitale la revision que estaba asignada
             $disp_art->fk_revision = null;
+            //No aplicar los timestamps, porque no se modifican los datos del artículo, solo su disponibilidad
             $disp_art->timestamps = false;
+            //Actualizar fecha, hora y usuario responsable
             $disp_art->disponibilidad_updated_at = date("Y-m-d h:i:s");
+            $disp_art->disponibilidad_updated_by = Auth::id();
+
             $disp_art->save();
         }
         return redirect("revision/corte")->with('message', 'Creado Correctamente');

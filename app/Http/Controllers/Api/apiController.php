@@ -171,9 +171,15 @@ class apiController extends Controller
     }
 
     public function EditarDisponblidadArticulo(Request $request){
+        $user_id = DB::table('users')
+            ->where('work_id', $request->query('work_id'))
+            ->pluck('id')
+            ->first();
+
         $query = DB::update(
             "UPDATE articulo set".
                 " disponibilidad = '".$request->query('disponibilidad')."', ".
+                "disponibilidad_updated_by = ".$user_id." , ".
                 "disponibilidad_updated_at = '" .date("Y-m-d h:i:s")."' ".
                 "WHERE etiqueta_local = '".$request->query("etiqueta_local")."'") == 1;
         return response()->json($query, 201);
@@ -202,10 +208,16 @@ class apiController extends Controller
     }
 
     public function EditarDetallesArticulo(Request $request){
+        $user_id = DB::table('users')
+            ->where('work_id', $request->query('work_id'))
+            ->pluck('id')
+            ->first();
+
         $query = DB::update(
             "UPDATE articulo set".
             " fk_estado = ".$request->query('estado').", ".
             "observaciones = '".$request->query('observaciones')."', ".
+            "updated_by = ".$user_id.", ".
             "fk_oficina = ".$request->query('oficina')." ".
             "WHERE etiqueta_local = '".$request->query("etiqueta_local")."'") == 1;
 

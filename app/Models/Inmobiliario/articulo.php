@@ -42,7 +42,9 @@ class articulo extends Model
         'fk_revision',
         'vigencia',
         'disponibilidad',
-        'disponibilidad_updated_at'
+        'disponibilidad_updated_at',
+        'updated_by',
+        'disponibilidad_updated_by',
 
     ];
 
@@ -112,6 +114,13 @@ class articulo extends Model
         return $this->belongsTo('App\Models\Inmobiliario\foto', 'fk_foto');
     }
 
+    public function updated_by(){
+        return $this->belongsTo('App\Models\User','updated_by', 'id');
+    }
+
+    public function disponibilidad_updated_by(){
+        return $this->belongsTo('App\Models\User','disponibilidad_updated_by','id');
+    }
     /*
     public function encargo()
     {
@@ -132,4 +141,6 @@ class articulo extends Model
     public function revision(){
         return $this->belongsTo('App\Models\Revision\revision','fk_revision');
     }
+
+
 }

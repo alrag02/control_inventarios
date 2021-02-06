@@ -31,8 +31,9 @@ class revision extends Model
     {
         return $this->hasMany('App\Models\Inmobiliario\articulo', 'fk_revision','id');
     }
+
     public function departamento()
     {
-        return $this->hasMany('App\Models\Inmobiliario\departamento', 'fk_departamento','id');
+        return $this->belongsTo('App\Models\Inmobiliario\departamento', 'fk_departamento','id');
     }
 }

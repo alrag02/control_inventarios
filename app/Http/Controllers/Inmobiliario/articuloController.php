@@ -16,6 +16,8 @@ use App\Models\Inmobiliario\tipo_compra;
 use App\Models\Inmobiliario\tipo_equipo;
 use App\Models\Inmobiliario\edificio;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
@@ -46,6 +48,7 @@ class articuloController extends Controller
             'oficina' => oficina::get(['id', 'nombre', 'vigencia']),
             'edificio' => edificio::get(['id', 'nombre', 'vigencia']),
             'revision' => revision::all(),
+            'user' => User::all(),
         ]);
     }
 
@@ -122,6 +125,8 @@ class articuloController extends Controller
         $data->fk_tipo_compra = $request->fk_tipo_compra;
         $data->fk_tipo_equipo = $request->fk_tipo_equipo;
         $data->fk_oficina = $request->fk_oficina;
+
+        $data->updated_by = Auth::id();
 
         //Generar codigo interno
         $data->etiqueta_local = 'ITSLM-'.
@@ -200,6 +205,10 @@ class articuloController extends Controller
         $data->fk_tipo_compra = $request->fk_tipo_compra;
         $data->fk_tipo_equipo = $request->fk_tipo_equipo;
         $data->fk_oficina = $request->fk_oficina;
+
+        $data->updated_by = Auth::id();
+
+
         return $data->save() ? redirect("inmobiliario/articulo") : view("inmobiliario.articulo.edit");
 
     }

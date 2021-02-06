@@ -33,6 +33,8 @@ class CreateArticuloTable extends Migration
             $table->boolean('vigencia')->nullable();
             $table->enum('disponibilidad',['sin_revisar','en_revision','revisado'])->nullable();
             $table->dateTime('disponibilidad_updated_at')->nullable();
+            $table->unsignedBigInteger('disponibilidad_updated_by')->nullable()->index('disponibilidad_updated_by');
+
 
             $table->integer('empleado_encargado_area')->nullable()->index('empleado_encargado_area');
             $table->integer('empleado_titular')->nullable()->index('empleado_titular');
@@ -50,6 +52,8 @@ class CreateArticuloTable extends Migration
             $table->integer('fk_revision')->nullable()->index('fk_revision');
 
             $table->timestamps();
+            $table->unsignedBigInteger('updated_by')->nullable()->index('updated_by');
+
 
 
         });

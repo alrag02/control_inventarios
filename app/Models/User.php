@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
 
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -49,5 +51,13 @@ class User extends Authenticatable
 
     public function revision(){
         return $this->hasMany('App\Models\Revision\revision', 'fk_user','id');
+    }
+
+    public function disponibilidad_updated_by(){
+        return $this->hasMany('App\Models\Inmobiliario\articulo', 'disponibilidad_updated_by','id');
+    }
+
+    public function updated_by(){
+        return $this->hasMany('App\Models\Inmobiliario\articulo', 'updated_by','id');
     }
 }

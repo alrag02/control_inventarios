@@ -29,6 +29,10 @@ class AddForeignKeysToArticuloTable extends Migration
             $table->foreign('empleado_resguardo', 'articulo_ibfk_12')->references('id')->on('empleado')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->foreign('empleado_resguardo_secundario', 'articulo_ibfk_13')->references('id')->on('empleado')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 
+            //Referencia a los usuarios que actualizaron los campos, al eliminar están configurados para que aparezcan null
+            $table->foreign('updated_by', 'articulo_ibfk_14')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('set null');
+            $table->foreign('disponibilidad_updated_by', 'articulo_ibfk_15')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('set null');
+
         });
     }
 
@@ -53,6 +57,8 @@ class AddForeignKeysToArticuloTable extends Migration
             $table->dropForeign('articulo_ibfk_11');
             $table->dropForeign('articulo_ibfk_12');
             $table->dropForeign('articulo_ibfk_13');
+            $table->dropForeign('articulo_ibfk_14');
+            $table->dropForeign('articulo_ibfk_15');
         });
     }
 }

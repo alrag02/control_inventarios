@@ -19,6 +19,7 @@ use App\Models\Revision\disponibilidad_articulo;
 use App\Models\Revision\revision;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -162,6 +163,8 @@ class revisionController extends Controller
             'oficina' => oficina::get(['id', 'nombre', 'vigencia']),
             'edificio' => edificio::get(['id', 'nombre', 'vigencia']),
             'revision' => revision::all(),
+            'user' => user::all(),
+
         ]);
     }
 
@@ -175,6 +178,8 @@ class revisionController extends Controller
         $data->disponibilidad = $request->disponibilidad;
         $data->timestamps = false;
         $data->disponibilidad_updated_at = date("Y-m-d h:i:s");
+        $data->disponibilidad_updated_by = Auth::id();
+
         return $data->save() ? back() : view("revision.revision.show_details");
 
     }
