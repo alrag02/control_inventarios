@@ -31,6 +31,7 @@
                                 <th>Vigencia</th>
                                 <th>Modificado el.</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -42,8 +43,8 @@
                                         <td>{{$data->descripcion}}</td>
                                         <td>{{$data->created_at->format('d/M/Y h:i a')}}</td>
                                         <td>{{$data->updated_at->format('d/M/Y h:i a')}}</td>
-                                        <td><a href="{{url('/revision/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-outline-teal">Editar</a>
-                                        <td><a href="{{url('/revision/'.$nombre_concepto.'/'.$data->llave.'/get_excel_corte')}}" class="btn btn-outline-secondary">Backup(Excel)</a>
+                                        <td><a href="{{url('/revision/'.$nombre_concepto.'/'.$data->id.'/edit')}}" class="btn btn-primary">Editar</a>
+                                        <td><a href="{{url('/revision/'.$nombre_concepto.'/'.$data->llave.'/get_excel_corte')}}" class="btn btn-secondary">Backup(Excel)</a>
                                         </td>
                                     </tr>
                                 </a>

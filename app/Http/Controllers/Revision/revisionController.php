@@ -25,6 +25,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class revisionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:revisar inventarios'], ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show_detalis', 'get_excel_revision', 'cambiar_disponibilidad_articulo']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

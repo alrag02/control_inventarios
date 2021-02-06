@@ -13,6 +13,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class corteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:crear cortes'], ['only' => ['create', 'store', 'edit', 'update']]);
+        $this->middleware(['permission:consultar cortes'], ['only' => ['index', 'store_excel_corte', 'get_excel_corte']]);
+    }
     /**
      * Display a listing of the resource.
      *

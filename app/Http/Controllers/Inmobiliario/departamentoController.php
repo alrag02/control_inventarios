@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class departamentoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:crear conceptos'], ['only' => ['create', 'store']]);
+        $this->middleware(['permission:editar conceptos'], ['only' => ['edit', 'update']]);
+        $this->middleware(['permission:consultar conceptos'], ['only' => 'index']);
+        $this->middleware(['permission:eliminar conceptos'], ['only' => 'destroy']);
+    }
     /**
      * Display a listing of the resource.
      *

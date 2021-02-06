@@ -31,7 +31,7 @@
                                             <div class="card card-body">
                                                 <h4>Imagen</h4>
                                                 <div class="form-row">
-                                                    <img src="{{ $articulo->foto ? asset('thumbnail/'.$articulo->foto->image.'.jpg') : '#'}}" alt="" width="120px " class="card-image-top mx-auto d-block P-2">
+                                                    <img src="{{ $articulo->foto ? asset('thumbnail/'.$articulo->foto->image.'.jpg') : asset('icons/no-image-available.png')}}" alt="" width="120px " class="card-image-top mx-auto d-block P-2">
                                                     <a href="{{url('inmobiliario/articulo/'.$articulo->id.'/edit_foto')}}"><button class="btn btn-dark" type="button">Cambiar Imagen</button></a>
                                                 </div>
                                             </div>

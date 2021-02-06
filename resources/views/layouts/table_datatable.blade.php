@@ -11,7 +11,7 @@
             "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
             "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
             "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-            "search": "Buscar:",
+            "search": "Buscar cualquier campo:",
             "infoThousands": ",",
             "loadingRecords": "Cargando...",
             "paginate": {
@@ -142,6 +142,7 @@
             "thousands": "."
         };
 
+
         $('#table-datatable').DataTable({
             "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
             responsive: true,
@@ -152,41 +153,38 @@
         });
 
         $('#table-datatable-foto').DataTable({
-            "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+
+            //Responsivo
             responsive: true,
-            dom: 'Pfrtip',
-
-            //Configuración del tipo de documento
-            dom: 'lBfrtip',
-
 
             //Cambiar idioma
             language: $spanish,
 
-            //Botones para exportación
-            buttons: [
-                { extend: 'searchPanes', text: 'Búsqueda Avanzada'
-                }
+            //Busqueda individual por menú desplegable
+            initComplete: function () {
+                this.api().columns('.col-search-select').every( function () {
+                    let column = this;
+                    let title = $(column.header()).text();
+                    let select = $('<select class="form-select"><option selected disabled class="font-italic font-weight-bold">Buscar por ' + title + '</option><option class="font-italic" value="">Cualquier ' + title + '</option></select>')
+                        .appendTo( ".div-search" )
+                        .on( 'change', function () {
+                            let val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
 
-            ],
+                            column
+                                .search( val ? '^' + val + '$' : '', true, false )
+                                .draw();
+                        } );
 
-            //Paneles de busqueda
-            columnDefs: [
-                {
-                    searchPanes: {
-                        show: true
-                    },
-                    targets: [3]
-                },
-                {
-                    searchPanes: {
-                        show: false
-                    },
-                    targets: [0,1,2,4,5]
-                }
-            ],
+                    column.data().unique().sort().each( function ( d, j ) {
+                        select.append( '<option value="' + d + '">' + d + '</option>' )
+                    } );
+                } );
+            }
 
         });
+
 
         $('#table-datatable-articulo').DataTable({
             //Mostrar números de registros
@@ -217,7 +215,6 @@
             ],
 
             //Paneles de busqueda
-
             columnDefs: [
                 {
                     searchPanes: {
@@ -226,6 +223,49 @@
                     targets: [3,4,5,6,7,8,9,10,11,12]
                 },
             ],
+
+
+            //Busqueda individual por menú desplegable
+
+
+            initComplete: function () {
+                this.api().columns('.col-search-type').every( function () {
+                    let that = this;
+
+                    let title = $(this.header()).text();
+
+                    $( '<label>' + title + '</label>', this.header() ).appendTo(".div-search-table");
+                    $( '<input class="form-control" type="text" placeholder="Search "/><br>', this.header() ).appendTo(".div-search-table").on( 'input', function () {
+                        if ( that.search() !== this.value ) {
+                            that
+                                .search( this.value )
+                                .draw();
+                        }
+                    } )
+                });
+
+                this.api().columns('.col-search-select').every( function () {
+                    let column = this;
+                    let title = $(column.header()).text();
+
+                    $( '<label>' + title + '</label>', this.header() ).appendTo(".div-search-table");
+                    let select = $('<select class="form-select"><option selected disabled class="font-italic font-weight-bold">Buscar por ' + title + '</option><option class="font-italic" value="">Cualquier ' + title + '</option></select><br>')
+                        .appendTo( ".div-search-table" )
+                        .on( 'change', function () {
+                            let val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search( val ? '^' + val + '$' : '', true, false )
+                                .draw();
+                        } );
+
+                    column.data().unique().sort().each( function ( d, j ) {
+                        select.append( '<option value="' + d + '">' + d + '</option>' )
+                    } );
+                });
+            },
 
             //Cambiar idioma
             language: $spanish,

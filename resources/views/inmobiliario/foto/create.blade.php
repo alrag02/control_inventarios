@@ -23,6 +23,7 @@
                 <div class="form-group">
                     <label for="lbl_image">Imagen</label>
                     <input type="file" id="lbl_image" name="image" class="form-control" required>
+                    <small>Por motivos de almacenamiento, la foto será modificada para que tenga una resolución menor</small>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Subir</button>

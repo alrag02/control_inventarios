@@ -14,6 +14,11 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware(['permission:crear conceptos'], ['only' => ['create', 'store']]);
+        $this->middleware(['permission:editar conceptos'], ['only' => ['edit', 'update']]);
+        $this->middleware(['permission:consultar conceptos'], ['only' => 'index']);
+        $this->middleware(['permission:eliminar conceptos'], ['only' => 'destroy']);
+
     }
 
 

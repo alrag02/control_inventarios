@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class areaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:crear usuarios'], ['only' => ['create', 'store']]);
+        $this->middleware(['permission:editar usuarios'], ['only' => ['edit', 'update']]);
+        $this->middleware(['permission:consultar usuarios'], ['only' => 'index']);
+        $this->middleware(['permission:eliminar usuarios'], ['only' => 'destroy']);
+    }
 
     /**
      * Display a listing of the resource.

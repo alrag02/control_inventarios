@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col-lg-4 mg-4">
                             <div class="card card-body">
-                                <img src="{{($data->foto) ? asset('thumbnail/'.$data->foto->image.'.jpg') : '-'}}" alt="{{($data->foto) ? $data->foto->name : '-'}}" style="width: 100px;">
+                                <img src="{{($data->foto) ? asset('thumbnail/'.$data->foto->image.'.jpg') : asset('icons/no-image-available.png')}}" alt="{{($data->foto) ? $data->foto->name : '-'}}" style="width: 100px;">
                             </div>
                             <br>
                             <div class="card card-body">

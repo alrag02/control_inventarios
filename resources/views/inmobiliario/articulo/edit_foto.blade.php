@@ -12,7 +12,7 @@
                             <div class="row">
                                 <div class="form-group">
                                     <label for="fk_foto">Imagen Actual</label>
-                                    <img src="{{$articulo->foto ? asset('thumbnail/'.$articulo->foto->image.'.jpg') : '#'}}" alt="" width="120px " class="card-image-top mx-auto d-block P-2">
+                                    <img src="{{$articulo->foto ? asset('thumbnail/'.$articulo->foto->image.'.jpg') : asset('icons/no-image-available.png')}}" alt="" width="120px " class="card-image-top mx-auto d-block P-2">
                                 </div>
                             </div>
                     </div>
@@ -42,7 +42,7 @@
                                 <div class="form-group">
                                     <label for="lbl_image">Imagen</label>
                                     <input type="file" id="lbl_image" name="image" class="form-control" required>
-                                    <small>Por motivos de almacenamiento, la  foto será modifcada para que tenga una resolución menor</small>
+                                    <small>Por motivos de almacenamiento, la foto será modificada para que tenga una resolución menor</small>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Subir</button>
@@ -59,18 +59,22 @@
                         <p>Presione "Agregar" en la fila de la foto que desee vincular</p>
                     </div>
                     <div class="card-body">
+                        <div class="div-search">
+                            <!-- //Este campo se llena automaticamente -->
+                        </div>
+                        <br>
                         <div class="row">
                             <form method="POST" action="{{route('inmobiliario.articulo.update_foto',$articulo->id )}}" enctype="multipart/form-data">
                                 {{method_field('PATCH')}}
                                 @csrf
 
-                                <table id="table-edit" class="table table-bordered table-striped">
+                                <table id="table-datatable-foto" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>Img</th>
                                     <th>Acción</th>
                                     <th>Descripción</th>
-                                    <th>Familia</th>
+                                    <th class="col-search-select">Familia</th>
                                     <th>Fecha subida</th>
                                     <th>Actualizado a</th>
                                 </tr>

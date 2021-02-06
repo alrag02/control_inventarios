@@ -70,8 +70,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('/area', 'areaController');
 
         //Seccion de "articulo"
-              Route::get('articulo/search', [articuloController::class, 'search'])->name('articulo.search');
-              Route::get('articulo/show_search', [articuloController::class, 'show_search'])->name('articulo.show_search');
+         //     Route::get('articulo/search', [articuloController::class, 'search'])->name('articulo.search');
+         //     Route::get('articulo/show_search', [articuloController::class, 'show_search'])->name('articulo.show_search');
         Route::get('articulo/{id}/edit_foto', [articuloController::class, 'edit_foto'])->name('articulo.edit_foto');
         Route::patch('articulo/{id}/update_foto', [articuloController::class, 'update_foto'])->name('articulo.update_foto');
         Route::get('articulo/generateBarCode/{id}', [barcodeController::class, 'printBarCode'])->name('articulo.generateBarCode');

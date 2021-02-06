@@ -16,14 +16,18 @@
                         <h3>Galería de fotos</h3>
                     </div>
                     <div class="card-body">
+                        <div class="div-search">
+                            <!-- //Este campo se llena automaticamente -->
+                        </div>
+                        <br>
                         <div class="row">
-                            <table id="table-datatable-foto" class="table table-bordered table-striped table-foto">
+                            <table id="table-datatable-foto"  class="display">
                                 <thead>
                                 <tr>
                                     <th>Img</th>
                                     <th></th>
                                     <th>Descripción</th>
-                                    <th>Familia</th>
+                                    <th class="col-search-select">Familia</th>
                                     <th>Fecha subida</th>
                                     <th>Actualizado a</th>
                                 </tr>
@@ -38,6 +42,16 @@
                                         <td>{{$data->updated_at->format('d/M/Y h:i a')}}</td>
                                     </tr>
                                 @endforeach
+                                <tfoot>
+                                <tr>
+                                    <th>Img</th>
+                                    <th></th>
+                                    <th>Descripción</th>
+                                    <th>Familia</th>
+                                    <th>Fecha subida</th>
+                                    <th>Actualizado a</th>
+                                </tr>
+                                </tfoot>
                             </table>
 
                         </div> <!-- row / end -->

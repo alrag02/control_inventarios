@@ -16,28 +16,23 @@ use App\Models\Inmobiliario\tipo_compra;
 use App\Models\Inmobiliario\tipo_equipo;
 use App\Models\Inmobiliario\edificio;
 
+use Spatie\Permission\Models\Role;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Milon\Barcode\DNS1D;
 
 class articuloController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:crear inmobiliarios'], ['only' => ['create', 'store']]);
+        $this->middleware(['permission:editar inmobiliarios'], ['only' => ['edit', 'update', 'edit_foto', 'update_foto']]);
+        $this->middleware(['permission:consultar inmobiliarios'], ['only' => 'index']);
+        $this->middleware(['permission:eliminar inmobiliarios'], ['only' => 'destroy']);
+    }
+
     public function index()
     {
-        /*$articulo_has_empleado = DB::select("SELECT
-        encargo.nombre AS 'encargo_nombre',
-        empleado.nombre,
-        empleado.apellido_paterno,
-        empleado.apellido_materno,
-        empleado.nivel,
-        articulo_has_empleado.fk_articulo AS 'fk_articulo'
-        FROM articulo_has_empleado, empleado, encargo
-        WHERE articulo_has_empleado.fk_encargo = encargo.id
-        AND articulo_has_empleado.fk_empleado = empleado.id");
-        */
-
-        //$empleado = DB::select("SELECT empleado.nombre as 'nombre', empleado.apellido_paterno, empleado.apellido_materno, empleado.nivel FROM empleado");
-
         return view('inmobiliario.articulo.index', [
             'articulo' => articulo::all(),
             'area' => area::get(['id', 'nombre', 'vigencia']),
@@ -54,7 +49,7 @@ class articuloController extends Controller
         ]);
     }
 
-    public function search(){
+    /*public function search(){
         return view('inmobiliario.articulo.search');
     }
 
@@ -74,7 +69,7 @@ class articuloController extends Controller
             'edificio' => edificio::get(['id', 'nombre', 'vigencia']),
             'revision' => revision::all(),
         ]);
-    }
+    }*/
 
     public function create()
     {

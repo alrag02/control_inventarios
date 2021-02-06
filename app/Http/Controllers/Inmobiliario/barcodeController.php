@@ -10,23 +10,18 @@ use Milon\Barcode\DNS1D;
 
 class barcodeController extends Controller
 {
-
-    public function generateBarCode($id){
-        return (new DNS1D)->getBarcodeHTML($id, 'C128', '1','100', 'black', true);
-    }
-
-    public function _generdateBarcode(Request $request){
-        $id = $request->get('id');
-        $product = articulo::find($id);
-        return view('inmobiliario.articulo.get_barcode')->with('product',$product);
-    }
-
-    public function barcode($id)
+    public function __construct()
     {
-        return view('inmobiliario.articulo.get_barcode', [
-            'articulo' => articulo::find($id)]
-        );
+        $this->middleware(['permission:crear etiquetas'], ['only' => 'printBarCode']);
+
     }
+
+    /*
+     public function generateBarCode($id){
+         return (new DNS1D)->getBarcodeHTML($id, 'C128', '1','100', 'black', true);
+     }
+     */
+
     public function printBarCode($id){
 
         $data = articulo::find($id);
