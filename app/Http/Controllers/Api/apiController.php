@@ -40,13 +40,15 @@ class apiController extends Controller
             "area.nombre AS 'area_nombre', " .
             "departamento.nombre AS 'departamento_nombre', " .
             "edificio.nombre AS 'edificio_nombre', " .
-            "oficina.nombre AS 'oficina_nombre' " .
-            "FROM articulo,estado,area,departamento,edificio,oficina,users,revision " .
+            "oficina.nombre AS 'oficina_nombre', " .
+            "foto.image AS 'foto_nombre' ".
+            "FROM articulo,estado,area,departamento,edificio,oficina,users,revision,foto " .
             "WHERE articulo.vigencia = 1 " .
             "AND area.id = departamento.fk_area " .
             "AND departamento.id = articulo.fk_departamento " .
             "AND edificio.id = oficina.fk_edificio " .
             "AND oficina.id = articulo.fk_oficina " .
+            "AND foto.id = articulo.fk_foto " .
             "AND articulo.fk_estado = estado.id " .
             "AND articulo.fk_revision = revision.id ".
             "AND revision.fk_user = users.id " .
@@ -67,6 +69,7 @@ class apiController extends Controller
                     "FROM revision, corte, area, departamento, users ".
                     "WHERE revision.fk_corte = corte.id ".
                     "AND revision.fk_departamento = departamento.id ".
+                    "AND revision.vigencia = 1 ".
                     "AND departamento.fk_area = area.id ".
                     "AND users.work_id = '".$request->query('work_id')."' "
         );
@@ -93,13 +96,15 @@ class apiController extends Controller
             "area.nombre AS 'area_nombre', " .
             "departamento.nombre AS 'departamento_nombre', " .
             "edificio.nombre AS 'edificio_nombre', " .
-            "oficina.nombre AS 'oficina_nombre' " .
-            "FROM articulo,estado,area,departamento,edificio,oficina " .
+            "oficina.nombre AS 'oficina_nombre', " .
+            "foto.image AS 'foto_nombre' ".
+            "FROM articulo,estado,area,departamento,edificio,oficina,foto " .
             "WHERE articulo.vigencia = 1 " .
             "AND area.id = departamento.fk_area " .
             "AND departamento.id = articulo.fk_departamento " .
             "AND edificio.id = oficina.fk_edificio " .
             "AND oficina.id = articulo.fk_oficina " .
+            "AND foto.id = articulo.fk_foto " .
             "AND articulo.fk_estado = estado.id " .
             "AND articulo.etiqueta_local = '" . $request->query('etiqueta_local') . "'");
         return response()->json($query, 201);
@@ -125,8 +130,9 @@ class apiController extends Controller
                 "area.nombre AS 'area_nombre', " .
                 "departamento.nombre AS 'departamento_nombre', " .
                 "edificio.nombre AS 'edificio_nombre', " .
-                "oficina.nombre AS 'oficina_nombre' " .
-                "FROM articulo,estado,area,departamento,edificio,oficina,users,revision " .
+                "oficina.nombre AS 'oficina_nombre', " .
+                "foto.image AS 'foto_nombre' ".
+                "FROM articulo,estado,area,departamento,edificio,oficina,users,revision,foto " .
                 "WHERE articulo.vigencia = 1 " .
                 "AND area.id = departamento.fk_area " .
                 "AND departamento.id = articulo.fk_departamento " .
@@ -134,6 +140,7 @@ class apiController extends Controller
                 "AND oficina.id = articulo.fk_oficina " .
                 "AND articulo.fk_estado = estado.id " .
                 "AND articulo.fk_revision = revision.id " .
+                "AND foto.id = articulo.fk_foto " .
                 "AND revision.fk_user = users.id " .
                 "AND revision.id = ".$request->query('revision')." ");
         return response()->json($query, 201);

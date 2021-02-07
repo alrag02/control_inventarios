@@ -19,6 +19,8 @@ class CreateRevisionTable extends Migration
             $table->integer('fk_corte')->nullable();
             $table->integer('fk_departamento')->nullable();
             $table->timestamps();
+            $table->boolean('vigencia')->nullable();
+
         });
     }
 

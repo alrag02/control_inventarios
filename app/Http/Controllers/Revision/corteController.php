@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Inmobiliario\articulo;
 use App\Models\Revision\corte;
 use App\Models\Revision\disponibilidad_articulo;
+use App\Models\Revision\revision;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -60,6 +61,13 @@ class corteController extends Controller
 
         $data->save();
         $this->store_excel_corte($data->llave);
+
+        //Invalidar todos las revisiones anteriores
+        foreach (revision::all() as $rev){
+            $rev->vigencia = 0;
+            $rev->save();
+        }
+
         //Actualizar tods los articulos para que aparecan sin revisar,
         foreach (articulo::get() as $disp_art){
             //Reiniciar disponibilidad

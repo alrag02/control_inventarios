@@ -14,7 +14,8 @@ class revision extends Model
     protected $fillable = [
         'fk_user',
         'fk_corte',
-        'fk_departamento'
+        'fk_departamento',
+        'vigencia'
     ];
 
     public function user()

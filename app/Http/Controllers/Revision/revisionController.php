@@ -14,6 +14,7 @@ use App\Models\Inmobiliario\familia;
 use App\Models\Inmobiliario\oficina;
 use App\Models\Inmobiliario\tipo_compra;
 use App\Models\Inmobiliario\tipo_equipo;
+use App\Models\Revision\articulo_has_revision;
 use App\Models\Revision\corte;
 use App\Models\Revision\disponibilidad_articulo;
 use App\Models\Revision\revision;
@@ -60,7 +61,7 @@ class revisionController extends Controller
         ]);
     }
 
-    /*
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -70,19 +71,45 @@ class revisionController extends Controller
     {
         //Almacenar las revisiones
         $data = new revision();
+
+        //Almacenar el usuario al que se le asignan las revisiones
         $data->fk_user = $request->fk_user;
+
+        //Asignarle a qué corte pertenece esta revision, siempre será el más reciente
         $data->fk_corte = corte::latest()->first()['id'];
+
+        //Asignarle el departamento
         $data->fk_departamento = $request->fk_departamento;
+
+        //Decirle que esta revision está vigente
+        $data->vigencia  = 1;
+
+        //Guardar datos en revision, ahora modifica los artículos
         if ($data->save()){
-            //->whereBetween('fecha_adquisiscion', array($request->fk_fecha_adquisiscion_inicio, $request->fk_fecha_adquisiscion_final ))
+
+            //Por cada artículo dentro del departamento asignado
             foreach (
                 articulo::where('fk_departamento', $request->fk_departamento)
+                    ->where('vigencia',1)
                     ->get() as $disp_art){
+
+                //Guardar en tabla articulo_has_revision
+                $ahr = new articulo_has_revision();
+                $ahr->fk_revision = $data->id;
+                $ahr->fk_articulo = $disp_art->id;
+                $ahr->save();
+
+                //Si no ha sido revisado anteriormente, decirle que está en revision
+                //Ademas de agregarle la hora y fecha del cambio de disponibilidad
                 if ($disp_art->disponibilidad != 'revisado'){
                     $disp_art->disponibilidad = 'en_revision';
                     $disp_art->disponibilidad_updated_at = date("Y-m-d h:i:s");
                 }
+
+                //Almacena el id de la revision recien creada
                 $disp_art->fk_revision = $data->id;
+
+                //Debido a que no se está modificando el artículo, sino solo su estado, desactivar timestamps
                 $disp_art->timestamps = false;
                 $disp_art->save();
             }
