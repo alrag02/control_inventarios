@@ -71,6 +71,7 @@ class apiController extends Controller
                     "AND revision.fk_departamento = departamento.id ".
                     "AND revision.vigencia = 1 ".
                     "AND departamento.fk_area = area.id ".
+                    "AND revision.fk_user = users.id ".
                     "AND users.work_id = '".$request->query('work_id')."' "
         );
 
