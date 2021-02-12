@@ -279,9 +279,7 @@
                                         <div class="col-md-4">
                                             <div class="card card-body">
                                                 <h4 class="card-title">Datos de Adquisición</h4>
-                                                <!--
-                                                                                            </div>
-
+                                                </div>
                                                 <label for="inv_camp_fecha_adquisiscion">Etiqueta</label>
                                                 <div class="form-row">
                                                     <div class="container text-center bg-light p-2">
@@ -290,7 +288,6 @@
                                                         }}" alt="barcode" />
                                                     </div>
                                                 </div>
-                                                -->
                                                 <div class="form-row">
                                                     <!-- fecha_adquisiscion -->
                                                     <div class="form-group col-md-12">

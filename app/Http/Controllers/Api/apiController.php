@@ -58,6 +58,40 @@ class apiController extends Controller
 
     }
 
+    public function ConsultarArticulosPorEtiquetaExterna(Request $request){
+        $query = DB::select("SELECT " .
+            "articulo.id, " .
+            "articulo.etiqueta_local, " .
+            "articulo.etiqueta_externa, " .
+            "articulo.concepto, " .
+            "articulo.marca, " .
+            "articulo.modelo, " .
+            "articulo.descripcion, " .
+            "articulo.numero_serie, " .
+            "articulo.color, " .
+            "articulo.cantidad, " .
+            "articulo.placas, " .
+            "articulo.observaciones, " .
+            "articulo.disponibilidad, " .
+            "estado.nombre AS 'estado_nombre', " .
+            "area.nombre AS 'area_nombre', " .
+            "departamento.nombre AS 'departamento_nombre', " .
+            "edificio.nombre AS 'edificio_nombre', " .
+            "oficina.nombre AS 'oficina_nombre', " .
+            "foto.image AS 'foto_nombre' ".
+            "FROM articulo,estado,area,departamento,edificio,oficina,foto " .
+            "WHERE articulo.vigencia = 1 " .
+            "AND area.id = departamento.fk_area " .
+            "AND departamento.id = articulo.fk_departamento " .
+            "AND edificio.id = oficina.fk_edificio " .
+            "AND oficina.id = articulo.fk_oficina " .
+            "AND foto.id = articulo.fk_foto " .
+            "AND articulo.fk_estado = estado.id " .
+            "AND articulo.etiqueta_externa = '" . $request->query('etiqueta_externa') . "'");
+
+        return response()->json($query, 201);
+    }
+
     public function ConsultarRevisionesPorWorkId(Request $request){
         $query = DB::select("SELECT ".
                     "revision.id, ".

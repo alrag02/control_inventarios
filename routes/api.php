@@ -49,6 +49,9 @@ Route::post('ConsultarDetallesArticuloPorEtiquetaLocal',
 Route::post('ConsultarArticulosPorRevision',
     [Api\apiController::class, 'ConsultarArticulosPorRevision']);
 
+Route::post('ConsultarArticulosPorEtiquetaExterna',
+    [Api\apiController::class, 'ConsultarArticulosPorEtiquetaExterna']);
+
 Route::post('ComprobarArticuloExiste',
     [Api\apiController::class, 'ComprobarArticuloExiste']);
 

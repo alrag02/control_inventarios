@@ -26,15 +26,22 @@ class barcodeController extends Controller
 
         $data = articulo::find($id);
 
-        $view = '<table style="margin-bottom: 60px;" >'.
-                '<tr><td style="text-align: center">'.$data->concepto.'</td></tr>'.
-                '<tr><td>'.(new DNS1D)->getBarcodeHTML($data->etiqueta_local, 'C128','1','60').'</td></tr>'.
-                '<tr><td style="text-align: center">'.$data->etiqueta_local.'</td></tr>'.
-                '<tr><td style="text-align: center">'.$data->departamento->nombre.'</td></tr>'.
-                '</table>';
+        $view_html ='<table style="margin-bottom: 30px;" >'.
+                    '<tr><td style="text-align: center">'.$data->concepto.'</td></tr>'.
+                    '<tr><td>'.(new DNS1D)->getBarcodeHTML($data->etiqueta_local, 'C128','1','60').'</td></tr>'.
+                    '<tr><td style="text-align: center">'.$data->etiqueta_local.'</td></tr>'.
+                    '<tr><td style="text-align: center">'.$data->departamento->nombre.'</td></tr>'.
+                    '</table>';
+
+        $view_png = '<table style="margin-bottom: 30px;" >'.
+                    '<tr><td style="text-align: center">'.$data->concepto.'</td></tr>'.
+                    '<tr><td><img src="data:image/png;base64,'.(new DNS1D)->getBarcodePNG($data->etiqueta_local, 'C128','1','60',array(1,1,1)).'" alt="barcode" /></td></tr>'.
+                    '<tr><td style="text-align: center">'.$data->etiqueta_local.'</td></tr>'.
+                    '<tr><td style="text-align: center">'.$data->departamento->nombre.'</td></tr>'.
+                    '</table>';
 
         $pdf = app('dompdf.wrapper');
-        $pdf->loadHTML($view.$view.$view.$view.$view, 'UTF-8');
+        $pdf->loadHTML($view_html.$view_html.$view_html.$view_png.$view_png.$view_png, 'UTF-8');
         return $pdf->stream();
     }
 }

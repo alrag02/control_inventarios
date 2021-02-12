@@ -46,7 +46,8 @@
                             </div>
                         </div>
                         <br>
-                        <table id="table-datatable-articulo" class="table table-bordered table-striped" >
+
+                        <table id="table-datatable-articulo" class="table table-bordered table-striped">
                             <thead class="thead-dark">
                             <tr>
 
