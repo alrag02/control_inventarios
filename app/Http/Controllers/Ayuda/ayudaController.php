@@ -11,4 +11,29 @@ class ayudaController extends Controller
     {
         return view('ayuda.index');
     }
+
+    public function articulos()
+    {
+        return view('ayuda.articulos');
+    }
+
+    public function conceptos()
+    {
+        return view('ayuda.conceptos');
+    }
+
+    public function cortes()
+    {
+        return view('ayuda.cortes');
+    }
+
+    public function revisiones()
+    {
+        return view('ayuda.revisiones');
+    }
+
+    public function movil()
+    {
+        return view('ayuda.movil');
+    }
 }

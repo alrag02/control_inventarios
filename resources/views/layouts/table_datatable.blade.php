@@ -193,6 +193,12 @@
             //Responsivo (Para evitar que la tabla se salga de la página)
             responsive: true,
 
+            //Mostrar pantalla de carga
+            "processing": true,
+		
+
+	"paging": true,
+
             //Configuración del tipo de documento
             dom: 'lBfrtip',
 

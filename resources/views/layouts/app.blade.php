@@ -12,12 +12,13 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery.js')}}"></script>
+	    <script type="text/javascript" src="{{ asset('js/mdb.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/datatables.min.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('js/dataTables.buttons.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/dataTables.responsive.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/dataTables.buttons.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/dataTables.select.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/dataTables.searchPanes.min.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('js/mdb.min.js')}}"></script>
+
 
     <!-- Styles -->
     <link href="{{ url('css/app.css') }}" rel="stylesheet">

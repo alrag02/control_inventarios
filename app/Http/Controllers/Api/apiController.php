@@ -184,6 +184,7 @@ class apiController extends Controller
     public function ComprobarArticuloExiste(Request $request)
     {
         $query = DB::table('articulo')
+				->where('vigencia', 1)
                 ->where('etiqueta_local', $request->query('etiqueta_local'))
                 ->count() > 0;
         return response()->json($query, 201);
@@ -201,13 +202,12 @@ class apiController extends Controller
     public function ComprobarArticuloPerteneceRevision(Request $request){
 
         $query  = DB::table('articulo')
-                ->where('vigencia', '=', 1)
                 ->join('revision', 'articulo.fk_revision', '=', 'revision.id')
                 ->join('users', 'revision.fk_user', '=', 'users.id')
-                ->where('work_id', '=', "".$request->query("work_id")."")
-                ->where('etiqueta_local', '=', "".$request->query("etiqueta_local"))
+                ->where('users.work_id', "".$request->query("work_id")."")
+                ->where('etiqueta_local', "".$request->query("etiqueta_local")."")
                 ->get("articulo.id")
-                ->count() > 0;
+				->count() > 0;
 
         return response()->json($query, 201);
     }

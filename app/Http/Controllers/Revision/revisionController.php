@@ -195,9 +195,30 @@ class revisionController extends Controller
         ]);
     }
 
-    public function get_excel_revision($id){
+    public function get_excel_revision(Request $request, $id){
 
-        return Excel::download(new revisionExportController($id),''.date("Y-m-d_h:i:s").'reporte_'.$id.'.xlsx');
+
+        $area = DB::table('area')
+                ->join('departamento', 'area.id', '=', 'departamento.fk_area')
+                ->join('revision', 'departamento.id', '=', 'revision.fk_departamento')
+                ->where('revision.id', $id)
+                ->pluck("area.nombre")
+                ->first();
+
+        $departamento = DB::table('departamento')
+            ->join('revision', 'departamento.id', '=', 'revision.fk_departamento')
+            ->where('revision.id', $id)
+            ->pluck("departamento.nombre")
+            ->first();
+
+        $elaboro = $request->elaboro;
+        $autorizo = $request->autorizo;
+        $responsable_area = $request->responsable_area;
+        $responsable = $request->responsable;
+        $resguardante = $request->resguardante;
+        $visto_bueno = $request->visto_bueno;
+
+        return Excel::download(new revisionExportController($id, $area, $departamento, $elaboro, $autorizo, $responsable_area, $responsable, $resguardante, $visto_bueno),''.date("Y-m-d_h:i:s").'_reporte_'.$id.'.xlsx');
     }
 
     public function cambiar_disponibilidad_articulo(Request $request, $id){

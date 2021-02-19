@@ -41,7 +41,7 @@
                                         </div>
                                         <div class="card-footer">
                                             <a href="{{url('/revision/'.$nombre_concepto.'/'.$data->id.'/show_details')}}" class="btn btn-primary">Detalles</a>
-                                            <a href="{{url('/revision/'.$nombre_concepto.'/'.$data->id.'/get_excel_revision')}}" class="btn btn-success">Generar reporte (Excel)</a>
+                                            @include('revision.revision.modal_export')
                                         </div>
                                     </div>
                                 </div>

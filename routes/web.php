@@ -46,7 +46,11 @@ Route::group(['middleware' => ['auth']], function () {
 
         //Indice para "Ayuda"
         Route::get('/', [ayudaController::class, 'index'])->name('index');
-
+        Route::get('/articulos', [ayudaController::class, 'articulos'])->name('articulos');
+        Route::get('/conceptos', [ayudaController::class, 'conceptos'])->name('conceptos');
+        Route::get('/cortes', [ayudaController::class, 'cortes'])->name('cortes');
+        Route::get('/revisiones', [ayudaController::class, 'revisiones'])->name('revisiones');
+        Route::get('/movil', [ayudaController::class, 'movil'])->name('movil');
 
     });
 
@@ -104,9 +108,6 @@ Route::group(['middleware' => ['auth']], function () {
 
         //Seccion de "foto"
         Route::resource('/foto', 'fotoController');
-
-        //Route::post('foto/store', [fotoController::class, 'store'])->name('foto.store');
-        //Route::get('foto/create', [fotoController::class, 'create'])->name('foto.create');
 
     });
 
