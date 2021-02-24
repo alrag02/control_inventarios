@@ -11,7 +11,7 @@
                     <div class="card-header">
                         <div class="form-row">
                             <div class="col-lg-2">
-                                <img class="card-img-left mx-auto d-block" src=" https://www.flaticon.com/svg/static/icons/svg/1642/1642054.svg " style="width: 48px; " alt="">
+                                <img class="card-img-left mx-auto d-block" src="{{asset('icons/menu/area.png')}}" style="width: 48px; " alt="">
                             </div>
                             <div class="col-lg-7">
                                 <h1>{{ __('Lista de '.$nombre_concepto.'s') }}</h1>

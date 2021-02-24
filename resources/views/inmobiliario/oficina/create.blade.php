@@ -8,7 +8,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
-                    <img class="card-img-top mx-auto d-block" src="https://www.flaticon.com/svg/static/icons/svg/2966/2966479.svg" style="width: 96px;  margin: 1em" alt="Card image cap">
+                    <img class="card-img-top mx-auto d-block" src="{{asset('icons/menu/oficina.png')}}" style="width: 96px;  margin: 1em" alt="Card image cap">
 
                     <div class="card-header"> <h1>{{ __('Cree un nuevo '.$nombre_concepto) }}</h1> </div>
 
