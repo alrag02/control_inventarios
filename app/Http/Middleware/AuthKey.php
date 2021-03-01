@@ -16,9 +16,9 @@ class AuthKey
      */
     public function handle(Request $request, Closure $next)
     {
-        $token = $request->header('APP_KEY');
-        if($token != env("APP_KEY")){
-            return response()->json(['message' => 'No se encontró la App Key'], 401);
+        $token = $request->header('APPKEY');
+        if($token != config('app.key')){
+            return response()->json(['message' => 'Acceso no autorizado'], 401);
         }
         return $next($request);
     }

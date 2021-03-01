@@ -22,53 +22,44 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/',
     [Api\apiController::class, 'home']);
-//Route::apiResource('revision/{id_user}','Revision\revisionApi');
-
-//Route::post('login', 'movil\ApiRest@login');
-//Route::apiResource('articulo','Inmobiliario\articuloController');
-
-//Route::apiResource('departamento','Inmobiliario\departamentoController');
-
-
-// Route::get('articles',           [Api\articuloApiController::class, 'index']);
-// Route::get('articles/{article}', [Api\articuloApiController::class, 'show']);
-// Route::put('articles/{article}', [Api\articuloApiController::class, 'update']);
 
 Route::post('login',
     [Api\apiController::class, 'login']);
 
 Route::post('ConsultarArticulosPorWorkId',
-    [Api\apiController::class, 'ConsultarArticulosPorWorkId']);
-
-Route::post('ConsultarRevisionesPorWorkId',
-    [Api\apiController::class, 'ConsultarRevisionesPorWorkId']);
+    [Api\articuloApiController::class, 'ConsultarArticulosPorWorkId']);
 
 Route::post('ConsultarDetallesArticuloPorEtiquetaLocal',
-    [Api\apiController::class, 'ConsultarDetallesArticuloPorEtiquetaLocal']);
+    [Api\articuloApiController::class, 'ConsultarDetallesArticuloPorEtiquetaLocal']);
 
 Route::post('ConsultarArticulosPorRevision',
-    [Api\apiController::class, 'ConsultarArticulosPorRevision']);
+    [Api\articuloApiController::class, 'ConsultarArticulosPorRevision']);
 
 Route::post('ConsultarArticulosPorEtiquetaExterna',
-    [Api\apiController::class, 'ConsultarArticulosPorEtiquetaExterna']);
+    [Api\articuloApiController::class, 'ConsultarArticulosPorEtiquetaExterna']);
 
 Route::post('ComprobarArticuloExiste',
-    [Api\apiController::class, 'ComprobarArticuloExiste']);
+    [Api\articuloApiController::class, 'ComprobarArticuloExiste']);
 
 Route::post('ObtenerDisponibilidadArticulo',
-    [Api\apiController::class, 'ObtenerDisponibilidadArticulo']);
+    [Api\articuloApiController::class, 'ObtenerDisponibilidadArticulo']);
 
 Route::post('ComprobarArticuloPerteneceRevision',
-    [Api\apiController::class, 'ComprobarArticuloPerteneceRevision']);
+    [Api\articuloApiController::class, 'ComprobarArticuloPerteneceRevision']);
 
 Route::post('EditarDisponblidadArticulo',
-    [Api\apiController::class, 'EditarDisponblidadArticulo']);
-
-Route::post('ObtenerEstados',
-    [Api\apiController::class, 'ObtenerEstados']);
-
-Route::post('ObtenerUbicaciones',
-    [Api\apiController::class, 'ObtenerUbicaciones']);
+    [Api\articuloApiController::class, 'EditarDisponblidadArticulo']);
 
 Route::post('EditarDetallesArticulo',
-    [Api\apiController::class, 'EditarDetallesArticulo']);
+    [Api\articuloApiController::class, 'EditarDetallesArticulo']);
+
+Route::post('ConsultarRevisionesPorWorkId',
+    [Api\revisionApiController::class, 'ConsultarRevisionesPorWorkId']);
+
+Route::post('ObtenerEstados',
+    [Api\estadoApiController::class, 'ObtenerEstados']);
+
+Route::post('ObtenerUbicaciones',
+    [Api\oficinaApiController::class, 'ObtenerUbicaciones']);
+
+
