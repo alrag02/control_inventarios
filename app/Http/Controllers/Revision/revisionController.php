@@ -57,7 +57,8 @@ class revisionController extends Controller
             'revision' => revision::all(),
             'user' => User::all(),
             'corte' => corte::all(),
-            'departamento' => departamento::all()
+            'departamento' => departamento::all(),
+            'oficina' => oficina::all(),
         ]);
     }
 
