@@ -9,6 +9,8 @@
 
                     <div class="card-body">
                         <ul>
+                            <li><a href="{{route('ayuda.inicio')}}">Inicio de sesión</a></li>
+                            <li><a href="{{route('ayuda.usuarios')}}">Control de usuarios</a></li>
                             <li><a href="{{route('ayuda.articulos')}}">Edición y consulta de artículos</a></li>
                             <li><a href="{{route('ayuda.conceptos')}}">Edición y consulta de conceptos</a></li>
                             <li><a href="{{route('ayuda.cortes')}}">Creación de cortes de caja de inventarios</a></li>
