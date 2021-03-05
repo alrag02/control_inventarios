@@ -20,7 +20,7 @@ class UsersWithPermissions extends Seeder
             'last_name_m' => 'Gonzañes',
             'work_id' => 'wid02',
             'email' => 'NineBaboon@maildrop.cc',
-            'password' => "$2y$10$LxP03/KKYdxxpTmn5gFi0et6Sk1D1OkF5T38BnfTw.enxuWeEe3Oi"
+            'password' => '$2y$10$LxP03/KKYdxxpTmn5gFi0et6Sk1D1OkF5T38BnfTw.enxuWeEe3Oi'
         ]);
         $predefUser->assignRole('consultor');
 
@@ -30,7 +30,7 @@ class UsersWithPermissions extends Seeder
             'last_name_m' => 'Montelongo',
             'work_id' => 'wid03',
             'email' => 'osacar.montelongo@lagos.tecmm.edu.mx',
-            'password' => "$2y$10$LxP03/KKYdxxpTmn5gFi0et6Sk1D1OkF5T38BnfTw.enxuWeEe3Oi"
+            'password' => '$2y$10$LxP03/KKYdxxpTmn5gFi0et6Sk1D1OkF5T38BnfTw.enxuWeEe3Oi'
         ]);
         $predefUser_2->assignRole('editor');
 
@@ -40,7 +40,7 @@ class UsersWithPermissions extends Seeder
             'last_name_m' => 'Tovar',
             'work_id' => 'wid01',
             'email' => 'agpf5@outlook.com',
-            'password' => "$2y$10$LxP03/KKYdxxpTmn5gFi0et6Sk1D1OkF5T38BnfTw.enxuWeEe3Oi"
+            'password' => '$2y$10$LxP03/KKYdxxpTmn5gFi0et6Sk1D1OkF5T38BnfTw.enxuWeEe3Oi'
         ]);
         $predefUser_3->assignRole('admin');
     }
