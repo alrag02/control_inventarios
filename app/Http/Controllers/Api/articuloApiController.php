@@ -41,7 +41,8 @@ class articuloApiController extends Controller
             "AND articulo.fk_estado = estado.id " .
             "AND articulo.fk_revision = revision.id ".
             "AND revision.fk_user = users.id " .
-            "AND users.work_id = '" . $request->query('work_id') . "'");
+            "AND users.work_id = '" . $request->query('work_id') . "' ".
+            "ORDER BY articulo.etiqueta_local");
 
         return response()->json($query, 201);
 
@@ -77,7 +78,7 @@ class articuloApiController extends Controller
             "AND foto.id = articulo.fk_foto " .
             "AND articulo.fk_estado = estado.id " .
             "AND articulo.etiqueta_externa = '" . $request->query('etiqueta_externa') . "' " .
-            "ORDER BY articulo.id");
+            "ORDER BY articulo.etiqueta_local");
 
         return response()->json($query, 201);
     }
@@ -147,7 +148,8 @@ class articuloApiController extends Controller
             "AND articulo.fk_revision = revision.id " .
             "AND foto.id = articulo.fk_foto " .
             "AND revision.fk_user = users.id " .
-            "AND revision.id = ".$request->query('revision')." ");
+            "AND revision.id = ".$request->query('revision')."  " .
+            "ORDER BY articulo.etiqueta_local");
         return response()->json($query, 201);
     }
 
