@@ -12,6 +12,16 @@ class ayudaController extends Controller
         return view('ayuda.index');
     }
 
+    public function inicio()
+    {
+        return view('ayuda.inicio');
+    }
+
+    public function usuarios()
+    {
+        return view('ayuda.usuarios');
+    }
+
     public function articulos()
     {
         return view('ayuda.articulos');

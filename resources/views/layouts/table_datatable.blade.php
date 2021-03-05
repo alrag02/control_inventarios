@@ -195,29 +195,36 @@
 
             //Mostrar pantalla de carga
             "processing": true,
-		
 
-	"paging": true,
+
+	        "paging": true,
 
             //Configuración del tipo de documento
             dom: 'lBfrtip',
 
             //Botones para exportación
             buttons: [
-                { extend: 'searchPanes', text: 'Búsqueda Avanzada'
-                },
-                //{ extend: 'csv', text: 'CSV' },
-                { extend: 'excel', text: 'Exportar (.xlsx)',
+                /*
+                {
+                    extend: 'searchPanes'
+                },*/
+                {
+                    extend: 'excel', text: 'Exportar (.xlsx)',
                     exportOptions: {
                         columns: ':not(.not-export-col)'
                     }
                 },
-                { extend: 'pdf', text: 'Exportar (.pdf)', orientation: 'landscape',pageSize: 'LEGAL',
+                {
+                    extend: 'pdf', text: 'Exportar (.pdf)', orientation: 'landscape',pageSize: 'LEGAL',
                     exportOptions: {
                         columns: ':not(.not-export-col)'
                     }
                 },
-
+                {
+                    extend: 'colvis',
+                    columns: ':not(.not-search-col)',
+                    collectionLayout: 'fixed three-column',
+                },
             ],
 
             //Paneles de busqueda
@@ -239,9 +246,8 @@
                     let that = this;
 
                     let title = $(this.header()).text();
-
-                    $( '<label>' + title + '</label>', this.header() ).appendTo(".div-search-table");
-                    $( '<input class="form-control" type="text" placeholder="Search "/><br>', this.header() ).appendTo(".div-search-table").on( 'input', function () {
+                    $( '<label class="col-md-2">' + title + '</label>', this.header() ).appendTo("#div-search-table");
+                    $( '<input class="form-control col-md-2" type="text" placeholder="Buscar por ' + title + '"/>', this.header() ).appendTo("#div-search-table").on( 'input', function () {
                         if ( that.search() !== this.value ) {
                             that
                                 .search( this.value )
@@ -254,9 +260,9 @@
                     let column = this;
                     let title = $(column.header()).text();
 
-                    $( '<label>' + title + '</label>', this.header() ).appendTo(".div-search-table");
-                    let select = $('<select class="form-select"><option selected disabled class="font-italic font-weight-bold">Buscar por ' + title + '</option><option class="font-italic" value="">Cualquier ' + title + '</option></select><br>')
-                        .appendTo( ".div-search-table" )
+                    $( '<label class="col-md-2">' + title + '</label>', this.header() ).appendTo("#div-search-table");
+                    let select = $('<select class="form-select col-md-2"><option selected disabled class="font-italic font-weight-bold">Buscar por ' + title + '</option><option class="font-italic" value="">Cualquier ' + title + '</option></select><br>')
+                        .appendTo( "#div-search-table" )
                         .on( 'change', function () {
                             let val = $.fn.dataTable.util.escapeRegex(
                                 $(this).val()

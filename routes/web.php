@@ -46,6 +46,8 @@ Route::group(['middleware' => ['auth']], function () {
 
         //Indice para "Ayuda"
         Route::get('/', [ayudaController::class, 'index'])->name('index');
+        Route::get('/inicio', [ayudaController::class, 'inicio'])->name('inicio');
+        Route::get('/usuarios', [ayudaController::class, 'usuarios'])->name('usuarios');
         Route::get('/articulos', [ayudaController::class, 'articulos'])->name('articulos');
         Route::get('/conceptos', [ayudaController::class, 'conceptos'])->name('conceptos');
         Route::get('/cortes', [ayudaController::class, 'cortes'])->name('cortes');
