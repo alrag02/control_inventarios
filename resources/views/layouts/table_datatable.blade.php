@@ -152,7 +152,7 @@
             language: $spanish,
         });
 
-        $('#table-datatable-foto').DataTable({
+        $('#table-datatable-options').DataTable({
 
             //Responsivo
             responsive: true,
@@ -204,10 +204,6 @@
 
             //Botones para exportación
             buttons: [
-                /*
-                {
-                    extend: 'searchPanes'
-                },*/
                 {
                     extend: 'excel', text: 'Exportar (.xlsx)',
                     exportOptions: {
@@ -224,16 +220,16 @@
                     extend: 'colvis',
                     columns: ':not(.not-search-col)',
                     collectionLayout: 'fixed three-column',
-                },
-            ],
-
-            //Paneles de busqueda
-            columnDefs: [
-                {
-                    searchPanes: {
-                        show: true
+                    postfixButtons: [{
+                        extend: 'colvisGroup',
+                        text: '<b>Mostrar todo</b>',
+                        show: ':hidden'
                     },
-                    targets: [3,4,5,6,7,8,9,10,11,12]
+                        {
+                        extend: 'colvisGroup',
+                        text: '<b>Ocultar todo</b>',
+                        hide: ':not(.not-search-col)'
+                    }],
                 },
             ],
 

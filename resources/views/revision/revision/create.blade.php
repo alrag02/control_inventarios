@@ -8,6 +8,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
+                    @if ( count($corte) > 0 )
                     <div class="card-header"> <h1>{{ __('Crear una revision') }}</h1> </div>
                     <div class="card-body">
                         <form action="{{route('revision.'.$nombre_concepto.'.store')}}" method="POST" onsubmit="document.getElementById('btn_store').hidden = true; save();">
@@ -32,10 +33,26 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <!-- ubicacion -->
+                            <div class="form-group">
+                                <label for="inv_camp_fk_departamento">Ubicaciones</label>
+                                <select type="text" class="form-select" name="fk_ubicaciones" id="inv_camp_fk_ubicaciones" required>
+                                    <option selected disabled class="font-italic">Seleccione...</option>
+                                    @foreach($oficina as $data)
+                                        <option value="{{$data->id}}" >{{$data->nombre.'('.$data->edificio->nombre.')'}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         <!-- btn_store -->
                             <button type="submit" class="btn btn-primary" id="btn_store" >Guardar</button>
                         </form>
                     </div>
+                    @else
+                    <div class="card-header">Primero debe crear un corte nuevo</div>
+                    <div class="card-body">
+                        <a href="{{route('revision.corte.create')}}">Crear un corte nuevo</a>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>

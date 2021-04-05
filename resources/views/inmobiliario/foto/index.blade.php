@@ -21,7 +21,7 @@
                         </div>
                         <br>
                         <div class="row">
-                            <table id="table-datatable-foto"  class="display">
+                            <table id="table-datatable-options" class="display">
                                 <thead>
                                 <tr>
                                     <th>Img</th>

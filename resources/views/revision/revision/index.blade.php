@@ -22,31 +22,39 @@
 
                     </div>
                     <div class="card-body">
+                        <div class="div-search">
+                            <!-- //Este campo se llena automaticamente -->
+                        </div>
                         <div class="row">
-                            @foreach($revision as $data)
-                                <div class="col-lg-3">
-                                    <div class="card card-selection-revision">
-                                        <div class="card-header">
-                                            <h5>ID: {{$data->id}}</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <ul>
-                                                <li>Fecha: {{$data->created_at->format('d/M/Y h:i a')}}</li>
-                                                <li>Corte: {{$data->corte->nombre.', '.$data->corte->created_at}}</li>
-                                                <li>Num. Trabajador: {{$data->user->work_id}}</li>
-                                                <li>Usuario: {{$data->user->name.' '.$data->user->last_name_p}}</li>
-
-                                                <li>Departamento: {{$data->departamento->nombre}}</li>
-                                            </ul>
-                                        </div>
-                                        <div class="card-footer">
-                                            <a href="{{url('/revision/'.$nombre_concepto.'/'.$data->id.'/show_details')}}" class="btn btn-primary">Detalles</a>
-                                            @include('revision.revision.modal_export')
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-
+                            <table id="table-datatable-options" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Fecha</th>
+                                        <th>Corte</th>
+                                        <th>Num. Trabajador</th>
+                                        <th>Usuario</th>
+                                        <th>Departamento</th>
+                                        <th>Ubicación</th>
+                                        <th class="col-search-select">Vigencia</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                @foreach($revision as $data)
+                                    <tr>
+                                        <td>{{$data->id}}</td>
+                                        <td>{{$data->created_at->format('d/M/Y h:i a')}}</td>
+                                        <td>{{$data->corte->nombre.', '.$data->corte->created_at}}</td>
+                                        <td>{{$data->user->work_id}}</td>
+                                        <td>{{$data->user->name.' '.$data->user->last_name_p}}</td>
+                                        <td>{{$data->departamento->nombre}}</td>
+                                        <td></td>
+                                        <td>{{$data->vigencia == 1 ? 'Activo' : 'Inactivo'}}</td>
+                                        <td><a href="{{url('/revision/'.$nombre_concepto.'/'.$data->id.'/show_details')}}" class="btn btn-primary">Detalles</a>
+                                            @include('revision.revision.modal_export')</td>
+                                    </tr>
+                                @endforeach
+                            </table>
                         </div>
                     </div>
                 </div>
