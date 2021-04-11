@@ -79,8 +79,8 @@ class revisionController extends Controller
         //Asignarle a qué corte pertenece esta revision, siempre será el más reciente
         $data->fk_corte = corte::latest()->first()['id'];
 
-        //Asignarle el departamento
-        $data->fk_departamento = $request->fk_departamento;
+        //Asignarle la oficina
+        $data->fk_oficina = $request->fk_oficina;
 
         //Decirle que esta revision está vigente
         $data->vigencia  = 1;
@@ -88,9 +88,9 @@ class revisionController extends Controller
         //Guardar datos en revision, ahora modifica los artículos
         if ($data->save()){
 
-            //Por cada artículo dentro del departamento asignado
+            //Por cada artículo dentro de la oficna asignada
             foreach (
-                articulo::where('fk_departamento', $request->fk_departamento)
+                articulo::where('fk_oficina', $request->fk_oficina)
                     ->where('vigencia',1)
                     ->get() as $disp_art){
 

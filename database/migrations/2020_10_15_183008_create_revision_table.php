@@ -17,7 +17,7 @@ class CreateRevisionTable extends Migration
             $table->integer('id', true);
             $table->unsignedBigInteger('fk_user')->nullable();
             $table->integer('fk_corte')->nullable();
-            $table->integer('fk_departamento')->nullable();
+            $table->integer('fk_oficina')->nullable();
             $table->timestamps();
             $table->boolean('vigencia')->nullable();
 

@@ -14,7 +14,7 @@ class revision extends Model
     protected $fillable = [
         'fk_user',
         'fk_corte',
-        'fk_departamento',
+        'fk_oficina',
         'vigencia'
     ];
 
@@ -33,8 +33,8 @@ class revision extends Model
         return $this->hasMany('App\Models\Inmobiliario\articulo', 'fk_revision','id');
     }
 
-    public function departamento()
+    public function oficina()
     {
-        return $this->belongsTo('App\Models\Inmobiliario\departamento', 'fk_departamento','id');
+        return $this->belongsTo('App\Models\Inmobiliario\oficina', 'fk_oficina', 'id');
     }
 }

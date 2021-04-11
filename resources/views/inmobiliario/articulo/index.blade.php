@@ -204,7 +204,7 @@
                                         ' '.$user->where('id', $data->disponibilidad_updated_by)->implode('last_name_p','').
                                         ' '.$user->where('id', $data->disponibilidad_updated_by)->implode('last_name_m','').
                                         ' ('.' '.$user->where('id', $data->disponibilidad_updated_by)->implode('work_id','').')' : ''}}</td>
-                                    <td>{{$data->disponibilidad_updated_at->format('d/M/Y h:i a')}}</td>
+                                    <td>{{$data->disponibilidad_updated_at ? $data->disponibilidad_updated_at->format('d/M/Y h:i a') : ''}}</td>
 
                                     <!-- Revision -->
 

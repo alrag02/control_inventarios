@@ -15,7 +15,7 @@
                         @csrf
                         <!-- nombre -->
                             <div class="form-group">
-                                <label for="inv_camp_fk_user">Usuario Asignado</label>
+                                <label for="inv_camp_fk_user">Seleccione el usuario que realizará la revisión</label>
                                 <select type="text" class="form-select" name="fk_user" id="inv_camp_fk_user" required>
                                     <option selected disabled class="font-italic">Seleccione...</option>
                                     @foreach($user as $data)
@@ -23,7 +23,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                        <!-- fk_departamento -->
+                        <!-- fk_departamento --
                             <div class="form-group">
                                 <label for="inv_camp_fk_departamento">Departamento Asignado</label>
                                 <select type="text" class="form-select" name="fk_departamento" id="inv_camp_fk_departamento" required>
@@ -33,10 +33,11 @@
                                     @endforeach
                                 </select>
                             </div>
+                            -->
                             <!-- ubicacion -->
                             <div class="form-group">
-                                <label for="inv_camp_fk_departamento">Ubicaciones</label>
-                                <select type="text" class="form-select" name="fk_ubicaciones" id="inv_camp_fk_ubicaciones" required>
+                                <label for="inv_camp_fk_oficina">Seleccione la oficina</label>
+                                <select type="text" class="form-select" name="fk_oficina" id="inv_camp_fk_oficina" required>
                                     <option selected disabled class="font-italic">Seleccione...</option>
                                     @foreach($oficina as $data)
                                         <option value="{{$data->id}}" >{{$data->nombre.'('.$data->edificio->nombre.')'}}</option>

@@ -28,4 +28,9 @@ class oficina extends Model
     {
         return $this->hasMany('App\Models\Inmobiliario\articulo', 'fk_oficina','id');
     }
+
+    public function revision()
+    {
+        return $this->hasMany('App\Models\Revision\revision', 'fk_oficina','id');
+    }
 }

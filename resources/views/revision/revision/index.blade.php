@@ -34,21 +34,20 @@
                                         <th>Corte</th>
                                         <th>Num. Trabajador</th>
                                         <th>Usuario</th>
-                                        <th>Departamento</th>
-                                        <th>Ubicación</th>
+                                        <th>Oficina</th>
                                         <th class="col-search-select">Vigencia</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 @foreach($revision as $data)
                                     <tr>
-                                        <td>{{$data->id}}</td>
-                                        <td>{{$data->created_at->format('d/M/Y h:i a')}}</td>
-                                        <td>{{$data->corte->nombre.', '.$data->corte->created_at}}</td>
-                                        <td>{{$data->user->work_id}}</td>
-                                        <td>{{$data->user->name.' '.$data->user->last_name_p}}</td>
-                                        <td>{{$data->departamento->nombre}}</td>
-                                        <td></td>
+                                        <td>{{$data->id ?? "(Ninguno)"}}</td>
+                                        <td>{{$data->created_at ? $data->created_at->format('d/M/Y h:i a') : "(Ninguno)"}}</td>
+                                        <td>{{$data->corte ? $data->corte->nombre.', '.$data->corte->created_at : "(Ninguno"}}</td>
+                                        <td>{{$data->user->work_id ?? "(Ninguno)"}}</td>
+                                        <td>{{$data->user ? $data->user->name.' '.$data->user->last_name_p : "(Ninguno)"}}</td>
+                                        <td>{{$data->oficina->nombre ?? "(Ninguno)"}}</td>
+
                                         <td>{{$data->vigencia == 1 ? 'Activo' : 'Inactivo'}}</td>
                                         <td><a href="{{url('/revision/'.$nombre_concepto.'/'.$data->id.'/show_details')}}" class="btn btn-primary">Detalles</a>
                                             @include('revision.revision.modal_export')</td>
