@@ -13,31 +13,31 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Nombre</label>
-                                    <input type="text" name="name" required class="form-control" placeholder="Escriba el nombre">
+                                    <input type="text" name="name" required class="form-control" placeholder="Escriba el nombre" maxlength="100">
                                 </div>
                                 <div class="form-group">
                                     <label for="last_name_p">Apellido Paterno</label>
-                                    <input type="text" name="last_name_p" required class="form-control" placeholder="Escriba el primer apellido">
+                                    <input type="text" name="last_name_p" required class="form-control" placeholder="Escriba el primer apellido" maxlength="100">
                                 </div>
                                 <div class="form-group">
                                     <label for="last_name_m">Apellido Materno</label>
-                                    <input type="text" name="last_name_m" required class="form-control" placeholder="En caso de no tener, puede dejarlo en blanco">
+                                    <input type="text" name="last_name_m" required class="form-control" placeholder="En caso de no tener, puede dejarlo en blanco" maxlength="100">
                                 </div>
                                 <div class="form-group">
                                     <label for="work_id">ID de trabajador</label>
-                                    <input type="text" name="work_id" required class="form-control" placeholder="Codigo para poderse registrar">
+                                    <input type="text" name="work_id" required class="form-control" placeholder="Codigo para poderse registrar" maxlength="100">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Correo Electrónico</label>
-                                    <input type="text" name="email" class="form-control" placeholder="Correo de la institución (opcional)">
+                                    <input type="text" name="email" class="form-control" placeholder="Correo de la institución (opcional)" maxlength="255">
                                 </div>
                                 <div class="form-group">
                                     <label for="password_LOGIN">Escriba la nueva contraseña</label>
-                                    <input type="password" id="camp_password_LOGIN" name="password_LOGIN" min="8" required class="form-control" placeholder="Minimo 8 carácteres">
+                                    <input type="password" id="camp_password_LOGIN" name="password" min="8" required class="form-control" placeholder="Minimo 8 carácteres" maxlength="255">
                                 </div>
                                 <div class="form-group">
                                     <label for="password_repeat">Confirme la contraseña</label>
-                                    <input type="password" id="camp_password_repeat" name="password_repeat" min="8" required class="form-control" placeholder="Los dos campos deben coincidir">
+                                    <input type="password" id="camp_password_repeat" name="password_confirmation" min="8" required class="form-control" placeholder="Los dos campos deben coincidir" maxlength="255">
                                 </div>
                                 <div class="form-group">
                                     <label for="rol">Rol</label>

@@ -7,7 +7,6 @@
                     <div class="card">
                         <div class="card-header">
                             <h4>Cambiar datos de usuario</h4>
-                            <input type="submit" value="Guardar" class="btn btn-primary">
                         </div>
                         <div class="card-body">
                             <form action="{{ route('usuarios.registrados.update', $usuario->id) }}" method="post" autocomplete="off">
@@ -41,9 +40,11 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <input type="submit" value="Guardar" class="btn btn-primary">
                             </form>
                                 <div class="card-footer">
-                                    @can('eliminar usuarios')
+
+                                @can('eliminar usuarios')
                                     <div class="float-right">
                                         @include('usuarios.registrados.delete',["'usuario. " => $usuario->id])
                                     </div>
