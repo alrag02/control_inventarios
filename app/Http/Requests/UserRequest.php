@@ -24,9 +24,8 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        //To identify if request is for add or edit just take autoincremented id parameter form request.
 
-        $id = request('id') ?: 'NULL';
+        //$id = request('id') ?: 'NULL';
 
         switch ($this->method()){
             case 'POST':
@@ -37,13 +36,16 @@ class UserRequest extends FormRequest
                     'work_id' => 'required|string|unique:users|max:100',
                     'email' => 'nullable|email|max:255',
                     'password' => 'required|string|max:255|min:8|confirmed',
+                    'rol' => 'required'
                 ];
             case 'PUT':
                 return [
-                    'name' => 'required|string|max:100'.$id,
+                    'name' => 'required|string|max:100', //.$id,
                     'last_name_p' => 'required|string|max:100',
                     'last_name_m' => 'required|string|max:100',
                     'email' => 'nullable|email|max:255',
+                    'rol' => 'required'
+
                 ];
             default:
                 return [];
