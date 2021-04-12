@@ -18,12 +18,12 @@
                         <!-- nombre -->
                             <div class="form-group">
                                 <label for="inv_camp_nombre">Nombre del {{$nombre_concepto}}</label>
-                                <input type="text" class="form-control" name="nombre" id="inv_camp_nombre" placeholder="Inserte el nombre aquí" required>
+                                <input type="text" class="form-control" name="nombre" id="inv_camp_nombre" placeholder="Inserte el nombre aquí" required max="100">
                             </div>
                         <!-- nombre -->
                         <div class="form-group">
                             <label for="inv_camp_descripcion">Descripción</label>
-                            <input type="text" class="form-control" name="descripcion" id="inv_camp_descripcion" placeholder="Inserte la descripcion aquí" required>
+                            <input type="text" class="form-control" name="descripcion" id="inv_camp_descripcion" placeholder="Inserte la descripcion aquí" required max="255">
                         </div>
                         <!-- btn_store -->
                             <button type="submit" class="btn btn-primary" id="btn_store" >Guardar</button>

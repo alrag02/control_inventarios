@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Revision;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\revision\corteRequest;
 use App\Models\Inmobiliario\articulo;
 use App\Models\Revision\corte;
 use App\Models\Revision\disponibilidad_articulo;
@@ -46,7 +47,7 @@ class corteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(corteRequest $request)
     {
         //Obtener el dato
         $data = new corte();
@@ -59,31 +60,20 @@ class corteController extends Controller
         //Almacenar el dato y dirigir al index con mensaje,
         // si no puede almacenar, regresar a create con mensaje de error
 
-        $data->save();
-        $this->store_excel_corte($data->llave);
+        if ($data->save()){
+            $this->store_excel_corte($data->llave);
 
-        //Invalidar todos las revisiones anteriores
-        foreach (revision::all() as $rev){
-            $rev->vigencia = 0;
-            $rev->save();
+            //Invalidar todos las revisiones anteriores
+            $this->invalidadRevisionesAnteriores();
+
+            //Actualizar tods los articulos para que aparecan sin revisar,
+            $this->ponerArticulosSinRevisar();
+
+            return redirect("revision/corte")->with('message', 'Creado Correctamente');
+
+        }else{
+            return redirect("revision/corte/create")->with('message', 'Hubo un error');
         }
-
-        //Actualizar tods los articulos para que aparecan sin revisar,
-        foreach (articulo::get() as $disp_art){
-            //Reiniciar disponibilidad
-            $disp_art->disponibilidad = 'sin_revisar';
-            //Quitale la revision que estaba asignada
-            $disp_art->fk_revision = null;
-            //No aplicar los timestamps, porque no se modifican los datos del artículo, solo su disponibilidad
-            $disp_art->timestamps = false;
-            //Actualizar fecha, hora y usuario responsable
-            $disp_art->disponibilidad_updated_at = date("Y-m-d h:i:s");
-            $disp_art->disponibilidad_updated_by = Auth::id();
-
-            $disp_art->save();
-        }
-        return redirect("revision/corte")->with('message', 'Creado Correctamente');
-
     }
 
     /**
@@ -115,7 +105,7 @@ class corteController extends Controller
      * @param  \App\Models\Revision\corte  $corte
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(corteRequest $request, $id)
     {
         //Obtener el dato
 
@@ -143,6 +133,35 @@ class corteController extends Controller
     {
         echo 'No deberias de eliminar un corte';
     }
+
+    public function invalidadRevisionesAnteriores()
+    {
+        foreach (revision::all() as $data){
+            $data->vigencia = 0;
+            $data->save();
+        }
+    }
+
+   public function ponerArticulosSinRevisar(){
+       foreach (articulo::get() as $data){
+
+           //Reiniciar disponibilidad
+           $data->disponibilidad = 'sin_revisar';
+
+           //Quitale la revision que estaba asignada
+           $data->fk_revision = null;
+
+           //No aplicar los timestamps, porque no se modifican los datos del artículo, solo su disponibilidad
+           $data->timestamps = false;
+
+           //Actualizar fecha, hora y usuario responsable
+           $data->disponibilidad_updated_at = date("Y-m-d h:i:s");
+           $data->disponibilidad_updated_by = Auth::id();
+
+           $data->save();
+       }
+
+   }
 
     public function store_excel_corte($llave){
 
