@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Revision;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\revision\revisionRequest;
 use App\Models\Inmobiliario\area;
 use App\Models\Inmobiliario\articulo;
 use App\Models\Inmobiliario\departamento;
@@ -68,7 +69,7 @@ class revisionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(revisionRequest $request)
     {
         //Almacenar las revisiones
         $data = new revision();

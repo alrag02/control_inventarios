@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Http\Requests\revision;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+
+class revisionRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return Auth::check();
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'fk_user' => 'required|string|max:100',
+            'fk_oficina' => 'required|int'
+        ];
+    }
+}
