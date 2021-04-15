@@ -98,10 +98,12 @@ class articuloApiController extends Controller
             "articulo.placas, " .
             "articulo.observaciones, " .
             "articulo.disponibilidad, " .
+            "estado.id AS 'estado_id', " .
             "estado.nombre AS 'estado_nombre', " .
             "area.nombre AS 'area_nombre', " .
             "departamento.nombre AS 'departamento_nombre', " .
             "edificio.nombre AS 'edificio_nombre', " .
+            "oficina.id AS 'oficina_id', " .
             "oficina.nombre AS 'oficina_nombre', " .
             "foto.image AS 'foto_nombre' ".
             "FROM articulo,estado,area,departamento,edificio,oficina,foto " .
