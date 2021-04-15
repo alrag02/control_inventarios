@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Inmobiliario;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\inmobiliario\tipoCompraRequest;
 use App\Models\Inmobiliario\tipo_compra;
 use Illuminate\Http\Request;
 
@@ -43,7 +44,7 @@ class tipo_compraController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(tipoCompraRequest $request)
     {
         //Obtener el dato
 
@@ -90,7 +91,7 @@ class tipo_compraController extends Controller
      * @param  \App\Models\Inmobiliario\tipo_compra  $tipo_compra
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(tipoCompraRequest $request, $id)
     {
         //Obtener el dato
 

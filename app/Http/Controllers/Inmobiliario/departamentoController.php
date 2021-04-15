@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Inmobiliario;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\inmobiliario\departamentoRequest;
 use App\Models\Inmobiliario\area;
 use App\Models\Inmobiliario\departamento;
 use Illuminate\Http\Request;
@@ -43,7 +44,7 @@ class departamentoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(departamentoRequest $request)
     {
         $data = new departamento();
         $data->nombre = $request->nombre;
@@ -83,7 +84,7 @@ class departamentoController extends Controller
      * @param  \App\Models\Inmobiliario\departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(departamentoRequest $request, $id)
     {
         $data = departamento::find($id);
         $data->nombre = $request->nombre;

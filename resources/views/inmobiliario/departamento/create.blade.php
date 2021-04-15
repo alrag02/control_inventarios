@@ -19,7 +19,7 @@
                             <!-- nombre -->
                             <div class="form-group">
                                 <label for="inv_camp_nombre">Nombre del {{$nombre_concepto}}</label>
-                                <input type="text" class="form-control" name="nombre" id="inv_camp_nombre" placeholder="Inserte el nombre aquí" required>
+                                <input type="text" class="form-control" name="nombre" id="inv_camp_nombre" placeholder="Inserte el nombre aquí" required max="100">
                             </div>
                             <!-- fk_area -->
                             <div class="form-group">

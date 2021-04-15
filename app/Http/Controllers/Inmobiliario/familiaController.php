@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Inmobiliario;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\inmobiliario\familiaRequest;
 use App\Models\Inmobiliario\familia;
 use Illuminate\Http\Request;
 
@@ -43,7 +44,7 @@ class familiaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(familiaRequest $request)
     {
         //Obtener el dato
 
@@ -90,7 +91,7 @@ class familiaController extends Controller
      * @param  \App\Models\Inmobiliario\familia  $familia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(familiaRequest $request, $id)
     {
         //Obtener el dato
 

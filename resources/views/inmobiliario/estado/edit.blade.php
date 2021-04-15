@@ -17,7 +17,7 @@
                                 @csrf
                                 <!-- nombre -->
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="nombre" id="inv_camp_nombre" value="{{$estado->nombre}}" placeholder="Nombre" required>
+                                    <input type="text" class="form-control" name="nombre" id="inv_camp_nombre" value="{{$estado->nombre}}" placeholder="Nombre" required max="100">
                                 </div>
                                 <!-- vigencia -->
                                 <div class="form-group" @cannot('baja conceptos') hidden @endcan>

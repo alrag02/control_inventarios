@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Inmobiliario;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\inmobiliario\estadoRequest;
 use App\Models\Inmobiliario\estado;
 use Illuminate\Http\Request;
 
@@ -43,7 +44,7 @@ class estadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(estadoRequest $request)
     {
         //Obtener el dato
 
@@ -89,7 +90,7 @@ class estadoController extends Controller
      * @param  \App\Models\Inmobiliario\estado  $estado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(estadoRequest $request, $id)
     {
         //Obtener el dato
 

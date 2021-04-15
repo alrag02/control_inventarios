@@ -19,12 +19,12 @@
                             <!-- nombre -->
                             <div class="form-group">
                                 <label for="inv_camp_nombre">Nombre del {{$nombre_concepto}}</label>
-                                <input type="text" class="form-control" name="nombre" id="inv_camp_nombre" placeholder="Inserte el nombre aquí" required>
+                                <input type="text" class="form-control" name="nombre" id="inv_camp_nombre" placeholder="Inserte el nombre aquí" required max="100">
                             </div>
                             <!-- sigla -->
                             <div class="form-group">
                                 <label for="inv_camp_sigla">Nombre del {{$nombre_concepto}}</label>
-                                <input type="text" class="form-control" name="sigla" id="inv_camp_sigla" placeholder="Sigla" required>
+                                <input type="text" class="form-control" name="sigla" id="inv_camp_sigla" placeholder="Sigla" required max="100">
                             </div>
                             <!-- vigencia -->
                             <div class="form-group" @cannot('baja conceptos') hidden @endcan>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Inmobiliario;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\inmobiliario\areaRequest;
 use App\Models\Inmobiliario\area;
 use Illuminate\Http\Request;
 
@@ -47,7 +48,7 @@ class areaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(areaRequest $request)
     {
         //Obtener el dato
 
@@ -93,7 +94,7 @@ class areaController extends Controller
      * @param  \App\Models\Inmobiliario\area  $area
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(areaRequest $request, $id)
     {
         //Obtener el dato
 

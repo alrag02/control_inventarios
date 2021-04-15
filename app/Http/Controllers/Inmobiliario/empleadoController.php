@@ -51,7 +51,7 @@ class empleadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(empleadoRequest $request)
     {
         $data = new empleado();
         $data->nombre = $request->nombre;
@@ -96,7 +96,7 @@ class empleadoController extends Controller
      * @param  \App\Models\Inmobiliario\empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(empleadoRequest $request, $id)
     {
         $data = empleado::find($id);
         $data->nombre = $request->nombre;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Inmobiliario;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\inmobiliario\oficinaRequest;
 use App\Models\Inmobiliario\edificio;
 use App\Models\Inmobiliario\oficina;
 use Illuminate\Http\Request;
@@ -44,7 +45,7 @@ class oficinaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(oficinaRequest $request)
     {
         $data = new oficina();
         $data->nombre = $request->nombre;
@@ -84,7 +85,7 @@ class oficinaController extends Controller
      * @param  \App\Models\Inmobiliario\oficina  $oficina
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(oficinaRequest $request, $id)
     {
         $data = oficina::find($id);
         $data->nombre = $request->nombre;

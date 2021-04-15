@@ -17,11 +17,11 @@
                                 @csrf
                                 <!-- nombre -->
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="nombre" id="inv_camp_nombre" value="{{$tipo_compra->nombre}}" placeholder="Nombre" required>
+                                    <input type="text" class="form-control" name="nombre" id="inv_camp_nombre" value="{{$tipo_compra->nombre}}" placeholder="Nombre" required max="100">
                                 </div>
                                 <!-- sigla -->
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="sigla" id="inv_camp_sigla" value="{{$tipo_compra->sigla}}" placeholder="Sigla" required>
+                                    <input type="text" class="form-control" name="sigla" id="inv_camp_sigla" value="{{$tipo_compra->sigla}}" placeholder="Sigla" required max="100">
                                 </div>
                                 <!-- vigencia -->
                                 <div class="form-group" @cannot('baja conceptos') hidden @endcan>

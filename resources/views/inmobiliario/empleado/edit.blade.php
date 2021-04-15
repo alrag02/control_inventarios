@@ -19,17 +19,17 @@
                                     <!-- nombre -->
                                     <div class="col-lg-4">
                                         <label for="inv_camp_nombre">Nombre</label>
-                                        <input type="text" class="form-control" name="nombre" id="inv_camp_nombre" value="{{$empleado->nombre}}" placeholder="Nombre" required>
+                                        <input type="text" class="form-control" name="nombre" id="inv_camp_nombre" value="{{$empleado->nombre}}" placeholder="Nombre" required max="100">
                                     </div>
                                     <!-- apellido_paterno -->
                                     <div class="col-lg-4">
                                         <label for="inv_camp_ap">Apellido Paterno</label>
-                                        <input type="text" class="form-control" name="apellido_paterno" id="inv_camp_ap" value="{{$empleado->apellido_paterno}}" placeholder="Inserte el apellido aquí" required>
+                                        <input type="text" class="form-control" name="apellido_paterno" id="inv_camp_ap" value="{{$empleado->apellido_paterno}}" placeholder="Inserte el apellido aquí" required max="100">
                                     </div>
                                     <!-- apellido_materno -->
                                     <div class="col-lg-4">
                                         <label for="inv_camp_am">Apellido Materno</label>
-                                        <input type="text" class="form-control" name="apellido_materno" id="inv_camp_am" value="{{$empleado->apellido_materno}}" placeholder="Inserte el otro apellido aquí" required>
+                                        <input type="text" class="form-control" name="apellido_materno" id="inv_camp_am" value="{{$empleado->apellido_materno}}" placeholder="Inserte el otro apellido aquí" required max="100">
                                     </div>
                                 </div>
                                 <br>
@@ -37,12 +37,12 @@
                                 <!-- num_ref -->
                                     <div class="col-lg-6">
                                         <label for="inv_camp_num_ref">Numero de Referencia</label>
-                                        <input type="text" class="form-control" name="num_ref" id="inv_camp_num_ref" value="{{$empleado->num_ref}}" placeholder="xxxx-xxxx-xxxx-xxxx" required>
+                                        <input type="text" class="form-control" name="num_ref" id="inv_camp_num_ref" value="{{$empleado->num_ref}}" placeholder="xxxx-xxxx-xxxx-xxxx" required max="255">
                                     </div>
                                     <!-- email -->
                                     <div class="col-lg-6">
                                         <label for="inv_camp_email">Correo electrónico</label>
-                                        <input type="text" class="form-control" name="email" id="inv_camp_email" value="{{$empleado->email}}" placeholder="ejemplo@tecmm.edu.mx" required>
+                                        <input type="text" class="form-control" name="email" id="inv_camp_email" value="{{$empleado->email}}" placeholder="ejemplo@tecmm.edu.mx" required max="255">
                                     </div>
                                     <!-- nivel --
                                     <div class="col-lg-4">

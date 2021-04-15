@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Inmobiliario;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\inmobiliario\edificioRequest;
 use App\Models\Inmobiliario\edificio;
 use Illuminate\Http\Request;
 
@@ -42,7 +43,7 @@ class edificioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(edificioRequest $request)
     {
         //Obtener el dato
 
@@ -90,7 +91,7 @@ class edificioController extends Controller
      * @param  \App\Models\Inmobiliario\edificio  $edificio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(edificioRequest $request, $id)
     {
         //Obtener el dato
 
